@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_half_lg
+label: 'Square 1/2 LG'
+effects:
+  25502f73-99a2-4a88-a434-008310106ac9:
+    uuid: 25502f73-99a2-4a88-a434-008310106ac9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 600
+      crop_type: focal_point

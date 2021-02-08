@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.columns_two_uneven.column_content_2
+    - paragraphs.paragraphs_type.columns_two_uneven
+  module:
+    - entity_reference_revisions
+id: paragraph.columns_two_uneven.default
+targetEntityType: paragraph
+bundle: columns_two_uneven
+mode: default
+content:
+  column_content_2:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: view_mode_selector
+      link: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  uid: true

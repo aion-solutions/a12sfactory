@@ -1,0 +1,7 @@
+allowed_providers:
+  - Dailymotion
+  - Facebook
+  - Vimeo
+  - Wistia
+  - YouTube
+external_fetch: false

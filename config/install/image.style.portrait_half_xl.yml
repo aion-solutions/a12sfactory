@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_half_xl
+label: 'Portrait 1/2 XL'
+effects:
+  bc0296c4-6791-470a-b304-b84bd590e9e5:
+    uuid: bc0296c4-6791-470a-b304-b84bd590e9e5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 800
+      height: 1200
+      crop_type: focal_point

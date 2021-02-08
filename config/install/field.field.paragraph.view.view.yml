@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.view
+    - paragraphs.paragraphs_type.view
+  module:
+    - viewsreference
+id: paragraph.view.view
+field_name: view
+entity_type: paragraph
+bundle: view
+label: View
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:view'
+  handler_settings:
+    target_bundles: null
+    auto_create: 0
+  plugin_types:
+    embed: embed
+    block: block
+    default: 0
+    page: 0
+    entity_browser: 0
+  preselect_views:
+    agency_nodes: agency_nodes
+    exhibition_nodes: exhibition_nodes
+    frontpage: frontpage
+    news_nodes: news_nodes
+    partner_nodes: partner_nodes
+    testimonial_nodes: testimonial_nodes
+    block_content: 0
+    browser: 0
+    content: 0
+    content_recent: 0
+    files: 0
+    hero_sliders: 0
+    icon_select: 0
+    media: 0
+    redirect: 0
+    user_admin_people: 0
+    webform_submissions: 0
+  enabled_settings:
+    title: title
+    pager: pager
+    limit: limit
+    argument: argument
+    offset: offset
+field_type: viewsreference

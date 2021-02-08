@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.square_full_sm
+    - image.style.square_full_xs
+    - image.style.square_half_md
+    - image.style.square_onefourth_lg
+    - image.style.square_onefourth_xl
+  module:
+    - a12sfactory
+id: square_onefourth
+label: 'Square 1/4'
+image_style_mappings:
+  -
+    breakpoint_id: a12sfactory.xl-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: square_onefourth_xl
+  -
+    breakpoint_id: a12sfactory.lg-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: square_onefourth_lg
+  -
+    breakpoint_id: a12sfactory.md-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: square_half_md
+  -
+    breakpoint_id: a12sfactory.sm-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: square_full_sm
+breakpoint_group: a12sfactory
+fallback_image_style: square_full_xs

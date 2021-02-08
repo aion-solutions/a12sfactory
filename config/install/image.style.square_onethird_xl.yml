@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_onethird_xl
+label: 'Square 1/3 XL'
+effects:
+  c651d8b7-6a73-43d3-90e6-20437fd31830:
+    uuid: c651d8b7-6a73-43d3-90e6-20437fd31830
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 540
+      height: 540
+      crop_type: focal_point

@@ -1,0 +1,27 @@
+langcode: en
+status: true
+dependencies: {  }
+id: authenticated
+label: 'Authenticated user'
+weight: -9
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access sitemap'
+  - 'bypass honeypot protection'
+  - 'search content'
+  - 'show format selection for block_content'
+  - 'show format selection for media'
+  - 'show format selection for node'
+  - 'show format selection for paragraph'
+  - 'show format selection for taxonomy_term'
+  - 'show format selection for user'
+  - 'show format tips'
+  - 'show more format tips link'
+  - 'use text format basic_html'
+  - 'use text format html_basic'
+  - userprotect.account.edit
+  - userprotect.mail.edit
+  - userprotect.pass.edit
+  - 'view media'
+  - 'view terms in icons'

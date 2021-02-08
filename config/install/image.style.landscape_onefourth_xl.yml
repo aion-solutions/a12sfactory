@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_onefourth_xl
+label: 'Landscape 1/4 XL'
+effects:
+  558f8fd5-8c2d-447a-b433-f2bb6ae1d9a7:
+    uuid: 558f8fd5-8c2d-447a-b433-f2bb6ae1d9a7
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 400
+      height: 267
+      crop_type: focal_point

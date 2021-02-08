@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_onethird_xl
+label: 'Portrait 1/3 XL'
+effects:
+  74bdf493-49fb-4e9e-8b9d-f69127f82290:
+    uuid: 74bdf493-49fb-4e9e-8b9d-f69127f82290
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 540
+      height: 810
+      crop_type: focal_point

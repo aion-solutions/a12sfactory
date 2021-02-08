@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_onefourth_lg
+label: 'Square 1/4 LG'
+effects:
+  2c2feb92-25da-48d5-a799-a580ef4eb90b:
+    uuid: 2c2feb92-25da-48d5-a799-a580ef4eb90b
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 300
+      height: 300
+      crop_type: focal_point

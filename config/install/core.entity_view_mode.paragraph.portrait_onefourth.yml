@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.portrait_onefourth
+label: 'Portrait 1/4'
+targetEntityType: paragraph
+cache: true

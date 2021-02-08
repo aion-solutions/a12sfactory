@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.media.field_document_file
+    - media.type.document
+  module:
+    - file
+id: media.document.field_document_file
+field_name: field_document_file
+entity_type: media
+bundle: document
+label: Document
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: 'document/[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'pdf doc docx ppt pptx xls xlsx epub odt odp ods txt rtf'
+  max_filesize: '10 Mo'
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file

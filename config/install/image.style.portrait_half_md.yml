@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_half_md
+label: 'Portrait 1/2 MD'
+effects:
+  c25fdef9-fc8e-4807-ab87-4f601233ec14:
+    uuid: c25fdef9-fc8e-4807-ab87-4f601233ec14
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 750
+      crop_type: focal_point

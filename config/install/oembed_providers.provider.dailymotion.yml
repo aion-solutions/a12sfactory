@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {  }
+id: dailymotion
+label: Dailymotion
+provider_url: 'https://www.dailymotion.com'
+endpoints:
+  -
+    schemes:
+      - 'https://www.dailymotion.com/video/*'
+    url: 'https://www.dailymotion.com/services/oembed'
+    discovery: true
+    formats:
+      json: true
+      xml: false

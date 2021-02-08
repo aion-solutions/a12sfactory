@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_onefourth_xl
+label: 'Square 1/4 XL'
+effects:
+  0bb0c465-0667-4b1d-b41f-d15b44419beb:
+    uuid: 0bb0c465-0667-4b1d-b41f-d15b44419beb
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 400
+      crop_type: focal_point

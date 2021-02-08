@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: heading_md
+label: 'Heading MD'
+effects:
+  69990654-e388-41e6-ac33-a4a623b9a8e5:
+    uuid: 69990654-e388-41e6-ac33-a4a623b9a8e5
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 992
+      height: 260
+      crop_type: focal_point

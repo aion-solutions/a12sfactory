@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_half_xl
+label: 'No-crop 1/2 XL'
+effects:
+  298189ca-685e-4f09-b4e4-759f077df313:
+    uuid: 298189ca-685e-4f09-b4e4-759f077df313
+    id: image_scale
+    weight: 1
+    data:
+      width: 720
+      height: null
+      upscale: false

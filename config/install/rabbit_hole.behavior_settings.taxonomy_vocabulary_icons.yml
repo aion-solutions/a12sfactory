@@ -1,0 +1,9 @@
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.icons
+id: taxonomy_vocabulary_icons
+action: access_denied
+allow_override: 0
+redirect: ''
+redirect_code: 301

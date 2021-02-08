@@ -1,0 +1,51 @@
+langcode: en
+status: null
+dependencies:
+  config:
+    - field.field.paragraph.tab_section.tab_section_body
+    - field.field.paragraph.tab_section.tab_section_title
+    - paragraphs.paragraphs_type.tab_section
+  module:
+    - paragraphs
+id: paragraph.tab_section.default
+targetEntityType: paragraph
+bundle: tab_section
+mode: default
+content:
+  status:
+    type: boolean_checkbox
+    weight: 2
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  tab_section_body:
+    type: paragraphs
+    weight: 1
+    settings:
+      title: Component
+      title_plural: Components
+      edit_mode: closed
+      add_mode: modal
+      form_display_mode: default
+      closed_mode: summary
+      autocollapse: none
+      default_paragraph_type: ''
+      features:
+        duplicate: duplicate
+        collapse_edit_all: collapse_edit_all
+      closed_mode_threshold: 0
+    third_party_settings: {  }
+    region: content
+  tab_section_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  translation: true
+  uid: true

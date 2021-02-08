@@ -1,0 +1,123 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.image_browser
+    - field.field.node.hero_slide.field_call2action_links
+    - field.field.node.hero_slide.field_hero_sliders
+    - field.field.node.hero_slide.field_media
+    - field.field.node.hero_slide.field_multiline_title
+    - field.field.node.hero_slide.field_page_paragraphs
+    - node.type.hero_slide
+  module:
+    - entity_browser
+    - field_group
+    - link
+    - paragraphs
+third_party_settings:
+  field_group:
+    group_display:
+      children:
+        - field_hero_sliders
+      parent_name: ''
+      weight: 3
+      format_type: details
+      format_settings:
+        label: Display
+        open: true
+        id: ''
+        classes: ''
+        required_fields: false
+      label: Display
+      region: content
+id: node.hero_slide.default
+targetEntityType: node
+bundle: hero_slide
+mode: default
+content:
+  field_call2action_links:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_hero_sliders:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: options_buttons
+    region: content
+  field_media:
+    weight: 5
+    settings:
+      entity_browser: image_browser
+      field_widget_display: rendered_entity
+      field_widget_display_settings:
+        view_mode: browser_preview
+      field_widget_edit: true
+      field_widget_remove: true
+      open: true
+      selection_mode: selection_append
+      field_widget_replace: false
+    third_party_settings: {  }
+    type: entity_browser_entity_reference
+    region: content
+  field_multiline_title:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_page_paragraphs:
+    weight: 4
+    settings:
+      title: Composant
+      title_plural: Composants
+      edit_mode: closed_expand_nested
+      closed_mode: summary
+      autocollapse: none
+      closed_mode_threshold: 0
+      add_mode: dropdown
+      form_display_mode: default
+      default_paragraph_type: _none
+      features:
+        add_above: add_above
+        collapse_edit_all: collapse_edit_all
+        duplicate: duplicate
+    third_party_settings: {  }
+    type: paragraphs
+    region: content
+  langcode:
+    type: language_select
+    weight: 2
+    region: content
+    settings:
+      include_locked: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 7
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  translation: true
+  uid: true
+  url_redirects: true

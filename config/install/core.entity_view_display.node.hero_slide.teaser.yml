@@ -1,0 +1,28 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.hero_slide.field_call2action_links
+    - field.field.node.hero_slide.field_hero_sliders
+    - field.field.node.hero_slide.field_media
+    - field.field.node.hero_slide.field_multiline_title
+    - field.field.node.hero_slide.field_page_paragraphs
+    - node.type.hero_slide
+  module:
+    - user
+id: node.hero_slide.teaser
+targetEntityType: node
+bundle: hero_slide
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_call2action_links: true
+  field_hero_sliders: true
+  field_media: true
+  field_multiline_title: true
+  field_page_paragraphs: true
+  langcode: true

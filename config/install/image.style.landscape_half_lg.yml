@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_half_lg
+label: 'Landscape 1/2 LG'
+effects:
+  60a1b887-08f2-4aeb-bc7e-f16cd3b15b81:
+    uuid: 60a1b887-08f2-4aeb-bc7e-f16cd3b15b81
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 600
+      height: 400
+      crop_type: focal_point

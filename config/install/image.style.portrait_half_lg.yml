@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_half_lg
+label: 'Portrait 1/2 LG'
+effects:
+  da8121c3-8a72-4941-81fb-14491371789e:
+    uuid: da8121c3-8a72-4941-81fb-14491371789e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 600
+      height: 900
+      crop_type: focal_point

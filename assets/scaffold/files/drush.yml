@@ -1,0 +1,14 @@
+options:
+  uri: ${env.APP_SCHEME}${env.APP_URL}
+command:
+  options:
+    uri: ${env.APP_SCHEME}${env.APP_URL}
+  site:
+    install:
+      options:
+        db-url: ${env.DATABASE_DRIVER}://${env.DATABASE_USER}:${env.DATABASE_PASSWORD}@${env.DATABASE_HOST}:${env.DATABASE_PORT}/${env.DATABASE_NAME}
+        account-name: Webmaster
+        account-mail: dev@a12s.io
+        site-mail: dev@a12s.io
+        locale: en
+

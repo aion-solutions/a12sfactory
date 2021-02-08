@@ -1,0 +1,14 @@
+a12sfactory.settings:
+  path: '/admin/config/a12sfactory'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'A12S Factory'
+  requirements:
+    _permission: 'administer a12sfactory settings'
+a12sfactory.paragraph_behavior_settings:
+  path: '/admin/config/a12sfactory/paragraphs-behavior'
+  defaults:
+    _form: '\Drupal\a12sfactory\Form\A12sFactoryParagraphsBehaviorSettingsForm'
+    _title: 'A12S Factory Paragraphs behavior settings'
+  requirements:
+    _permission: 'administer a12sfactory settings'

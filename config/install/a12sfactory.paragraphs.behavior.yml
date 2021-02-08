@@ -1,0 +1,61 @@
+display:
+  background_styles:
+    bg-primary: Primary
+    bg-secondary: Secondary
+    bg-success: Success
+    bg-info: Info
+    bg-warning: Warning
+    bg-danger: Danger
+    bg-white: White
+    bg-light: Light
+    bg-gray: Gray
+    bg-dark: Dark
+  background_image:
+    background_size:
+      option: cover
+      custom: null
+    background_position:
+      option: center
+      custom: null
+    scheme: public
+    directory: images/components/background-images
+    max_size: '2 Mo'
+    max_dimensions:
+      width: '1800'
+      height: '1400'
+  spacing:
+    margin_top:
+      mt-0: 'No margin'
+      mt-1: Tiny
+      mt-2: Small
+      mt-3: Medium
+      mt-4: Large
+      mt-5: X-Large
+    margin_bottom:
+      mb-0: 'No margin'
+      mb-1: Tiny
+      mb-2: Small
+      mb-3: Medium
+      mb-4: Large
+      mb-5: X-Large
+    padding_top:
+      pt-0: 'No padding'
+      pt-1: Tiny
+      pt-2: Small
+      pt-3: Medium
+      pt-4: Large
+      pt-5: X-Large
+    padding_bottom:
+      pb-0: 'No padding'
+      pb-1: Tiny
+      pb-2: Small
+      pb-3: Medium
+      pb-4: Large
+      pb-5: X-Large
+row:
+  column_breakpoints:
+    xs: X-Small
+    sm: Small
+    md: Medium
+    lg: Large
+    xl: X-Large

@@ -1,0 +1,6 @@
+status: 1
+pattern: '[node:field_multiline_title:array:value:join: ]'
+escape: false
+dependencies:
+  config:
+    - node.type.hero_slide

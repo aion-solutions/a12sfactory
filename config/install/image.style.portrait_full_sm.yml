@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_full_sm
+label: 'Portrait full SM'
+effects:
+  1fa47228-65a7-422e-820c-284de3748476:
+    uuid: 1fa47228-65a7-422e-820c-284de3748476
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 1152
+      crop_type: focal_point

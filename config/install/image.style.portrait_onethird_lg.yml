@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_onethird_lg
+label: 'Portrait 1/3 LG'
+effects:
+  7cae4af9-a5ee-4ccc-88f4-22bfca1621fa:
+    uuid: 7cae4af9-a5ee-4ccc-88f4-22bfca1621fa
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 600
+      crop_type: focal_point

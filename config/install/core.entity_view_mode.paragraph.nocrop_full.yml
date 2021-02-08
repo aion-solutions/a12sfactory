@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.nocrop_full
+label: 'No-crop full'
+targetEntityType: paragraph
+cache: true

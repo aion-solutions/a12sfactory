@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.editor_image_browser
+    - media.type.image
+  module:
+    - entity_embed
+    - media
+    - media_thumbnail_formatters
+label: Image
+id: media_image
+type_id: entity
+type_settings:
+  entity_type: media
+  bundles:
+    - image
+  display_plugins:
+    - 'entity_reference:media_thumbnail_formatters_responsive'
+  entity_browser: editor_image_browser
+  entity_browser_settings:
+    display_review: false
+icon:
+  data: iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAuQAAALkB4qdB6AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGmSURBVFiFzdc/ixQxGMfxz3iN2FhYWA6+ALHb3jdhIaIoB4eKCipyCCfWwr0Dsb1WsLAWC0tbC+trXUvB21hc1svE+cPsZnYNhGGSZ+b3TZ7nCXmEEKDGEY4RJu7HUauO2mrMNyCc93nUdhQHPmMWQjBlxyxqhaj9d9snF88glu443ZLMII2Jhs8KQixd0QToiYl5SYg+gEZM5D7bBMA/MZH6rDTAOVtubQCf4vOwqqpZVVUzHGZzRdv/FYQl0xAHOBgNUGiF+4nI/kYB8LzFhc82AoAnyc9fx758fzwpAB6m4sl4CnF/EgDsYZGLt0AssDsKAG/wqmf+Xp94B8QwAHbwLjF+2WJzGydD4h3u6AbAebxvIX6R2NwcI94B0XoQXXR67Ab8wo3so6dx7PdY8cEswGV8jeM/cb2DfGXxTgBcwXdn16VrA9v3cY2saQLgqrO7wDc9Z38G8agUwI/4/IJLIwPpQQmAgA+4sEI0L7C3LsBb7KywkhRid+0sWNGfKcTdsQBFCpME4gR3BmwbhUmx0iyDuNUj3ijNatssTiNVbUvl+R+Dw5+7XC88KgAAAABJRU5ErkJggg==
+  uri: 'public://embed_buttons/image-embed.png'
+icon_uuid: null

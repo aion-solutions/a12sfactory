@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_full_md
+label: 'No-crop full MD'
+effects:
+  4562618c-8ca1-478c-a3af-58388284caa5:
+    uuid: 4562618c-8ca1-478c-a3af-58388284caa5
+    id: image_scale
+    weight: 1
+    data:
+      width: 992
+      height: null
+      upscale: false

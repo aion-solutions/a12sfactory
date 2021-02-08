@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_half_xl
+label: 'Landscape 1/2 XL'
+effects:
+  dfcd2db8-73cc-4636-a0ec-856668b3ef4e:
+    uuid: dfcd2db8-73cc-4636-a0ec-856668b3ef4e
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 800
+      height: 533
+      crop_type: focal_point

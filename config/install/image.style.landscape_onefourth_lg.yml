@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_onefourth_lg
+label: 'Landscape 1/4 LG'
+effects:
+  8cf9be03-eddc-4fa9-be17-11fa4e752925:
+    uuid: 8cf9be03-eddc-4fa9-be17-11fa4e752925
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 300
+      height: 200
+      crop_type: focal_point

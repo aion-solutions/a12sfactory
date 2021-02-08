@@ -1,0 +1,64 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - a12sfactory
+id: slider
+label: Slider
+icon_uuid: null
+icon_default: null
+description: ''
+behavior_plugins:
+  a12sfactory_paragraph_display:
+    enabled: true
+    features:
+      background_image: background_image
+      background_style: background_style
+      attributes: attributes
+      spacing: spacing
+    spacing:
+      margin: margin
+      padding: padding
+    attributes:
+      class: class
+      id: 0
+    background_image:
+      background_size:
+        option: global
+        custom: null
+      background_position:
+        option: global
+        custom: null
+      scheme: public
+      directory: images/components/background-images
+      max_size: '2 Mo'
+      max_dimensions:
+        width: '1800'
+        height: '1400'
+  a12sfactory_paragraph_grid:
+    is_row: 0
+    row_type: ''
+    remove_edge_column_spacing: 0
+    no_container_gutters: 0
+    column_breakpoint: lg
+  a12sfactory_paragraph_parallax:
+    factor:
+      default: 0
+      breakpoints:
+        xs:
+          enabled: false
+          value: 0
+        sm:
+          enabled: false
+          value: 0
+        md:
+          enabled: false
+          value: 0
+        lg:
+          enabled: false
+          value: 0
+        xl:
+          enabled: false
+          value: 0
+    type: background
+    direction: vertical

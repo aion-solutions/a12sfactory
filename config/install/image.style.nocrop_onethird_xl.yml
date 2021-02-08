@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_onethird_xl
+label: 'No-crop 1/3 XL'
+effects:
+  ddb68629-6b9e-4fd5-a248-dbd191ecf184:
+    uuid: ddb68629-6b9e-4fd5-a248-dbd191ecf184
+    id: image_scale
+    weight: 1
+    data:
+      width: 480
+      height: null
+      upscale: false

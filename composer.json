@@ -1,0 +1,253 @@
+{
+    "name": "aion-solutions/a12sfactory",
+    "description": "A Website factory built by Aïon Solutions",
+    "type": "drupal-profile",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Aïon Solutions",
+            "homepage": "https://www.aion-solutions.lu",
+            "role": "Maintainer"
+        }
+    ],
+    "repositories": {
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        "assets": {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    },
+    "require": {
+        "composer/installers": "^1.6.0",
+        "cweagans/composer-patches": "^1.6",
+        "doctrine/lexer": "1.0.2",
+        "drupal/access_unpublished": "~1.0-beta1",
+        "drupal/ace_editor": "^1.2",
+        "drupal/admin_toolbar": "~2.0",
+        "drupal/amp": "~2.1",
+        "drupal/auto_entitylabel": "^3.0@beta",
+        "drupal/better_exposed_filters": "~4.0-alpha1",
+        "drupal/blazy": "^2.1",
+        "drupal/block_field": "^1.0@RC",
+        "drupal/ckeditor_media_embed": "~1.7",
+        "drupal/components": "~2.0-beta2",
+        "drupal/config_ignore": "~2.2",
+        "drupal/config_perms": "~2.0",
+        "drupal/console": "~1.9.4",
+        "drupal/content_lock": "~2.0",
+        "drupal/core-recommended": "8.9.13",
+        "drupal/countup": "^2.0",
+        "drupal/crop": "~2.0",
+        "drupal/ctools": "^3.4",
+        "drupal/default_content": "^1.0",
+        "drupal/diff": "~1.0",
+        "drupal/draggableviews": "~1.2",
+        "drupal/drd_agent": "~3.7",
+        "drupal/dropzonejs": "~2.0",
+        "drupal/editor_advanced_link": "^1.8",
+        "drupal/email_registration": "~1.0",
+        "drupal/embed": "~1.3",
+        "drupal/entity": "~1.0-rc3",
+        "drupal/entity_browser": "^2.5",
+        "drupal/entity_browser_enhanced": "~1.0",
+        "drupal/entity_embed": "~1.0",
+        "drupal/entity_reference_revisions": "~1.7",
+        "drupal/eu_cookie_compliance": "^1.9",
+        "drupal/extlink": "~1.1",
+        "drupal/facets": "~1.4",
+        "drupal/fast_404": "~1.0-alpha3",
+        "drupal/field_group": "~3.0-rc2",
+        "drupal/focal_point": "~1.2",
+        "drupal/forward": "~2.3",
+        "drupal/google_analytics": "~2.2",
+        "drupal/honeypot": "~1.30",
+        "drupal/icon_select": "2.0.0",
+        "drupal/imagemagick": "~3.0",
+        "drupal/inline_entity_form": "^1.0",
+        "drupal/libraries": "~3.0-alpha1",
+        "drupal/linkit": "~5.0-beta10",
+        "drupal/login_destination": "~1.0",
+        "drupal/mailsystem": "~4.2",
+        "drupal/masquerade": "~2.0-beta2",
+        "drupal/maxlength": "~1.0-beta4",
+        "drupal/media_entity_actions": "~1.0",
+        "drupal/menu_breadcrumb": "~1.11",
+        "drupal/menu_item_extras": "~2.10",
+        "drupal/menu_link_attributes": "~1.0",
+        "drupal/metatag": "^1.12",
+        "drupal/node_edit_protection": "~1.0-alpha1",
+        "drupal/oembed_providers": "^1.1",
+        "drupal/override_node_options": "~2.4",
+        "drupal/paragraphs": "~1.11",
+        "drupal/password_policy": "~3.0-alpha4",
+        "drupal/pathauto": "^1.8",
+        "drupal/pathologic": "~1.0-alpha2",
+        "drupal/rabbit_hole": "~1.0-beta6",
+        "drupal/realname": "~1.0-rc2",
+        "drupal/redirect": "~1.5",
+        "drupal/robotstxt": "~1.2",
+        "drupal/roleassign": "~1.0-alpha2",
+        "drupal/schema_metatag": "~1.4",
+        "drupal/search_api": "~1.15",
+        "drupal/simple_sitemap": "~3.5",
+        "drupal/slick": "~2.0",
+        "drupal/slick_media": "3.x-dev",
+        "drupal/slick_views": "~2.1",
+        "drupal/smart_trim": "~1.2",
+        "drupal/spamspan": "^1.2",
+        "drupal/swiftmailer": "~1.0 | ^2.0",
+        "drupal/taxonomy_access_fix": "~2.7",
+        "drupal/token": "^1.7",
+        "drupal/twig_tweak": "^2.8",
+        "drupal/userprotect": "~1.0",
+        "drupal/view_mode_selector": "~1.0.0",
+        "drupal/views_bulk_edit": "~2.2",
+        "drupal/views_bulk_operations": "~3.3",
+        "drupal/views_field_formatter": "~1.10",
+        "drupal/views_infinite_scroll": "~1.6",
+        "drupal/viewsreference": "~2.0-alpha6",
+        "drupal/webform": "^5.15",
+        "drupal/webp": "^1.0@beta",
+        "drush/drush": "^9.0 || ^10.0",
+        "jonthornton/jquery-timepicker": "^1.11",
+        "npm-asset/blazy": "^1.8",
+        "npm-asset/dropzone": "^5.7",
+        "npm-asset/imagesloaded": "^4.1",
+        "npm-asset/jquery.easing": "^1.4",
+        "npm-asset/paroller.js": "^1.4",
+        "npm-asset/slick-carousel": "^1.8",
+        "oomphinc/composer-installers-extender": "^1.0 | ^2.0",
+        "webflo/drupal-finder": "^1.0.0",
+        "webmozart/path-util": "^2.3",
+        "wikimedia/composer-merge-plugin": "^1.4"
+    },
+    "require-dev": {
+        "drupal/core-dev": "^8.9.1",
+        "drupal/core-composer-scaffold": "^9.0"
+    },
+    "conflict": {},
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "component-dir": "/tmp",
+        "sort-packages": true
+    },
+    "suggest": {
+        "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it."
+    },
+    "extra": {
+        "merge-plugin": {
+            "include": [
+                "web/modules/contrib/webform/composer.libraries.json"
+            ]
+        },
+        "drupal-scaffold": {
+            "file-mapping": {
+                "[web-root]/.ht.router.php": false,
+                "[web-root]/.htaccess": false,
+                "[web-root]/example.gitignore": false,
+                "[web-root]/INSTALL.txt": false,
+                "[web-root]/README.txt": false,
+                "[web-root]/update.php": false,
+                "[web-root]/web.config": false,
+                "[web-root]/sites/README.txt": false,
+                "[web-root]/modules/README.txt": false,
+                "[web-root]/profiles/README.txt": false,
+                "[web-root]/themes/README.txt": false,
+                "[web-root]/sites/development.services.yml": {
+                    "path": "assets/scaffold/files/development.services.yml",
+                    "overwrite": false
+                },
+                "[web-root]/sites/example.sites.php": false,
+                "[web-root]/sites/sites.php": {
+                    "path": "assets/scaffold/files/example.sites.php",
+                    "overwrite": false
+                },
+                "[web-root]/sites/default/settings.development.php": false,
+                "[web-root]/sites/example.settings.local.php": false,
+                "[web-root]/sites/default/settings.local.php": {
+                    "path": "assets/scaffold/files/example.settings.local.php",
+                    "overwrite": false
+                },
+                "[web-root]/sites/default/settings.php": {
+                    "path": "assets/scaffold/files/default.settings.php",
+                    "overwrite": false
+                },
+                "[web-root]/sites/default/default.services.yml": false,
+                "[web-root]/sites/default/services.yml": {
+                    "path": "assets/scaffold/files/default.services.yml",
+                    "overwrite": false
+                },
+                "[project-root]/.gitignore": {
+                    "path": "assets/scaffold/files/default.gitignore",
+                    "overwrite": false
+                },
+                "[project-root]/.dockerignore": {
+                    "path": "assets/scaffold/files/default.dockerignore",
+                    "overwrite": false
+                },
+                "[project-root]/drush/drush.yml": {
+                    "path": "assets/scaffold/files/drush.yml",
+                    "overwrite": false
+                }
+            }
+        },
+        "patches": {
+            "drupal/ckeditor_media_embed": {
+                "Issue #2900313: Add ability to embed tweets and other rich content in WYSIWYG": "https://www.drupal.org/files/issues/embed_rich_content_in_WYSIWYG-2900313-2.patch"
+            },
+            "drupal/core": {
+                "Issue #2663316: Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch",
+                "Issue #2809793: EntityReference migrate destination": "https://www.drupal.org/files/issues/entityreference_migrate-2809793-56.patch",
+                "Issue #1975064: Add more granular block permissions": "https://www.drupal.org/files/issues/2020-07-12/drupal-block_permissions-1975064-148--8-9.patch",
+                "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/patch_empty_fix.patch",
+                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://www.drupal.org/files/issues/views-support-plural-2888320-10.patch",
+                "Issue #2817103: Theme registry doesn't find templates in subfolders for self-defined theme hooks": "https://www.drupal.org/files/issues/theme_registry_doesn_t-2817103-28.patch",
+                "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2019-05-08/1819538-46-D8.patch",
+                "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
+                "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
+                "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2018-07-16/views_multiple_refresh_fix-2986041-2.patch",
+                "Issue #1671190: Use <button /> form element type instead of <input type=\"submit\" />": "./patches/core-ajax-dialog-button-support-1671190-custom.patch.txt",
+                "Issue #2810355: Default translation issue when changing it, causing file/image field usage to be set to zero": "https://www.drupal.org/files/issues/2018-10-19/2810355-48-check-translation-status-cleaned.patch",
+                "Issue #2511548: Add a context array variable": "https://www.drupal.org/files/issues/2020-06-13/2511548-99.patch",
+                "Issue #3007424: Multiple usages of FieldPluginBase::getEntity do not check for NULL, leading to WSOD": "https://www.drupal.org/files/issues/2019-11-14/3007424-68.patch",
+                "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2883302-allow_themes_to_alter_widget_forms.patch"
+            },
+            "drupal/default_content": {
+                "Issue #2900089: Invalid translation language error when selected installation language does not match demo content language": "https://www.drupal.org/files/issues/2900089-14.patch"
+            },
+            "drupal/entity_reference_revisions": {
+                "Issue #2799479: Views doesn't recognize relationship to host": "https://www.drupal.org/files/issues/2020-02-11/2799479-108-no-tests.patch"
+            },
+            "drupal/icon_select": {
+                "Provide integration with CKEditor": "./patches/icon_select-ckeditor-plugin.patch.txt",
+                "Custom: fix missing check in sprite generator, causing PHP errors": "./patches/icon_select-sprite-generator-missing-check.patch.txt"
+            },
+            "drupal/paragraphs": {
+                "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
+                "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
+            },
+            "drupal/password_policy": {
+                "Issue #3153875: PasswordPolicyValidator detects role change when there isn't one": "https://www.drupal.org/files/issues/2020-07-09/password_policy-validator_detects_incorrect_role_change-3153875-6.patch"
+            },
+            "drupal/pathologic": {
+                "Issue #2418369: Internal URL handling (Aliases, language prefixes, base://, ...)": "https://www.drupal.org/files/issues/internal_url_handling-2418369-15.patch"
+            },
+            "drupal/token": {
+                "Issue #3115486: Provide array of primitive property values on multivalue field": "https://www.drupal.org/files/issues/2020-12-28/token-provide_primitive_type_arrays_for_properties_of_multivalue_fields-3115486-13.patch"
+            },
+            "drupal/username_enumeration_prevention": {
+                "Issue #2871931: hook_requirements error on install phase": "https://www.drupal.org/files/issues/username_enumeration_prevention-check_phase_runtime-2871931-5.patch"
+            },
+            "drupal/viewsreference": {
+                "Issue #2919092: Viewsreference embeds Views without cache, breaking Dynamic page cache": "https://www.drupal.org/files/issues/2020-01-31/viewsreference-viewsreference-embeds-views-without-cache-2919092-12.patch"
+            },
+            "drupal/webp": {
+                "Issue #3161795: A recent commit causes image generation to fail on Windows platforms": "https://www.drupal.org/files/issues/2020-11-30/webp-issue-with-uppercase-lowercase-extensions-3161795-15.patch"
+            }
+        }
+    }
+}

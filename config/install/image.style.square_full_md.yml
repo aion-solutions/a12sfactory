@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_full_md
+label: 'Square full MD'
+effects:
+  34c58119-f10c-4336-8801-788c494cfa8b:
+    uuid: 34c58119-f10c-4336-8801-788c494cfa8b
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 992
+      height: 992
+      crop_type: focal_point

@@ -1,0 +1,111 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.complex
+    - field.storage.block_content.field_paragraphs
+    - paragraphs.paragraphs_type.accordion
+    - paragraphs.paragraphs_type.columns
+    - paragraphs.paragraphs_type.columns_single
+    - paragraphs.paragraphs_type.columns_three_uneven
+    - paragraphs.paragraphs_type.columns_two_uneven
+    - paragraphs.paragraphs_type.config_block
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.modal
+    - paragraphs.paragraphs_type.tabs
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.view
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: block_content.complex.field_paragraphs
+field_name: field_paragraphs
+entity_type: block_content
+bundle: complex
+label: Components
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text: text
+      image: image
+      video: video
+      view: view
+      config_block: config_block
+      webform: webform
+      modal: modal
+      tabs: tabs
+      accordion: accordion
+      columns_single: columns_single
+      columns: columns
+      columns_two_uneven: columns_two_uneven
+      columns_three_uneven: columns_three_uneven
+    target_bundles_drag_drop:
+      accordion:
+        enabled: true
+        weight: -30
+      accordion_section:
+        weight: -31
+        enabled: false
+      card:
+        weight: -25
+        enabled: false
+      card_body:
+        weight: -23
+        enabled: false
+      card_list:
+        weight: -22
+        enabled: false
+      cards:
+        weight: -24
+        enabled: false
+      columns:
+        enabled: true
+        weight: -28
+      columns_single:
+        enabled: true
+        weight: -29
+      columns_three_uneven:
+        enabled: true
+        weight: -26
+      columns_two_uneven:
+        enabled: true
+        weight: -27
+      config_block:
+        enabled: true
+        weight: -36
+      image:
+        enabled: true
+        weight: -40
+      modal:
+        enabled: true
+        weight: -34
+      slider:
+        weight: -37
+        enabled: false
+      tab_section:
+        weight: -33
+        enabled: false
+      tabs:
+        enabled: true
+        weight: -32
+      text:
+        enabled: true
+        weight: -41
+      video:
+        enabled: true
+        weight: -39
+      view:
+        enabled: true
+        weight: -38
+      webform:
+        enabled: true
+        weight: -35
+field_type: entity_reference_revisions

@@ -1,0 +1,36 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.nocrop_full_md
+    - image.style.nocrop_full_sm
+    - image.style.nocrop_full_xs
+    - image.style.nocrop_onefourth_lg
+    - image.style.nocrop_onefourth_xl
+  module:
+    - a12sfactory
+id: nocrop_onefourth
+label: 'No-crop 1/4'
+image_style_mappings:
+  -
+    breakpoint_id: a12sfactory.xl-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: nocrop_onefourth_xl
+  -
+    breakpoint_id: a12sfactory.lg-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: nocrop_onefourth_lg
+  -
+    breakpoint_id: a12sfactory.md-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: nocrop_full_md
+  -
+    breakpoint_id: a12sfactory.sm-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: nocrop_full_sm
+breakpoint_group: a12sfactory
+fallback_image_style: nocrop_full_xs

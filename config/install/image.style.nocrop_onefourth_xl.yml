@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_onefourth_xl
+label: 'No-crop 1/4 XL'
+effects:
+  a71ea9e2-b09f-459d-b065-5481c71a6dc7:
+    uuid: a71ea9e2-b09f-459d-b065-5481c71a6dc7
+    id: image_scale
+    weight: 1
+    data:
+      width: 360
+      height: null
+      upscale: false

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_half_md
+label: 'Landscape 1/2 MD'
+effects:
+  7115a132-34c5-42cd-afba-d8bd141448a2:
+    uuid: 7115a132-34c5-42cd-afba-d8bd141448a2
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 500
+      height: 333
+      crop_type: focal_point

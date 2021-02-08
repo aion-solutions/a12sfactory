@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.landscape_full_md
+    - image.style.landscape_full_sm
+    - image.style.landscape_full_xs
+    - image.style.landscape_onethird_lg
+    - image.style.landscape_onethird_xl
+  module:
+    - a12sfactory
+id: landscape_onethird
+label: 'Landscape 1/3'
+image_style_mappings:
+  -
+    breakpoint_id: a12sfactory.xl-min
+    multiplier: 1x
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - landscape_onethird_xl
+  -
+    breakpoint_id: a12sfactory.lg-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: landscape_onethird_lg
+  -
+    breakpoint_id: a12sfactory.md-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: landscape_full_md
+  -
+    breakpoint_id: a12sfactory.sm-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: landscape_full_sm
+breakpoint_group: a12sfactory
+fallback_image_style: landscape_full_xs

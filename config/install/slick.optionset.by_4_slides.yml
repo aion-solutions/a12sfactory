@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies: {  }
+id: by_4_slides
+name: by_4_slides
+label: 'By 4 slides'
+weight: 0
+group: ''
+skin: a12sfactory_clear
+breakpoints: 2
+optimized: true
+options:
+  options__active_tab: edit-options-responsives
+  settings:
+    mobileFirst: true
+    arrows: false
+    dots: true
+    lazyLoad: ondemand
+    slidesToShow: 1
+  responsives:
+    responsive:
+      -
+        breakpoint: 767
+        unslick: false
+        settings:
+          arrows: false
+          dots: true
+          slidesToShow: 2
+          slidesToScroll: 2
+          swipe: false
+      -
+        breakpoint: 1199
+        unslick: false
+        settings:
+          dots: true
+          slidesToShow: 4
+          slidesToScroll: 4
+          swipe: false
+          touchMove: false

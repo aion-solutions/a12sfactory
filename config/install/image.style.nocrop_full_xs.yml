@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_full_xs
+label: 'No-crop full XS'
+effects:
+  9f933838-3f2c-4bf4-83d3-c0d47457b1c8:
+    uuid: 9f933838-3f2c-4bf4-83d3-c0d47457b1c8
+    id: image_scale
+    weight: 1
+    data:
+      width: 576
+      height: null
+      upscale: false

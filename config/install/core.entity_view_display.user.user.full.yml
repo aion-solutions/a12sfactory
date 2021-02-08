@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.full
+    - field.field.user.user.field_firstname
+    - field.field.user.user.field_last_password_reset
+    - field.field.user.user.field_lastname
+    - field.field.user.user.field_password_expiration
+  module:
+    - user
+id: user.user.full
+targetEntityType: user
+bundle: user
+mode: full
+content: {  }
+hidden:
+  field_firstname: true
+  field_last_password_reset: true
+  field_lastname: true
+  field_password_expiration: true
+  langcode: true
+  member_for: true
+  realname: true

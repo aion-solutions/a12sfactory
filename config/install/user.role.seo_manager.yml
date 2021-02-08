@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies: {  }
+id: seo_manager
+label: 'SEO manager'
+weight: -7
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access content overview'
+  - 'access contextual links'
+  - 'access toolbar'
+  - 'administer meta tags'
+  - 'administer pathauto'
+  - 'administer redirects'
+  - 'administer url aliases'
+  - 'create url aliases'
+  - 'edit any hero_slide content'
+  - 'edit any page content'
+  - 'enter all revision log entry'
+  - 'enter hero_slide revision log entry'
+  - 'enter page revision log entry'
+  - 'rabbit hole bypass node'
+  - 'rabbit hole bypass taxonomy_term'
+  - 'show format selection for block_content'
+  - 'show format selection for media'
+  - 'show format selection for node'
+  - 'show format selection for paragraph'
+  - 'show format selection for taxonomy_term'
+  - 'show format selection for user'
+  - 'show format tips'
+  - 'show more format tips link'
+  - 'view the administration theme'

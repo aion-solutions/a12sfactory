@@ -1,0 +1,130 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the A12S Factory profile.
+ */
+
+use Drupal\Component\Utility\NestedArray;
+use Drupal\Core\Config\Config;
+use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Field\FieldDefinitionInterface;
+use Drupal\Core\Render\Markup;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\paragraphs\Entity\ParagraphsType;
+use Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
+use Drupal\views\Views;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function a12sfactory_install() {
+  // Set front page to "node".
+  \Drupal::configFactory()->getEditable('system.site')->set('page.front', '/node')->save(TRUE);
+
+  // Restrict user registration to admin role creation.
+  \Drupal::configFactory()->getEditable('user.settings')->set('register', UserInterface::REGISTER_ADMINISTRATORS_ONLY)->save(TRUE);
+
+  // Assign user 1 the "administrator" role.
+  /** @var UserInterface $user */
+  $user = User::load(1);
+  $user->addRole('administrator');
+  $user->save();
+
+  // Enable the admin theme.
+  \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', TRUE)->save(TRUE);
+
+  // Entity updates to clear up any mismatched entity and/or field definitions
+  // And Fix changes were detected in the entity type and field definitions.
+  \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+
+  // Disable the Taxonomy Term view as it is not useful and causes issues
+  // with the REST module (DELETE).
+  /** @var \Drupal\views\ViewExecutable $view */
+  $view = Views::getView('taxonomy_term');
+
+  if ($view) {
+    $view->storage->setStatus(FALSE);
+    $view->save();
+  }
+}
+
+/**
+ * Return the last hook_update_N() number.
+ *
+ * @return int
+ *
+ * @see \hook_update_last_removed()
+ */
+function a12sfactory_update_last_removed(): int {
+  return 8009;
+}
+
+/**
+ * Get the editable config instance, if exists.
+ *
+ * @param string $config_name
+ *
+ * @return \Drupal\Core\Config\Config|null
+ */
+function a12sfactory_get_editable_config(string $config_name): ?Config {
+  $config_factory = \Drupal::configFactory();
+  $installed = $config_factory->listAll($config_name);
+
+  if (in_array($config_name, $installed)) {
+    return $config_factory->getEditable($config_name);
+  }
+
+  return NULL;
+}
+
+/**
+ * Helper for importing Drupal configuration from a file.
+ *
+ * @param $name
+ *   The config name.
+ * @param ?string $filepath
+ *   The file path. Default to the "config/install" directory of the profile.
+ * @param bool $override
+ *   Whether to override the configuration, if it already exists. Default to
+ *   FALSE.
+ */
+function a12sfactory_import_config_from_file($name, $filepath = NULL, $override = FALSE) {
+  /** @var \Drupal\Core\Config\StorageInterface $config_storage */
+  $config_storage = \Drupal::service('config.storage');
+
+  if (!isset($filepath)) {
+    $filepath = drupal_get_path('module', 'a12sfactory') . '/config/install';
+  }
+
+  if ($override || !\Drupal::service('config.storage')->exists($name)) {
+    $source = new FileStorage($filepath);
+    $config_storage->write($name, $source->read($name));
+  }
+}
+
+/**
+ * Install/update field storage for the given fields.
+ *
+ * @param  string  $entity_type
+ *   The entity type.
+ * @param  array  $field_names
+ *   The target field names.
+ */
+function a12sfactory_update_field_storage(string $entity_type, array $field_names) {
+  /** @var \Drupal\Core\Field\FieldStorageDefinitionInterface[] $storage_definitions */
+  $storage_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions($entity_type);
+  /** @var \Drupal\Core\Field\FieldStorageDefinitionListenerInterface $field_storage_listener */
+  $field_storage_listener = \Drupal::service('field_storage_definition.listener');
+
+  foreach ($field_names as $field_name) {
+    if (!empty($storage_definitions[$field_name])) {
+      $field_storage_listener->onFieldStorageDefinitionCreate($storage_definitions[$field_name]);
+    }
+  }
+}
+

@@ -1,0 +1,26 @@
+slick-clear:
+  css:
+    component:
+      css/component/slick/skin.clear.css: {}
+
+paragraph-admin:
+  css:
+    base:
+      css/base/paragraph.admin.css: {}
+
+background-styles:
+  css:
+    theme:
+      css/theme/background-styles.theme.css: {}
+
+paroller.js:
+  js:
+    /libraries/paroller.js/dist/jquery.paroller.min.js: { minified: true }
+  dependencies:
+    - core/jquery
+
+parallax:
+  js:
+    js/a12sfactory.parallax.js: {}
+  dependencies:
+  - a12sfactory/paroller.js

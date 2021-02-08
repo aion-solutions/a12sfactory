@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: social-medias
+label: 'Social medias'
+description: 'Displays links to social medias.'
+locked: false

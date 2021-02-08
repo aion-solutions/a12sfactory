@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.modal_body
+    - paragraphs.paragraphs_type.columns
+    - paragraphs.paragraphs_type.columns_three_uneven
+    - paragraphs.paragraphs_type.columns_two_uneven
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.modal
+    - paragraphs.paragraphs_type.slider
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.view
+  module:
+    - entity_reference_revisions
+id: paragraph.modal.modal_body
+field_name: modal_body
+entity_type: paragraph
+bundle: modal
+label: 'Modal body'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      text: text
+      image: image
+      video: video
+      view: view
+      slider: slider
+      columns: columns
+      columns_two_uneven: columns_two_uneven
+      columns_three_uneven: columns_three_uneven
+    target_bundles_drag_drop:
+      accordion:
+        weight: -21
+        enabled: false
+      accordion_section:
+        weight: -22
+        enabled: false
+      columns:
+        enabled: true
+        weight: -19
+      columns_single:
+        weight: -20
+        enabled: false
+      columns_three_uneven:
+        enabled: true
+        weight: -17
+      columns_two_uneven:
+        enabled: true
+        weight: -18
+      image:
+        enabled: true
+        weight: -30
+      modal:
+        weight: -25
+        enabled: false
+      slider:
+        enabled: true
+        weight: -27
+      tab_section:
+        weight: -24
+        enabled: false
+      tabs:
+        weight: -23
+        enabled: false
+      text:
+        enabled: true
+        weight: -31
+      video:
+        enabled: true
+        weight: -29
+      view:
+        enabled: true
+        weight: -28
+      webform:
+        weight: -26
+        enabled: false
+field_type: entity_reference_revisions

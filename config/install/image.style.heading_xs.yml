@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: heading_xs
+label: 'Heading XS'
+effects:
+  2da21245-3066-4101-825c-10dc680ee9a9:
+    uuid: 2da21245-3066-4101-825c-10dc680ee9a9
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 576
+      height: 150
+      crop_type: focal_point

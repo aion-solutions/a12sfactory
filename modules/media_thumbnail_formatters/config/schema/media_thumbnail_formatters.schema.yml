@@ -1,0 +1,10 @@
+field.formatter.settings.media_thumbnail_formatters_responsive:
+  type: mapping
+  label: 'Media thumbnail responsive field display format settings'
+  mapping:
+    image_link:
+      type: string
+      label: 'Link image to'
+    responsive_image_style:
+      type: string
+      label: 'Responsive image style'

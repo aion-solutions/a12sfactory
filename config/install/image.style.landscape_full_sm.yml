@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_full_sm
+label: 'Landscape full SM'
+effects:
+  6ce36967-a7f8-4a62-bee4-5ae0e20da9cd:
+    uuid: 6ce36967-a7f8-4a62-bee4-5ae0e20da9cd
+    id: focal_point_scale_and_crop
+    weight: 2
+    data:
+      width: 768
+      height: 512
+      crop_type: focal_point

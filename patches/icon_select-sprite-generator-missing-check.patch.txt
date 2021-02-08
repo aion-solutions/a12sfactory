@@ -1,0 +1,24 @@
+diff --git a/src/Helper/SvgSpriteGenerator.php b/src/Helper/SvgSpriteGenerator.php
+index 1b367be..1fb6bca 100644
+--- a/src/Helper/SvgSpriteGenerator.php
++++ b/src/Helper/SvgSpriteGenerator.php
+@@ -36,10 +36,17 @@ class SvgSpriteGenerator {
+         $symbol_content = '';
+         $symbol_viewbox = '0 0 88 88';
+ 
+-        $symbol_id = $term->field_symbol_id->value;
++        if (!$term->hasField('field_symbol_id') || $term->get('field_symbol_id')->isEmpty()) {
++          continue;
++        }
++
++        $symbol_id = $term->get('field_symbol_id')->value;
+ 
+-        $uri = $term->field_svg_file->entity->getFileUri();
++        if (!$term->hasField('field_svg_file') || $term->get('field_svg_file')->isEmpty() || !($file = $term->get('field_svg_file')->entity)) {
++          continue;
++        }
+ 
++        $uri = $file->getFileUri();
+         $svg_file_content = file_exists($uri) ? file_get_contents($uri) : NULL;
+ 
+         $symbol_xml = simplexml_load_string($svg_file_content);

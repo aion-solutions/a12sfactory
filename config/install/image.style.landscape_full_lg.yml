@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_full_lg
+label: 'Landscape full LG'
+effects:
+  67a04b38-22eb-41fb-9858-7d78413a86c7:
+    uuid: 67a04b38-22eb-41fb-9858-7d78413a86c7
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 960
+      crop_type: focal_point

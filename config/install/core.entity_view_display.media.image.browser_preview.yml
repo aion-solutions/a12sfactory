@@ -1,0 +1,32 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.media.browser_preview
+    - field.field.media.image.field_copyright
+    - field.field.media.image.field_image
+    - image.style.medium
+    - media.type.image
+  module:
+    - image
+id: media.image.browser_preview
+targetEntityType: media
+bundle: image
+mode: browser_preview
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: medium
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+    region: content
+hidden:
+  created: true
+  field_copyright: true
+  langcode: true
+  name: true
+  thumbnail: true
+  uid: true

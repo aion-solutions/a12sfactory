@@ -1,0 +1,15 @@
+{% embed "@a12sfactory/paragraph/paragraph--default.html.twig" %}
+
+  {% block content %}
+    {% if paragraph.field_cards_title.0.value is not empty %}
+      <h2 class="pb-3">{{ content.field_cards_title }}</h2>
+    {% endif %}
+
+    {{ content|without('field_cards_title', 'field_cards') }}
+
+    <div class="{{ card_group_type }}">
+      {{ content.field_cards }}
+    </div>
+  {% endblock content %}
+
+{% endembed %}

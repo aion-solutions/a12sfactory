@@ -1,0 +1,5 @@
+roleassign_roles:
+  editor: editor
+  seo_manager: seo_manager
+  site_manager: site_manager
+  administrator: '0'

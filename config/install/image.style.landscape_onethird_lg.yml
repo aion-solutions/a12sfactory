@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_onethird_lg
+label: 'Landscape 1/3 LG'
+effects:
+  f77a6d2e-9b47-4a74-8e6f-7d84678b3893:
+    uuid: f77a6d2e-9b47-4a74-8e6f-7d84678b3893
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 267
+      crop_type: focal_point

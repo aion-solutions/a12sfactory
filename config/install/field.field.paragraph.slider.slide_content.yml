@@ -1,0 +1,82 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.slide_content
+    - paragraphs.paragraphs_type.columns
+    - paragraphs.paragraphs_type.columns_three_uneven
+    - paragraphs.paragraphs_type.columns_two_uneven
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.slider
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video
+  module:
+    - entity_reference_revisions
+id: paragraph.slider.slide_content
+field_name: slide_content
+entity_type: paragraph
+bundle: slider
+label: 'Slide content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      image: image
+      text: text
+      video: video
+      columns: columns
+      columns_two_uneven: columns_two_uneven
+      columns_three_uneven: columns_three_uneven
+    target_bundles_drag_drop:
+      accordion:
+        weight: -22
+        enabled: false
+      accordion_section:
+        weight: -23
+        enabled: false
+      columns:
+        enabled: true
+        weight: -20
+      columns_single:
+        weight: -21
+        enabled: false
+      columns_three_uneven:
+        enabled: true
+        weight: -18
+      columns_two_uneven:
+        enabled: true
+        weight: -19
+      image:
+        enabled: true
+        weight: -31
+      modal:
+        weight: -26
+        enabled: false
+      slider:
+        weight: -29
+        enabled: false
+      tab_section:
+        weight: -25
+        enabled: false
+      tabs:
+        weight: -24
+        enabled: false
+      text:
+        enabled: true
+        weight: -31
+      video:
+        enabled: true
+        weight: -31
+      view:
+        weight: -30
+        enabled: false
+      webform:
+        weight: -28
+        enabled: false
+field_type: entity_reference_revisions

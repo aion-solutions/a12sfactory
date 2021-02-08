@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_full_lg
+label: 'No-crop full LG'
+effects:
+  1b96cca9-62db-4ab1-8675-cc02e49019d9:
+    uuid: 1b96cca9-62db-4ab1-8675-cc02e49019d9
+    id: image_scale
+    weight: 1
+    data:
+      width: 1200
+      height: null
+      upscale: false

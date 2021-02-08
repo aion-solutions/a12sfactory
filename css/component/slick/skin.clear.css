@@ -1,0 +1,86 @@
+.slick--skin--a12sfactory-clear .slick-arrow {
+  border-radius: 0;
+}
+
+.slick--skin--a12sfactory-clear .slick-prev {
+  left: calc(25% - 42px);
+}
+
+.slick--skin--a12sfactory-clear .slick-next {
+  right: calc(25% - 42px);
+}
+
+.slick--skin--a12sfactory-clear .slick-arrow {
+  opacity: 0;
+  transition: opacity .2s ease-in-out;
+}
+
+.slick--skin--a12sfactory-clear .slick-arrow::before {
+  border-color: transparent transparent transparent black;
+  border-style: solid;
+  border-width: 21px 14px;
+  content: "";
+  height: 0;
+  margin-top: -21px;
+  position: absolute;
+  width: 0;
+}
+
+.slick--skin--a12sfactory-clear:hover .slick-arrow {
+  opacity: 1;
+}
+
+.slick--skin--a12sfactory-clear .slick-prev::before {
+  border-color: transparent black transparent transparent;
+  left: 0;
+}
+
+.slick--skin--a12sfactory-clear .slick-next::before {
+  right: 0;
+}
+
+.slick--skin--a12sfactory-clear.slick--optionset--slider-simple {
+  overflow: hidden;
+}
+
+.slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-list {
+  margin: 0 -10px;
+}
+
+.slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-slide {
+  margin: 0px 10px;
+}
+
+.slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-slide img {
+  margin: 0 auto;
+}
+
+.slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-slide.slick-active {
+  opacity:1;
+  transition-delay: 0.3s;
+  transition-duration: 0.2s;
+  transition-property: opacity;
+  transition-timing-function: ease-in;
+}
+
+@media screen and (min-width: 766px) {
+  .slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-list:before,
+  .slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-list:after {
+    background-color: rgba(255, 255, 255, .9);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    width: 25%;
+    z-index: 1;
+  }
+
+  .slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-list:before {
+    left: 0;
+  }
+
+  .slick--skin--a12sfactory-clear.slick--optionset--slider-simple .slick-list:after {
+    right: 0;
+  }
+}

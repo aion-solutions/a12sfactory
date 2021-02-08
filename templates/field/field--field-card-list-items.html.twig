@@ -1,0 +1,15 @@
+{%
+  set classes = [
+  'field',
+  'field--name-' ~ field_name|clean_class,
+  'field--type-' ~ field_type|clean_class,
+  'field--label-' ~ label_display,
+  'list-group',
+  'list-group-flush',
+]
+%}
+<ul{{ attributes.addClass(classes) }}>
+  {% for item in items %}
+    <li{{ item.attributes.addClass('list-group-item') }}>{{ item.content }}</li>
+  {% endfor %}
+</ul>

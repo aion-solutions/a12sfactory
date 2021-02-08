@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_full_xs
+label: 'Square full XS'
+effects:
+  e7247fb7-6bac-4319-862f-9ebe1617497d:
+    uuid: e7247fb7-6bac-4319-862f-9ebe1617497d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 576
+      height: 576
+      crop_type: focal_point

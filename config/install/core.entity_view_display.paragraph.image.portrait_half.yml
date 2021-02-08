@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.portrait_half
+    - field.field.paragraph.image.field_view_mode
+    - field.field.paragraph.image.image_field
+    - field.field.paragraph.image.link
+    - paragraphs.paragraphs_type.image
+    - responsive_image.styles.portrait_half
+  module:
+    - link
+    - media_thumbnail_formatters
+id: paragraph.image.portrait_half
+targetEntityType: paragraph
+bundle: image
+mode: portrait_half
+content:
+  image_field:
+    type: media_thumbnail_formatters_responsive
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      responsive_image_style: portrait_half
+      image_link: ''
+    third_party_settings: {  }
+  link:
+    type: link
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+hidden:
+  field_view_mode: true

@@ -1,0 +1,24 @@
+a12sfactory.sm-min:
+  label: Small Min
+  mediaQuery: 'all and (min-width: 576px)'
+  weight: 1
+  multipliers:
+      - 1x
+a12sfactory.md-min:
+  label: Medium Min
+  mediaQuery: 'all and (min-width: 768px)'
+  weight: 1
+  multipliers:
+    - 1x
+a12sfactory.lg-min:
+  label: Large min
+  mediaQuery: 'all and (min-width: 992px)'
+  weight: 1
+  multipliers:
+    - 1x
+a12sfactory.xl-min:
+  label: X-Large min
+  mediaQuery: 'all and (min-width: 1200px)'
+  weight: 1
+  multipliers:
+    - 1x

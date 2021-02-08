@@ -1,0 +1,3 @@
+services:
+  a12sfactory_seo.seo_manager:
+    class: Drupal\a12sfactory_seo\SeoManager

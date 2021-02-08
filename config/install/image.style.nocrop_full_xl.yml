@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_full_xl
+label: 'No-crop full XL'
+effects:
+  929d0f2c-c0a2-467b-96e1-7063daab3b9c:
+    uuid: 929d0f2c-c0a2-467b-96e1-7063daab3b9c
+    id: image_scale
+    weight: 1
+    data:
+      width: 1440
+      height: null
+      upscale: false

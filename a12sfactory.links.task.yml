@@ -1,0 +1,9 @@
+a12sfactory.settings:
+  title: 'A12S Factory'
+  route_name: a12sfactory.settings
+  base_route: system.admin_config
+a12sfactory.paragraph_behavior_settings:
+  title: 'Paragraphs behavior settings'
+  route_name: a12sfactory.paragraph_behavior_settings
+  base_route: a12sfactory.settings
+  

@@ -1,0 +1,117 @@
+.paragraph.paragraph--color {
+  display: table;
+}
+.paragraph.paragraph--color > .paragraph__column {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+.paragraph.paragraph--color + .paragraph > .paragraph__column {
+  padding-top: 30px;
+}
+.bg-primary {
+  background: #007bff;
+  color: #ffffff;
+}
+.bg-primary a {
+  color: #ffffff;
+}
+.bg-primary a:hover,
+.bg-primary a:focus,
+.bg-primary a:active,
+.bg-primary a.is-active {
+  color: #ffffff;
+}
+.bg-secondary {
+  background: #868e96;
+  color: #ffffff;
+}
+.bg-secondary a {
+  color: #ffffff;
+}
+.bg-secondary a:hover,
+.bg-secondary a:focus,
+.bg-secondary a:active,
+.bg-secondary a.is-active {
+  color: #ffffff;
+}
+.bg-success {
+  background: #28a745;
+  color: #ffffff;
+}
+.bg-success a {
+  color: #ffffff;
+}
+.bg-success a:hover,
+.bg-success a:focus,
+.bg-success a:active,
+.bg-success a.is-active {
+  color: #ffffff;
+}
+.bg-info {
+  background: #17a2b8;
+  color: #ffffff;
+}
+.bg-info a {
+  color: #ffffff;
+}
+.bg-info a:hover,
+.bg-info a:focus,
+.bg-info a:active,
+.bg-info a.is-active {
+  color: #ffffff;
+}
+.bg-warning {
+  background: #ffc107;
+  color: #ffffff;
+}
+.bg-warning a {
+  color: #ffffff;
+}
+.bg-warning a:hover,
+.bg-warning a:focus,
+.bg-warning a:active,
+.bg-warning a.is-active {
+  color: #ffffff;
+}
+
+.bg-danger {
+  background: #dc3545;
+  color: #ffffff;
+}
+.bg-danger a {
+  color: #ffffff;
+}
+.bg-danger a:hover,
+.bg-danger a:focus,
+.bg-danger a:active,
+.bg-danger a.is-active {
+  color: #ffffff;
+}
+
+.bg-light {
+  background: #f8f9fa;
+  color: #000000;
+}
+.bg-light a {
+  color: #000000;
+}
+.bg-light a:hover,
+.bg-light a:focus,
+.bg-light a:active,
+.bg-light a.is-active {
+  color: #000000;
+}
+
+.bg-dark {
+  background: #343a40;
+  color: #ffffff;
+}
+.bg-dark a {
+  color: #ffffff;
+}
+.bg-dark a:hover,
+.bg-dark a:focus,
+.bg-dark a:active,
+.bg-dark a.is-active {
+  color: #ffffff;
+}

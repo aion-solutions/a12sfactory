@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_onefourth_xl
+label: 'Portrait 1/4 XL'
+effects:
+  7ac6f7fe-fac0-4941-80c0-7b038b8dd44a:
+    uuid: 7ac6f7fe-fac0-4941-80c0-7b038b8dd44a
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 400
+      height: 600
+      crop_type: focal_point

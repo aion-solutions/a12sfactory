@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: complex
+label: Complex
+revision: 1
+description: 'This block type provides an advanced editor to build complex structures.'

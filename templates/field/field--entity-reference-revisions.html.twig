@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Template override for Entity Reference Revisions Field.
+ *
+ * @ingroup templates
+ *
+ * @see template_preprocess_field()
+ */
+#}
+{%
+  set title_classes = [
+    'field--label',
+    label_display == 'visually_hidden' ? 'sr-only',
+  ]
+%}
+
+{% if not label_hidden %}
+  <div{{ title_attributes.addClass(title_classes) }}>{{ label }}</div>
+{% endif %}
+
+{%- for item in items -%}
+  {% if add_column %}
+    <div{{ item.attributes.addClass(classes) }}>
+  {% endif %}
+
+  {{ item.content }}
+
+  {% if add_column %}
+    </div>
+  {% endif %}
+{%- endfor -%}

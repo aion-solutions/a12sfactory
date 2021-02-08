@@ -1,0 +1,75 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.page.field_meta_tags
+    - field.field.node.page.field_page_paragraphs
+    - field.field.node.page.field_subtitle
+    - field.field.node.page.teaser_description_field
+    - field.field.node.page.teaser_display_field
+    - field.field.node.page.teaser_image_field
+    - node.type.page
+    - responsive_image.styles.square_onefourth
+  module:
+    - blazy
+    - text
+    - user
+id: node.page.default
+targetEntityType: node
+bundle: page
+mode: default
+content:
+  teaser_description_field:
+    type: text_default
+    weight: 1
+    region: content
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+  teaser_image_field:
+    type: blazy_media
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      responsive_image_style: square_onefourth
+      class: ''
+      id: ''
+      image: ''
+      link: ''
+      overlay: ''
+      title: ''
+      vanilla: false
+      icon: ''
+      layout: ''
+      view_mode: ''
+      cache: 0
+      current_view_mode: ''
+      skin: ''
+      fx: ''
+      style: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      caption: {  }
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      _uri: ''
+      breakpoints: {  }
+      sizes: ''
+      grid_header: ''
+      grid: 0
+      grid_medium: 0
+      grid_small: 0
+    third_party_settings: {  }
+hidden:
+  field_meta_tags: true
+  field_page_paragraphs: true
+  field_subtitle: true
+  langcode: true
+  links: true
+  teaser_display_field: true

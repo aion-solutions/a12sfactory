@@ -1,0 +1,86 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_card_paragraphs
+    - paragraphs.paragraphs_type.card
+    - paragraphs.paragraphs_type.card_body
+    - paragraphs.paragraphs_type.card_list
+  module:
+    - entity_reference_revisions
+id: paragraph.card.field_card_paragraphs
+field_name: field_card_paragraphs
+entity_type: paragraph
+bundle: card
+label: Components
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      card_body: card_body
+      card_list: card_list
+    target_bundles_drag_drop:
+      accordion:
+        weight: -37
+        enabled: false
+      accordion_section:
+        weight: -36
+        enabled: false
+      card:
+        weight: -35
+        enabled: false
+      card_body:
+        enabled: true
+        weight: -39
+      card_list:
+        enabled: true
+        weight: -38
+      cards:
+        weight: -33
+        enabled: false
+      columns:
+        weight: -32
+        enabled: false
+      columns_single:
+        weight: -31
+        enabled: false
+      columns_three_uneven:
+        weight: -30
+        enabled: false
+      columns_two_uneven:
+        weight: -29
+        enabled: false
+      image:
+        weight: -28
+        enabled: false
+      modal:
+        weight: -27
+        enabled: false
+      slider:
+        weight: -26
+        enabled: false
+      tab_section:
+        weight: -24
+        enabled: false
+      tabs:
+        weight: -25
+        enabled: false
+      text:
+        weight: -34
+        enabled: false
+      video:
+        weight: -23
+        enabled: false
+      view:
+        weight: -22
+        enabled: false
+      webform:
+        weight: -21
+        enabled: false
+field_type: entity_reference_revisions

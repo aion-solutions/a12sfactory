@@ -1,0 +1,41 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.browser
+  module:
+    - entity_browser_entity_form
+    - views
+name: video_browser
+label: 'Video Browser'
+display: modal
+display_configuration:
+  width: '750'
+  height: '500'
+  link_text: 'Select a video'
+  auto_open: false
+selection_display: no_display
+selection_display_configuration: {  }
+widget_selector: tabs
+widget_selector_configuration: {  }
+widgets:
+  2eb686e7-7c52-4399-864f-fd97e781bbc8:
+    settings:
+      view: browser
+      view_display: video_browser
+      submit_text: 'Select a video'
+      auto_select: false
+    uuid: 2eb686e7-7c52-4399-864f-fd97e781bbc8
+    weight: 1
+    label: Library
+    id: view
+  f4a20141-d72c-4041-91c8-8532bfbf49d9:
+    settings:
+      entity_type: media
+      bundle: video
+      form_mode: default
+      submit_text: 'Select a video'
+    uuid: f4a20141-d72c-4041-91c8-8532bfbf49d9
+    weight: 2
+    label: Web
+    id: entity_form

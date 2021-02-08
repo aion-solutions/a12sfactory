@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_half_xl
+label: 'Square 1/2 XL'
+effects:
+  74ae9421-ba1c-4a07-8002-cb87179131ac:
+    uuid: 74ae9421-ba1c-4a07-8002-cb87179131ac
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 800
+      height: 800
+      crop_type: focal_point

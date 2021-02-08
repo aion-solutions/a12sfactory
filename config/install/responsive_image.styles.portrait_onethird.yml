@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.portrait_full_sm
+    - image.style.portrait_full_xs
+    - image.style.portrait_half_md
+    - image.style.portrait_onethird_lg
+    - image.style.portrait_onethird_xl
+  module:
+    - a12sfactory
+id: portrait_onethird
+label: 'Portrait 1/3'
+image_style_mappings:
+  -
+    breakpoint_id: a12sfactory.xl-min
+    multiplier: 1x
+    image_mapping_type: sizes
+    image_mapping:
+      sizes: 100vw
+      sizes_image_styles:
+        - portrait_onethird_xl
+  -
+    breakpoint_id: a12sfactory.lg-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: portrait_onethird_lg
+  -
+    breakpoint_id: a12sfactory.md-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: portrait_half_md
+  -
+    breakpoint_id: a12sfactory.sm-min
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: portrait_full_sm
+breakpoint_group: a12sfactory
+fallback_image_style: portrait_full_xs

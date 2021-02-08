@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_call2action_links
+    - node.type.hero_slide
+  module:
+    - link
+id: node.hero_slide.field_call2action_links
+field_name: field_call2action_links
+entity_type: node
+bundle: hero_slide
+label: 'Call-to-action links'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link

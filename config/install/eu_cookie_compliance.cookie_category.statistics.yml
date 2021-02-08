@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: statistics
+label: 'Statistical cookies'
+description: ''
+checkbox_default_state: checked
+weight: 1

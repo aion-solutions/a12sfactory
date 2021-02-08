@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_half_lg
+label: 'No-crop 1/2 LG'
+effects:
+  2db53a85-2e64-41a0-8433-54a952f19ca8:
+    uuid: 2db53a85-2e64-41a0-8433-54a952f19ca8
+    id: image_scale
+    weight: 1
+    data:
+      width: 600
+      height: null
+      upscale: false

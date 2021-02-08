@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: landscape_full_md
+label: 'Landscape full MD'
+effects:
+  0a2f9091-8b2b-46cb-add8-6f95a8f820d3:
+    uuid: 0a2f9091-8b2b-46cb-add8-6f95a8f820d3
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 992
+      height: 661
+      crop_type: focal_point

@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: portrait_full_xs
+label: 'Portrait full XS'
+effects:
+  1ff4e4ac-bcc4-4a96-ba92-4abb02f60dd2:
+    uuid: 1ff4e4ac-bcc4-4a96-ba92-4abb02f60dd2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 576
+      height: 864
+      crop_type: focal_point

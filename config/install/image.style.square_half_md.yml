@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_half_md
+label: 'Square 1/2 MD'
+effects:
+  45d7386c-9c4b-464c-9014-3618ff13b4c2:
+    uuid: 45d7386c-9c4b-464c-9014-3618ff13b4c2
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 500
+      height: 500
+      crop_type: focal_point

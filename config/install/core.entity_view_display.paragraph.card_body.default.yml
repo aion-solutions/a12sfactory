@@ -1,0 +1,44 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.card_body.field_card_links
+    - field.field.paragraph.card_body.field_card_title
+    - field.field.paragraph.card_body.text
+    - paragraphs.paragraphs_type.card_body
+  module:
+    - link
+    - text
+id: paragraph.card_body.default
+targetEntityType: paragraph
+bundle: card_body
+mode: default
+content:
+  field_card_links:
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  field_card_title:
+    weight: 0
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+    region: content
+hidden: {  }

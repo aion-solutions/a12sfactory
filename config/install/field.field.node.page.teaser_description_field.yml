@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.teaser_description_field
+    - node.type.page
+  module:
+    - text
+id: node.page.teaser_description_field
+field_name: teaser_description_field
+entity_type: node
+bundle: page
+label: Description
+description: 'The description text is displayed on overview pages. Additionally, it is used for Google and Facebook snippets.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

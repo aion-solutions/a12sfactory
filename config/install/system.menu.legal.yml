@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: legal
+label: Legal
+description: 'Displays legal pages.'
+locked: false

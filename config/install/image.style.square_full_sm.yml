@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: square_full_sm
+label: 'Square full SM'
+effects:
+  57aa7a1b-1c6c-4468-8173-26dfee435c67:
+    uuid: 57aa7a1b-1c6c-4468-8173-26dfee435c67
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 768
+      crop_type: focal_point

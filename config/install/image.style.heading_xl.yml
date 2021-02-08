@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: heading_xl
+label: 'Heading XL'
+effects:
+  7f4c8edc-69b3-4ce0-92ed-07593c7e970e:
+    uuid: 7f4c8edc-69b3-4ce0-92ed-07593c7e970e
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1440
+      height: 376
+      crop_type: focal_point

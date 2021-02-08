@@ -1,0 +1,40 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.image.field_view_mode
+    - field.field.paragraph.image.image_field
+    - field.field.paragraph.image.link
+    - paragraphs.paragraphs_type.image
+    - responsive_image.styles.landscape_full
+  module:
+    - link
+    - media_thumbnail_formatters
+id: paragraph.image.default
+targetEntityType: paragraph
+bundle: image
+mode: default
+content:
+  image_field:
+    type: media_thumbnail_formatters_responsive
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      responsive_image_style: landscape_full
+      image_link: ''
+    third_party_settings: {  }
+  link:
+    type: link
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+hidden:
+  field_view_mode: true

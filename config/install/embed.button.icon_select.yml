@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - entity_browser.browser.icon_select_browser
+    - taxonomy.vocabulary.icons
+  module:
+    - entity_embed
+    - icon_select
+    - taxonomy
+label: 'Icon Select'
+id: icon_select
+type_id: entity
+type_settings:
+  entity_type: taxonomy_term
+  bundles:
+    - icons
+  display_plugins:
+    - 'entity_reference:icon_select_formatter_default'
+  entity_browser: icon_select_browser
+  entity_browser_settings:
+    display_review: false
+icon:
+  data: iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAArJJREFUeNq0lrF2EkEUhpecqLGCxpNOKDSkgkaTSmwCVKHRpBIbEytiI6mCjeADaFJFG8EqVsFKbQRfIFAl2rC+QJYnwC9czjLMLIvuJvfMzpm5d3buzD//vTORwWBghZNOp+v0nYeZjKd13got+wcH1NMcWINw0uv1rt1YoNDwHBDWwbOtbXFAw3NAhA8Qy7u7PiAUi0+eFoum3rbtu8llwInH4/VG4/fZKY2wZ9Bqt/tOv9Pt2PYf2mgqlb3E0MFaLj90djudSkdj0dGpBANEyq3FRRcZGneWkqpVTP8N0db2cxYbi0V/nZ5RayMdp7+0nKRm/If3hyOIGJfJPPBxoCIrv+Ejm899//pN9cG8KNXZg9NUsHq0saEq6aJ8WS6ryjk5t+sLN31KtVbT9rRTKlEnJjkjXTFNsAjDq8qeD0QZI0phEXUqlWJxtdob4RJdyRwTZA0G0etqFTQ02kgXkw5RAGm3f0qgQXbii1IorNMdbq57CbmIxa5lcz9aLVVJFyWmS8hFJyedfzRFwt8H/jJnXbFcuYN5NU02Gp+ECel0ingxc28AGZ0BuYUsptnIJ57XQLP5Ra7JacLiYO3YAWvP5vKkrc9HR5LE8Ud+JW2ZdwiBen91VTJgwthiz7YFg/GPbpLSSP2xXjczl5DdvQw0RtJFKVZ3tgsHaO+trJiMZhyB4+ng7bt9/qIcHzddvWgwqQ4CsggWcBkAwuPNTfC8uB5y+Wg0hhKTnip8IDLfCrIDGXx+7rB1wYQGXW3ACCJRsTtXy+yCpvna0f5nUtYHkjK7twNEgNOKeYzm/6ZoA0aB9mKnBHawmyeJUJDbA6bKxavDalkyzFM0k1+yk+gjPlQf0FzigMfPtIeT+uaYkU3FBxsicNQp2sMn1zQprBfGm56Z+jlwn+w/U/4KMADuGtNHDYPjyAAAAABJRU5ErkJggg==
+  uri: 'public://embed_buttons/icon-select.png'
+icon_uuid: null

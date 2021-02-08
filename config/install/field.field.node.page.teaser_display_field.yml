@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.teaser_display_field
+    - node.type.page
+id: node.page.teaser_display_field
+field_name: teaser_display_field
+entity_type: node
+bundle: page
+label: 'Display the teaser on the full page'
+description: 'When enabled, the summary is displayed under the title, on the full page.'
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'Yes'
+  off_label: 'No'
+field_type: boolean

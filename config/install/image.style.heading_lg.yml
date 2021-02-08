@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: heading_lg
+label: 'Heading LG'
+effects:
+  b3e2ca98-e6b7-485a-975d-b014f4e2264d:
+    uuid: b3e2ca98-e6b7-485a-975d-b014f4e2264d
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 314
+      crop_type: focal_point

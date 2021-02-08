@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hero_sliders
+    - node.type.hero_slide
+    - taxonomy.vocabulary.hero_sliders
+id: node.hero_slide.field_hero_sliders
+field_name: field_hero_sliders
+entity_type: node
+bundle: hero_slide
+label: 'Hero sliders'
+description: 'Select the carousels where the slide should be displayed.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      hero_sliders: hero_sliders
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

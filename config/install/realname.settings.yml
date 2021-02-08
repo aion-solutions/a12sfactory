@@ -1,0 +1,1 @@
+pattern: '[user:field_firstname] [user:field_lastname]'

@@ -1,0 +1,85 @@
+a12sfactory.paragraphs.behavior:
+  type: config_object
+  label: 'Global setttings for Paragraphs display behavior'
+  mapping:
+    display:
+      type: mapping
+      label: Display
+      mapping:
+        background_styles:
+          type: a12sfactory.keyvalue
+          label: 'Background styles'
+        background_image:
+          type: mapping
+          label: 'Background image'
+          mapping:
+            background_size:
+              type: a12sfactory.css_background
+              label: 'Background size'
+            background_position:
+              type: a12sfactory.css_background
+              label: 'Background position'
+            scheme:
+              type: string
+              label: 'Background image scheme'
+            directory:
+              type: string
+              label: 'Background image directory'
+            max_size:
+              type: string
+              label: 'Background image max size'
+            max_dimensions:
+              type: mapping
+              label: 'Background image max dimensions'
+              mapping:
+                height:
+                  type: string
+                  label: 'Height'
+                width:
+                  type: string
+                  label: 'Width'
+        spacing:
+          type: mapping
+          label: 'Spacing'
+          mapping:
+            margin_top:
+              type: a12sfactory.keyvalue
+              label: 'Margin top'
+            margin_bottom:
+              type: a12sfactory.keyvalue
+              label: 'Margin bottom'
+            padding_top:
+              type: a12sfactory.keyvalue
+              label: 'Padding top'
+            padding_bottom:
+              type: a12sfactory.keyvalue
+              label: 'Padding bottom'
+    row:
+      type: mapping
+      label: Row
+      mapping:
+        column_breakpoints:
+          type: a12sfactory.keyvalue
+          label: 'Column breakpoints'
+
+a12sfactory.keyvalue:
+  type: mapping
+  label: 'Key/Value pairs'
+  mapping:
+    key:
+      type: string
+      label: key
+    value:
+      type: string
+      label: value
+
+a12sfactory.css_background:
+  type: mapping
+  label: 'Option/Custom pairs'
+  mapping:
+    option:
+      type: string
+      label: key
+    custom:
+      type: string
+      label: value

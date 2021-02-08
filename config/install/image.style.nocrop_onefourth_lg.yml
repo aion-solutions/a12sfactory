@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_onefourth_lg
+label: 'No-crop 1/4 LG'
+effects:
+  b54d2063-f50c-4792-a0f8-6f4adb934608:
+    uuid: b54d2063-f50c-4792-a0f8-6f4adb934608
+    id: image_scale
+    weight: 1
+    data:
+      width: 300
+      height: null
+      upscale: false

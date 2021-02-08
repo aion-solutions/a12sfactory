@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.hero_sliders
+id: taxonomy_term.hero_sliders.default
+targetEntityType: taxonomy_term
+bundle: hero_sliders
+mode: default
+content: {  }
+hidden:
+  description: true
+  langcode: true

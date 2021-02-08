@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - focal_point
+name: de2e
+label: Edge-to-Edge
+effects:
+  6383d79b-3e15-43b6-b78c-20d9ef575469:
+    uuid: 6383d79b-3e15-43b6-b78c-20d9ef575469
+    id: focal_point_scale_and_crop
+    weight: 1
+    data:
+      width: 1600
+      height: 600
+      crop_type: focal_point

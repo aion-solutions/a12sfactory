@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: nocrop_full_sm
+label: 'No-crop full SM'
+effects:
+  022cf663-46e8-4e34-9dd7-6765d84795bd:
+    uuid: 022cf663-46e8-4e34-9dd7-6765d84795bd
+    id: image_scale
+    weight: 1
+    data:
+      width: 768
+      height: null
+      upscale: false
