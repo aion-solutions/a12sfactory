@@ -134,6 +134,7 @@ dependencies:
   - slick_views:slick_views
   - smart_trim:smart_trim
   - spamspan:spamspan
+  - structure_sync:structure_sync
   - swiftmailer:swiftmailer
   - taxonomy_access_fix:taxonomy_access_fix
   - token:token

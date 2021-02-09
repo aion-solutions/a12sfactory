@@ -1,0 +1,12 @@
+taxonomies:
+  hero_sliders:
+    -
+      vid: hero_sliders
+      tid: '1'
+      langcode: en
+      name: 'Homepage carousel'
+      description__value: null
+      description__format: null
+      weight: '0'
+      parent: '0'
+
