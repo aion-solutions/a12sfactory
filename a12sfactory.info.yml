@@ -2,6 +2,7 @@ name: A12s Factory
 type: profile
 description: 'This distribution provides advanced features and automation for managing Websites.'
 core: 8.x
+core_version_requirement: ^8
 php: 7.1
 distribution:
   name: A12S Factory
@@ -27,19 +28,15 @@ dependencies:
   - drupal:content_translation
   - drupal:content_translation
   - drupal:contextual
-#  - drupal:datetime
   - drupal:dynamic_page_cache
   - drupal:editor
   - drupal:entity_reference
   - drupal:field_ui
   - drupal:file
-#  - drupal:filter
   - drupal:help
-#  - drupal:history
   - drupal:image
   - drupal:inline_form_errors
   - drupal:locale
-#  - drupal:layout_discovery
   - drupal:media
   - drupal:menu_link_content
   - drupal:menu_ui
@@ -48,9 +45,7 @@ dependencies:
   - drupal:options
   - drupal:page_cache
   - drupal:path
-#  - drupal:quickedit
   - drupal:responsive_image
-#  - drupal:settings_tray
   - drupal:taxonomy
   - drupal:telephone
   - drupal:text
@@ -62,22 +57,13 @@ dependencies:
   # Contrib modules
   - ace_editor:ace_editor
   - auto_entitylabel:auto_entitylabel
-#  - better_exposed_filters:better_exposed_filters
-#  - better_formats:better_formats
   - blazy:blazy
   - block_field:block_field
-#  - config_filter:config_filter
-#  - config_ignore:config_ignore
-#  - config_update:config_update
   - countup:countup
   - crop:crop
   - eu_cookie_compliance:eu_cookie_compliance
   - focal_point:focal_point
-#  - content_lock:content_lock
-#  - content_lock:content_lock_timeout
   - ctools:ctools
-#  - ctools:ctools_block
-#  - ctools:ctools_views
   - draggableviews:draggableviews
   - dropzonejs:dropzonejs
   - dropzonejs:dropzonejs_eb_widget
@@ -90,7 +76,6 @@ dependencies:
   - entity_embed:entity_embed
   - entity_reference_revisions:entity_reference_revisions
   - extlink:extlink
-#  - fast404:fast404
   - field_group:field_group
   - file_mdm:file_mdm
   - file_mdm:file_mdm_exif
@@ -100,28 +85,17 @@ dependencies:
   - imagemagick:imagemagick
   - inline_entity_form:inline_entity_form
   - linkit:linkit
-#  - login_destination:login_destination
   - mailsystem:mailsystem
   - maxlength:maxlength
-#  - menu_admin_per_menu:menu_admin_per_menu
-#  - menu_block:menu_block
   - menu_breadcrumb:menu_breadcrumb
-#  - node_edit_protection:node_edit_protection
   - oembed_providers:oembed_providers
   - override_node_options:override_node_options
-#  - page_manager:page_manager
-#  - page_manager:page_manager_ui
-#  - panels:panels
-#  - panelizer:panelizer
   - paragraphs:paragraphs
   - password_policy:password_policy
-#  - password_policy_characters
-#  - password_policy_character_types
   - password_policy:password_policy_length
   - password_policy:password_policy_username
   - pathauto:pathauto
   - pathologic:pathologic
-#  - persistent_login:persistent_login
   - rabbit_hole:rabbit_hole
   - rabbit_hole:rh_node
   - rabbit_hole:rh_taxonomy
@@ -130,7 +104,6 @@ dependencies:
   - roleassign:roleassign
   - slick:slick
   - slick:slick_ui
-#  - slick_media:slick_media
   - slick_views:slick_views
   - smart_trim:smart_trim
   - spamspan:spamspan
