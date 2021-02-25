@@ -1,8 +1,8 @@
 {
-    "name": "drupal/a12sfactory",
+    "name": "aion-solutions/a12sfactory",
     "description": "A Website factory built by Aïon Solutions",
     "type": "drupal-profile",
-    "license": "proprietary",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Aïon Solutions",
