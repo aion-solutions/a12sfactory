@@ -137,7 +137,8 @@
         "sort-packages": true
     },
     "suggest": {
-        "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it."
+        "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it.",
+        "drupal/slick_media": "DEPRECATED: Module will be removed in next minor release, disable it or require it in your root composer.json."
     },
     "extra": {
         "merge-plugin": {
