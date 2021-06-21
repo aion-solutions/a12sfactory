@@ -114,17 +114,19 @@ class SelectDefaultCustom extends FormElement {
    * Validates a SelectCustom property element.
    */
   public static function validateSelectCustom(&$element, FormStateInterface $form_state, &$complete_form) {
-    if ($element['option']['#value'] === 'custom') {
+    $value = $element['option']['#value'];
+
+    if ($value === 'custom') {
       if ($element['custom']['#value'] === '') {
         $form_state->setError($element, t('Custom value is required.'));
-        $form_state->setError($element, t('%name field: ustom value is required.', ['%name' => $element['#title']]));
+        $form_state->setError($element, t('%name field: custom value is required.', ['%name' => $element['#title']]));
       }
     }
     else {
       $form_state->setValueForElement($element['custom'], NULL);
     }
 
-    if ($element['#required'] && (empty($option) || $option === (string) $element['#empty_value'])) {
+    if ($element['#required'] && (empty($value) || $value === (string) $element['#empty_value'])) {
       $form_state->setError($element, t('%name field is required.', ['%name' => $element['#title']]));
     }
 

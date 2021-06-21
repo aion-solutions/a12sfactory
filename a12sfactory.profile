@@ -4,6 +4,7 @@
  * Enables modules and site configuration for a standard site installation.
  */
 
+use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
@@ -33,6 +34,7 @@ function a12sfactory_form_install_settings_form_alter(&$form, FormStateInterface
 
         if ($key = array_search('::submitForm', $handler)) {
           unset($handler[$key]);
+          $form['#has_submit_callback'] = TRUE;
         }
       }
     }
@@ -46,12 +48,12 @@ function a12sfactory_form_install_settings_form_alter(&$form, FormStateInterface
  *
  * @throws \Exception
  */
-function a12sfactory_form_install_settings_form_submit(array &$form, FormStateInterface $formState) {
+function a12sfactory_form_install_settings_form_submit(array &$form, FormStateInterface $form_state) {
   // Take care if the database connexion
   $database = Database::getConnectionInfo();
 
   if (!empty($database['default'])) {
-    $user_values = $formState->get('database');
+    $user_values = $form_state->get('database');
     $diff = array_diff($user_values, $database['default']);
 
     if (!isset($diff['database']) && isset($diff['password']) && $diff['password'] === '') {
@@ -80,9 +82,9 @@ function a12sfactory_form_install_settings_form_submit(array &$form, FormStateIn
   }
 
   // Fallback to default behavior.
-  // @todo store the initial callback in $formState, to avoid calling the
-  //   "submitForm" statically, as this is bad practice.
-  SiteSettingsForm::submitForm($form, $formState);
+  if (!empty($form['#has_submit_callback'])) {
+    call_user_func_array($form_state->prepareCallback('::submitForm'), [&$form, &$form_state]);
+  }
 }
 
 /**
@@ -496,10 +498,12 @@ function a12sfactory_slick_skins_info() {
 function a12sfactory_paragraph_insert(ParagraphInterface $paragraph) {
   \Drupal::service('a12sfactory.paragraphs_translation_synchronization')->deferSync($paragraph);
 
-  /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-  if ($plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display')) {
+  try {
+    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
     $plugin->addFileUsage($paragraph);
   }
+  catch (PluginException $e) {}
 }
 
 /**
@@ -511,10 +515,12 @@ function a12sfactory_paragraph_insert(ParagraphInterface $paragraph) {
  * @see hook_ENTITY_TYPE_update()
  */
 function a12sfactory_paragraph_update(ParagraphInterface $paragraph) {
-  /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-  if ($plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display')) {
+  try {
+    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
     $plugin->mergeFileUsage($paragraph);
   }
+  catch (PluginException $e) {}
 }
 
 /**
@@ -526,10 +532,12 @@ function a12sfactory_paragraph_update(ParagraphInterface $paragraph) {
  * @see hook_ENTITY_TYPE_delete()
  */
 function a12sfactory_paragraph_delete(ParagraphInterface $paragraph) {
-  /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-  if ($plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display')) {
+  try {
+    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
     $plugin->deleteFileUsage($paragraph, 0);
   }
+  catch (PluginException $e) {}
 }
 
 /**
@@ -541,10 +549,12 @@ function a12sfactory_paragraph_delete(ParagraphInterface $paragraph) {
  * @see hook_ENTITY_TYPE_revision_delete()
  */
 function a12sfactory_paragraph_revision_delete(ParagraphInterface $paragraph) {
-  /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-  if ($plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display')) {
+  try {
+    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
     $plugin->deleteFileUsage($paragraph);
   }
+  catch (PluginException $e) {}
 }
 
 /**

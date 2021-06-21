@@ -7,6 +7,7 @@
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\FileStorage;
+use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\field\Entity\FieldConfig;
@@ -39,15 +40,69 @@ function a12sfactory_install() {
   \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', TRUE)->save(TRUE);
 
   // Entity updates to clear up any mismatched entity and/or field definitions
-  // And Fix changes were detected in the entity type and field definitions.
-  \Drupal::entityDefinitionUpdateManager()->applyUpdates();
+  // and Fix changes were detected in the entity type and field definitions.
+  // In previous Drupal versions, the 55 following lines of code were executed
+  // by a single method:
+  // \Drupal::entityDefinitionUpdateManager()->applyUpdates()
+  $entity_type_manager = \Drupal::entityTypeManager();
+  $entity_field_manager = \Drupal::service('entity_field.manager');
+  $entity_schema_repository = \Drupal::service('entity.last_installed_schema.repository');
+  $entity_definition_manager = \Drupal::entityDefinitionUpdateManager();
+  $field_storage_definition_listener = \Drupal::service('field_storage_definition.listener');
+  if ($change_list = $entity_definition_manager->getChangeList()) {
+    // In case there are changes, explicitly invalidate caches.
+    \Drupal::entityTypeManager()->clearCachedDefinitions();
+    \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
+
+    foreach ($change_list as $entity_type_id => $change_item) {
+      if (!empty($change_item['entity_type'])) {
+        $entity_type = $entity_type_manager->getDefinition($entity_type_id);
+        $field_storage_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions($entity_type_id);
+
+        switch ($change_item['entity_type']) {
+          case EntityDefinitionUpdateManagerInterface::DEFINITION_CREATED:
+            \Drupal::service('entity_type.listener')->onEntityTypeCreate($entity_type);
+            break;
+
+          case EntityDefinitionUpdateManagerInterface::DEFINITION_UPDATED:
+            $original = \Drupal::service('entity.last_installed_schema.repository')->getLastInstalledDefinition($entity_type_id);
+            $original_field_storage_definitions = \Drupal::service('entity.last_installed_schema.repository')->getLastInstalledFieldStorageDefinitions($entity_type_id);
+
+            \Drupal::service('entity_type.listener')->onFieldableEntityTypeUpdate($entity_type, $original, $field_storage_definitions, $original_field_storage_definitions);
+            break;
+        }
+      }
+
+      // Process field storage definition changes.
+      if (!empty($change_item['field_storage_definitions'])) {
+        $storage_definitions = $entity_field_manager->getFieldStorageDefinitions($entity_type_id);
+        $original_storage_definitions = $entity_schema_repository->getLastInstalledFieldStorageDefinitions($entity_type_id);
+
+        foreach ($change_item['field_storage_definitions'] as $field_name => $change) {
+          $storage_definition = $storage_definitions[$field_name] ?? null;
+          $original_storage_definition = $original_storage_definitions[$field_name] ?? null;
+
+          switch ($change) {
+            case EntityDefinitionUpdateManagerInterface::DEFINITION_CREATED:
+              $field_storage_definition_listener->onFieldStorageDefinitionCreate($storage_definition);
+              break;
+
+            case EntityDefinitionUpdateManagerInterface::DEFINITION_UPDATED:
+              $field_storage_definition_listener->onFieldStorageDefinitionUpdate($storage_definition, $original_storage_definition);
+              break;
+
+            case EntityDefinitionUpdateManagerInterface::DEFINITION_DELETED:
+              $field_storage_definition_listener->onFieldStorageDefinitionDelete($original_storage_definition);
+              break;
+          }
+        }
+      }
+    }
+  }
 
   // Disable the Taxonomy Term view as it is not useful and causes issues
   // with the REST module (DELETE).
-  /** @var \Drupal\views\ViewExecutable $view */
-  $view = Views::getView('taxonomy_term');
-
-  if ($view) {
+  if ($view = Views::getView('taxonomy_term')) {
     $view->storage->setStatus(FALSE);
     $view->save();
   }
@@ -85,15 +140,15 @@ function a12sfactory_get_editable_config(string $config_name): ?Config {
 /**
  * Helper for importing Drupal configuration from a file.
  *
- * @param $name
+ * @param string $name
  *   The config name.
- * @param ?string $filepath
+ * @param ?string  $filepath
  *   The file path. Default to the "config/install" directory of the profile.
- * @param bool $override
+ * @param  bool  $override
  *   Whether to override the configuration, if it already exists. Default to
  *   FALSE.
  */
-function a12sfactory_import_config_from_file($name, $filepath = NULL, $override = FALSE) {
+function a12sfactory_import_config_from_file(string $name, string $filepath = NULL, bool $override = FALSE) {
   /** @var \Drupal\Core\Config\StorageInterface $config_storage */
   $config_storage = \Drupal::service('config.storage');
 

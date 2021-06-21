@@ -4,6 +4,7 @@ namespace Drupal\a12sfactory\Plugin\paragraphs\Behavior;
 
 use Drupal\a12sfactory\Form\A12sDisplayBehaviorFormTrait;
 use Drupal\Component\Utility\Bytes;
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityFieldManager;
@@ -71,7 +72,7 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
    *   The entity type manager.
    * @param \Drupal\Core\StreamWrapper\StreamWrapperManagerInterface $stream_wrapper_manager
    *   The stream wrapper manager.
-   * @param \Drupal\file\FileUsage\FileUsageInterface
+   * @param \Drupal\file\FileUsage\FileUsageInterface $file_usage
    *   The file usage service.
    */
   public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityFieldManager $entity_field_manager, EntityTypeManagerInterface $entity_type_manager, ConfigFactoryInterface $config_factory, StreamWrapperManagerInterface $stream_wrapper_manager, FileUsageInterface $file_usage) {
@@ -231,7 +232,6 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
    * {@inheritdoc}
    */
   public function view(array &$build, Paragraph $paragraph, EntityViewDisplayInterface $display, $view_mode) {
-    $config = $this->getConfiguration();
     $background_settings = $paragraph->getBehaviorSetting($this->getPluginId(), 'background', []);
     $content_settings = $paragraph->getBehaviorSetting($this->getPluginId(), 'content', []);
     $attributes_settings = $paragraph->getBehaviorSetting($this->getPluginId(), 'attributes', []);
@@ -359,7 +359,7 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
       // Ensure the image still exists.
       $background_image_file = $this->getBackgroundImageFile($paragraph);
 
-      $max_filesize = min(Bytes::toInt($config['background_image']['max_size']), file_upload_max_size());
+      $max_filesize = min(Bytes::toInt($config['background_image']['max_size']), Environment::getUploadMaxSize());
       $max_dimensions = 0;
       if (!empty($config['background_image']['max_dimensions']['width']) || !empty($config['background_image']['max_dimensions']['height'])) {
         $max_dimensions = $config['background_image']['max_dimensions']['width'] . 'x' . $config['background_image']['max_dimensions']['height'];
@@ -513,6 +513,8 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
         watchdog_exception('a12sfactory', $e);
       }
     }
+
+    return NULL;
   }
 
   /**
@@ -526,8 +528,8 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
    */
   public function addFileUsage(ParagraphInterface $paragraph) {
     if ($file = $this->getBackgroundImageFile($paragraph)) {
-      if ($file->status !== FILE_STATUS_PERMANENT) {
-        $file->status = FILE_STATUS_PERMANENT;
+      if ($file->get('status')->value !== FILE_STATUS_PERMANENT) {
+        $file->set('status', FILE_STATUS_PERMANENT);
 
         try {
           $file->save();
@@ -580,13 +582,13 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
    *
    * @param \Drupal\paragraphs\ParagraphInterface $paragraph
    *   The paragraph entity to inspect for file references on behavior plugins.
-   * @param $count
+   * @param  int  $count
    *   The number of references to delete. Should be 1 when deleting a single
    *   revision and 0 when deleting an entity entirely.
    *
    * @see \Drupal\file\FileUsage\FileUsageInterface::delete()
    */
-  public function deleteFileUsage(ParagraphInterface $paragraph, $count = 1) {
+  public function deleteFileUsage(ParagraphInterface $paragraph, int $count = 1) {
     if ($file = $this->getBackgroundImageFile($paragraph)) {
       $this->file_usage->delete($file, 'a12sfactory', $paragraph->getEntityTypeId(), $paragraph->id(), $count);
     }

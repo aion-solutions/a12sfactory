@@ -2,7 +2,7 @@
 
 namespace Drupal\a12sfactory\Form;
 
-use Drupal\Component\Utility\Unicode;
+use Drupal\Component\Utility\Environment;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 
 /**
@@ -24,11 +24,11 @@ trait A12sDisplayBehaviorFormTrait {
    *
    * @return array
    */
-  protected function getBackgroundImageDefaultValues() {
+  protected function getBackgroundImageDefaultValues(): array {
     return [
       'background_size' => ['option' => 'global'],
       'background_position' => ['option' => 'global'],
-      'scheme' => file_default_scheme(),
+      'scheme' => \Drupal::config('system.file')->get('default_scheme'),
       'directory' => 'background-images',
       'max_size' => '',
       'max_dimensions' => ['width' => '', 'height' => ''],
@@ -76,7 +76,7 @@ trait A12sDisplayBehaviorFormTrait {
       '#description' => t("A directory relative to Drupal's files directory where uploaded images will be stored."),
     ];
 
-    $default_max_size = format_size(file_upload_max_size());
+    $default_max_size = format_size(Environment::getUploadMaxSize());
     $subform['max_size'] = [
       '#type' => 'textfield',
       '#default_value' => $default['max_size'],
@@ -128,7 +128,7 @@ trait A12sDisplayBehaviorFormTrait {
    *
    * @return string
    */
-  protected function keyValue2Text(array $values) {
+  protected function keyValue2Text(array $values): string {
     $text = '';
 
     foreach ($values as $key => $value) {
@@ -146,7 +146,7 @@ trait A12sDisplayBehaviorFormTrait {
    *
    * @return array
    */
-  protected function text2KeyValue($string) {
+  protected function text2KeyValue($string): array {
     $values = [];
     $matches = [];
 
@@ -166,9 +166,9 @@ trait A12sDisplayBehaviorFormTrait {
    * @return bool
    *   Whether the pairs are valid or not.
    */
-  protected function validateKeyValue(array $array) {
+  protected function validateKeyValue(array $array): bool {
     foreach ($array as $key => $value) {
-      if (Unicode::strlen($key) > 255) {
+      if (mb_strlen($key) > 255) {
         return FALSE;
       }
     }

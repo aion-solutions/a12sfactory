@@ -43,7 +43,7 @@ Trait A12sBehaviorTrait {
    */
   protected function filterEmptyDetailsElements(array $form) {
     foreach (Element::children($form) as $key) {
-      if (!empty($form[$key]) && $form[$key] === 'details' && empty(Element::children($form[$key]))) {
+      if (!empty($form[$key]['#type']) && $form[$key]['#type'] === 'details' && empty(Element::children($form[$key]))) {
         $form[$key]['#access'] = FALSE;
       }
     }
@@ -101,7 +101,7 @@ Trait A12sBehaviorTrait {
   /**
    * Attach the background style library to the given render array
    *
-   * @param array &$build
+   * @param array $build
    *   A render array.
    */
   protected function attachBackgroundStyleLibrary(array &$build) {

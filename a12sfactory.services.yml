@@ -10,7 +10,7 @@ services:
       - { name: event_subscriber }
   a12sfactory.php_errors:
     class: Drupal\a12sfactory\EventSubscriber\PhpErrorsSubscriber
-    arguments: ['@string_translation', '@bare_html_page_renderer', '@entity_type.manager', '@cache.discovery']
+    arguments: ['@bare_html_page_renderer', '@entity_type.manager', '@cache.discovery']
     tags:
       - { name: event_subscriber }
   a12sfactory.background_image_css:

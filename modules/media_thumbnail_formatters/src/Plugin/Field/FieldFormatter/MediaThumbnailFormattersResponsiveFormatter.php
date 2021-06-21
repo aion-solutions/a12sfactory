@@ -5,6 +5,8 @@ namespace Drupal\media_thumbnail_formatters\Plugin\Field\FieldFormatter;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityMalformedException;
 use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Entity\FieldableEntityInterface;
+use Drupal\Core\Entity\TranslatableInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
@@ -81,8 +83,8 @@ class MediaThumbnailFormattersResponsiveFormatter extends ResponsiveImageFormatt
       $configuration['label'],
       $configuration['view_mode'],
       $configuration['third_party_settings'],
-      $container->get('entity.manager')->getStorage('responsive_image_style'),
-      $container->get('entity.manager')->getStorage('image_style'),
+      $container->get('entity_type.manager')->getStorage('responsive_image_style'),
+      $container->get('entity_type.manager')->getStorage('image_style'),
       $container->get('link_generator'),
       $container->get('current_user'),
       $container->get('renderer')
@@ -149,9 +151,9 @@ class MediaThumbnailFormattersResponsiveFormatter extends ResponsiveImageFormatt
     $url = NULL;
     $image_link_setting = $this->getSetting('image_link');
     // Check if the formatter involves a link.
-    if ($image_link_setting == 'content') {
+    if ($image_link_setting === 'content') {
       $entity = $items->getEntity();
-      if ($langcode && $entity->hasTranslation($langcode)) {
+      if ($langcode && $entity instanceof TranslatableInterface && $entity->hasTranslation($langcode)) {
         $entity = $entity->getTranslation($langcode);
       }
       if (!$entity->isNew()) {
@@ -163,53 +165,52 @@ class MediaThumbnailFormattersResponsiveFormatter extends ResponsiveImageFormatt
     }
 
     // Collect cache tags to be added for each item in the field.
-    /** @var \Drupal\responsive_image\ResponsiveImageStyleInterface $responsive_image_style */
+    /** @var \Drupal\responsive_image\ResponsiveImageStyleInterface|null $responsive_image_style */
     $responsive_image_style = $this->responsiveImageStyleStorage->load($this->getSetting('responsive_image_style'));
-
-    $image_styles_to_load = [];
     $cache_tags = [];
-    if ($responsive_image_style) {
+
+    if ($responsive_image_style !== NULL) {
       $cache_tags = Cache::mergeTags($cache_tags, $responsive_image_style->getCacheTags());
       $image_styles_to_load = $responsive_image_style->getImageStyleIds();
-    }
 
-    if (!empty($image_styles_to_load)) {
-      $image_styles = $this->imageStyleStorage->loadMultiple($image_styles_to_load);
+      if (!empty($image_styles_to_load)) {
+        $image_styles = $this->imageStyleStorage->loadMultiple($image_styles_to_load);
 
-      foreach ($image_styles as $image_style) {
-        $cache_tags = Cache::mergeTags($cache_tags, $image_style->getCacheTags());
-      }
-    }
-
-    /** @var \Drupal\media_entity\MediaInterface $media_item */
-    foreach ($media as $delta => $media_item) {
-      $bundle = $media_item->bundle->entity;
-      $item_key = isset($bundle->getSource()->configuration['source_field'])
-        ? $bundle->getSource()->configuration['source_field']
-        : 'thumbnail';
-
-      $elements[$delta] = [
-        '#theme' => 'responsive_image_formatter',
-        '#item' => $media_item->get($item_key),
-        '#item_attributes' => [],
-        '#responsive_image_style_id' => $responsive_image_style ? $responsive_image_style->id() : '',
-        '#cache' => [
-          'tags' => $cache_tags,
-        ],
-      ];
-
-      if (isset($link_media)) {
-        try {
-          $url = $media_item->toUrl();
-        } catch (EntityMalformedException $e) {
-          // Error getting the media URL...
+        foreach ($image_styles as $image_style) {
+          $cache_tags = Cache::mergeTags($cache_tags, $image_style->getCacheTags());
         }
       }
+    }
 
-      $elements[$delta]['#url'] = $url;
+    /** @var \Drupal\media\MediaInterface $media_item */
+    foreach ($media as $delta => $media_item) {
+      $sourceConfig = $media_item->getSource()->getConfiguration();
+      $item_key = $sourceConfig['source_field'] ?? 'thumbnail';
 
-      // Collect cache tags to be added for each item in the field.
-      $this->renderer->addCacheableDependency($elements[$delta], $media_item);
+      if ($media_item instanceof FieldableEntityInterface) {
+        $elements[$delta] = [
+          '#theme' => 'responsive_image_formatter',
+          '#item' => $media_item->get($item_key),
+          '#item_attributes' => [],
+          '#responsive_image_style_id' => $responsive_image_style !== NULL ? $responsive_image_style->id() : '',
+          '#cache' => [
+            'tags' => $cache_tags,
+          ],
+        ];
+
+        if (isset($link_media)) {
+          try {
+            $url = $media_item->toUrl();
+          } catch (EntityMalformedException $e) {
+            // Error getting the media URL...
+          }
+        }
+
+        $elements[$delta]['#url'] = $url;
+
+        // Collect cache tags to be added for each item in the field.
+        $this->renderer->addCacheableDependency($elements[$delta], $media_item);
+      }
     }
 
     $image_styles_to_load = [];

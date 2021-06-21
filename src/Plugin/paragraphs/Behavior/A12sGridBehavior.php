@@ -350,10 +350,10 @@ class A12sGridBehavior extends ParagraphsBehaviorBase {
    * @return bool
    */
   public function paragraphIsColumn(ParagraphInterface $paragraph) {
-    /** @var \Drupal\Core\Entity\ContentEntityInterface $parent */
+    /** @var \Drupal\Core\Entity\ContentEntityInterface|null $parent */
     $parent = $paragraph->getParentEntity();
 
-    if ($parent && $parent->getEntityTypeId() === 'paragraph') {
+    if ($parent && $parent instanceof ParagraphInterface) {
       return a12sfactory_paragraph_is_row($parent);
     }
 
@@ -462,9 +462,9 @@ class A12sGridBehavior extends ParagraphsBehaviorBase {
   /**
    * Get details about the given row type style.
    *
-   * @param $row_type
+   * @param string $row_type
    *   The row type.
-   * @param string $key
+   * @param  string|null  $key
    *   The expected property. May be one of:
    *   - label
    *   - columns
@@ -474,7 +474,7 @@ class A12sGridBehavior extends ParagraphsBehaviorBase {
    *
    * @return array
    */
-  protected function getRowTypeStyle($row_type, $key = NULL, string $columnBreakpoint = 'lg'): array {
+  protected function getRowTypeStyle(string $row_type, string $key = NULL, string $columnBreakpoint = 'lg'): array {
     $rowStyles = $this->getRowTypeStyles($columnBreakpoint);
 
     if (isset($rowStyles[$row_type])) {

@@ -6,6 +6,7 @@
 
 namespace Drupal\a12sfactory\Paragraphs;
 
+use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -57,6 +58,7 @@ class TranslationSynchronization implements EventSubscriberInterface {
   public function sync(PostResponseEvent $event) {
     foreach ($this->scheduledParagraphs as $id) {
       $paragraph = Paragraph::load($id);
+      /** @var ContentEntityInterface|null $parent */
       $parent = $paragraph->getParentEntity();
 
       // We are supposed to have always a parent, but is some specific case,

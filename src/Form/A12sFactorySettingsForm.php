@@ -4,24 +4,25 @@ namespace Drupal\a12sfactory\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\Unicode;
 
 /**
  * Provides form for managing module settings.
  */
 class A12sFactorySettingsForm extends ConfigFormBase {
 
+  use A12sDisplayBehaviorFormTrait;
+
   /**
    * Get the from ID.
    */
-  public function getFormId() {
+  public function getFormId(): string {
     return 'a12sfactory_settings';
   }
 
   /**
    * Get the editable config names.
    */
-  protected function getEditableConfigNames() {
+  protected function getEditableConfigNames(): array {
     return ['a12sfactory.settings'];
   }
 
@@ -43,36 +44,6 @@ class A12sFactorySettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Submit Form.
-   */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
-    // To be removed
-    /*try {
-      // Update the Allowed list text values.
-      $newAllowedListTextValues = $this->text2KeyValue($form_state->getValue('background_styles'));
-      $fieldStorage = \Drupal\field\Entity\FieldStorageConfig::loadByName('paragraph', 'background');
-      $fieldStorage->setSetting('allowed_values', $newAllowedListTextValues);
-      $fieldStorage->save();
-    }
-    catch (FieldStorageDefinitionUpdateForbiddenException $e) {
-      drupal_set_message($e->getMessage(), 'error');
-      $form_state->setRebuild();
-      return;
-    }
-    catch (Exception $e) {
-      drupal_set_message($e->getMessage(), 'error');
-      $form_state->setRebuild();
-      return;
-    }
-
-    $config = $this->config('a12sfactory.settings');
-    $config->set('background_styles', $form_state->getValue('background_styles'));
-    $config->save();*/
-
-    parent::submitForm($form, $form_state);
-  }
-
-  /**
    * Validate Form.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -86,7 +57,7 @@ class A12sFactorySettingsForm extends ConfigFormBase {
     else {
       // Check that keys are valid for the field type.
       foreach ($values as $key => $value) {
-        if (Unicode::strlen($key) > 255) {
+        if (mb_strlen($key) > 255) {
           $form_state->setErrorByName('background_styles', t('Allowed values list: each key must be a string at most 255 characters long.'));
           break;
         }

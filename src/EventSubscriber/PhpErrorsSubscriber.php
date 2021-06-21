@@ -48,8 +48,6 @@ class PhpErrorsSubscriber implements EventSubscriberInterface {
   /**
    * Constructs a new MaintenanceModeSubscriber.
    *
-   * @param \Drupal\Core\StringTranslation\TranslationInterface $translation
-   *   The string translation.
    * @param \Drupal\Core\Render\BareHtmlPageRendererInterface $bare_html_page_renderer
    *   The bare HTML page renderer.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
@@ -57,7 +55,7 @@ class PhpErrorsSubscriber implements EventSubscriberInterface {
    * @param \Drupal\Core\Cache\CacheBackendInterface $cache_discovery
    *   The cache backend for plugin discovery.
    */
-  public function __construct(TranslationInterface $translation, BareHtmlPageRendererInterface $bare_html_page_renderer, EntityTypeManagerInterface $entity_type_manager, CacheBackendInterface $cache_discovery) {
+  public function __construct(BareHtmlPageRendererInterface $bare_html_page_renderer, EntityTypeManagerInterface $entity_type_manager, CacheBackendInterface $cache_discovery) {
     $this->bareHtmlPageRenderer = $bare_html_page_renderer;
     $this->entityTypeManager = $entity_type_manager;
     $this->cacheDiscovery = $cache_discovery;
