@@ -29,7 +29,6 @@ dependencies:
   - drupal:contextual
   - drupal:dynamic_page_cache
   - drupal:editor
-  - drupal:entity_reference
   - drupal:field_ui
   - drupal:file
   - drupal:help
