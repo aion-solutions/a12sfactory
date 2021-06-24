@@ -2,7 +2,7 @@ name: Media thumbnail extra formatters
 description: 'Provide extra formatters for Media thumbnails.'
 type: module
 package: Media
-core: 8.x
+core_version_requirement: '^8.7.7 || ^9'
 dependencies:
   - drupal:responsive_image
   - drupal:media
