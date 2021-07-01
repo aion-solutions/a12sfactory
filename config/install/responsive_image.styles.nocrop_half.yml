@@ -7,7 +7,7 @@ dependencies:
     - image.style.nocrop_full_xs
     - image.style.nocrop_half_lg
     - image.style.nocrop_half_xl
-  module:
+  profile:
     - a12sfactory
 id: nocrop_half
 label: 'No-crop 1/2'

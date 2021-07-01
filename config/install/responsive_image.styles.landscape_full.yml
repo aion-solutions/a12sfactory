@@ -6,7 +6,7 @@ dependencies:
     - image.style.landscape_full_md
     - image.style.landscape_full_sm
     - image.style.landscape_full_xs
-  module:
+  profile:
     - a12sfactory
 id: landscape_full
 label: 'Landscape full'

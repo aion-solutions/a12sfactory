@@ -92,7 +92,20 @@ settings:
       linkit_enabled: true
       linkit_profile: editor
     bootstrapcolors:
-      colors: "primary|Primary\nsuccess|Success\ngreen-flash|Green Flash\npurple|Purple\ndanger|Danger\nsecondary|Secondary\nwarning|Warning\npink|Pink\ninfo|Info\nlight|Light\nwhite|White\ndark|Dark\nblack|Black"
+      colors: |-
+        primary|Primary
+        success|Success
+        green-flash|Green Flash
+        purple|Purple
+        danger|Danger
+        secondary|Secondary
+        warning|Warning
+        pink|Pink
+        info|Info
+        light|Light
+        white|White
+        dark|Dark
+        black|Black
       panelcss: /themes/custom/a12s_microbase/dest/ckeditor-toolbar.css
 image_upload:
   status: true

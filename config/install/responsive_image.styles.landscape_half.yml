@@ -7,7 +7,7 @@ dependencies:
     - image.style.landscape_half_lg
     - image.style.landscape_half_md
     - image.style.landscape_half_xl
-  module:
+  profile:
     - a12sfactory
 id: landscape_half
 label: 'Landscape 1/2'

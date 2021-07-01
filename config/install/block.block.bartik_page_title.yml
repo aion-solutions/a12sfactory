@@ -14,4 +14,4 @@ settings:
   label: 'Titre de page'
   provider: core
   label_display: '0'
-visibility: { }
+visibility: {  }

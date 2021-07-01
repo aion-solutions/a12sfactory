@@ -16,5 +16,4 @@ settings:
   label: 'Fils d''ariane'
   provider: system
   label_display: '0'
-visibility: { }
-
+visibility: {  }

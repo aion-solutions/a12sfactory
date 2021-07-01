@@ -16,4 +16,4 @@ settings:
   label: Messages
   provider: system
   label_display: '0'
-visibility: { }
+visibility: {  }

@@ -7,8 +7,6 @@ dependencies:
     - image.style.thumbnail
     - node.type.hero_slide
     - taxonomy.vocabulary.hero_sliders
-  content:
-    - 'taxonomy_term:hero_sliders:4a5d70c8-3604-4123-8c60-fc9233366726'
   module:
     - draggableviews
     - media
@@ -746,7 +744,9 @@ display:
           empty: true
           tokenize: false
           content:
-            value: "<p>You can reorder the slides that are displayed on this Hero slider.</p>\n<p>Initially, only the <em>5</em> first slides are displayed. If necessary this settings may be overridden for each Hero Slider block.</p>"
+            value: |-
+              <p>You can reorder the slides that are displayed on this Hero slider.</p>
+              <p>Initially, only the <em>5</em> first slides are displayed. If necessary this settings may be overridden for each Hero Slider block.</p>
             format: html_full
           plugin_id: text
       access:

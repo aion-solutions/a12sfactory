@@ -7,7 +7,7 @@ dependencies:
     - image.style.square_half_lg
     - image.style.square_half_md
     - image.style.square_half_xl
-  module:
+  profile:
     - a12sfactory
 id: square_half
 label: 'Square 1/2'

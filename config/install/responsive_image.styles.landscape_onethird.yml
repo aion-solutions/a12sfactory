@@ -7,7 +7,7 @@ dependencies:
     - image.style.landscape_full_xs
     - image.style.landscape_onethird_lg
     - image.style.landscape_onethird_xl
-  module:
+  profile:
     - a12sfactory
 id: landscape_onethird
 label: 'Landscape 1/3'
