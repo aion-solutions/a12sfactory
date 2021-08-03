@@ -38,9 +38,7 @@
         "drupal/config_perms": "~2.0",
         "drupal/console": "~1.9.4",
         "drupal/content_lock": "~2.0",
-        "drupal/core-composer-scaffold": "^9.0.0",
-        "drupal/core-project-message": "^9.0.0",
-        "drupal/core-recommended": "^9.0.0",
+        "drupal/core-recommended": "^9.0",
         "drupal/countup": "^2.0",
         "drupal/crop": "~2.0",
         "drupal/ctools": "^3.4",
@@ -125,7 +123,8 @@
         "wikimedia/composer-merge-plugin": "^1.4 || ^2.0.1"
     },
     "require-dev": {
-        "drupal/core-dev": "^9.0.0"
+        "drupal/core-dev": "*",
+        "drupal/core-composer-scaffold": "*"
     },
     "conflict": {},
     "minimum-stability": "dev",
