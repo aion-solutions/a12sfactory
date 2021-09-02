@@ -629,28 +629,6 @@ index 0000000..0bb9242
 +        - user.permissions
 +      tags:
 +        - 'config:field.storage.taxonomy_term.field_symbol_id'
-diff --git a/icon_select.module b/icon_select.module
-index 5e83436..029d613 100644
---- a/icon_select.module
-+++ b/icon_select.module
-@@ -38,10 +38,9 @@ function icon_select_preprocess_icon_select_svg_icon(&$variables) {
-  * Implements hook_preprocess_page().
-  */
- function icon_select_preprocess_page(&$vars) {
--  // Add a random string to disable caching of AJAX request.
--  $full_url = file_url_transform_relative(file_create_url(SvgSpriteGenerator::getSpriteDestinationPath()));
--  $url = $full_url . '?hash=' . \Drupal::state()->get('icon_select_hash');
--  $vars['#attached']['drupalSettings']['icon_select']['icon_select_url'] = $url;
-+  if ($url = SvgSpriteGenerator::getUrl()) {
-+    $vars['#attached']['drupalSettings']['icon_select']['icon_select_url'] = $url;
-+  }
- }
- 
- /**
-diff --git a/js/iconselect/.DS_Store b/js/iconselect/.DS_Store
-new file mode 100644
-index 0000000..d24ee94
-Binary files /dev/null and b/js/iconselect/.DS_Store differ
 diff --git a/js/iconselect/plugin.js b/js/iconselect/plugin.js
 new file mode 100644
 index 0000000..ac8ba84
@@ -791,7 +769,7 @@ index d17771c..1b367be 100644
 @@ -115,4 +115,22 @@ class SvgSpriteGenerator {
      return $destination;
    }
- 
+
 +  /**
 +   * Get the sprite URL, if applicable.
 +   *
