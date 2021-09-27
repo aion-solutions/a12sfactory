@@ -137,6 +137,7 @@
     "extra": {
         "merge-plugin": {
             "include": [
+                "web/modules/contrib/countup/composer.libraries.json",
                 "web/modules/contrib/webform/composer.libraries.json"
             ]
         },
