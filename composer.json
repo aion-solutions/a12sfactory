@@ -189,6 +189,22 @@
                 "[project-root]/drush/drush.yml": {
                     "path": "assets/scaffold/files/drush.yml",
                     "overwrite": false
+                },
+                "[project-root]/docker-compose.yml": {
+                    "path": "assets/scaffold/files/docker-compose.yml",
+                    "overwrite": false
+                },
+                "[project-root]/.env.example": {
+                    "path": "assets/scaffold/files/.env.example",
+                    "overwrite": false
+                },
+                "[project-root]/local/nginx.conf": {
+                    "path": "assets/scaffold/files/nginx.conf",
+                    "overwrite": false
+                },
+                "[project-root]/local/uploads.ini": {
+                    "path": "assets/scaffold/files/uploads.ini",
+                    "overwrite": false
                 }
             }
         },

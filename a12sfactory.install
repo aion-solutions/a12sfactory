@@ -4,14 +4,9 @@
  * Install, update and uninstall functions for the A12S Factory profile.
  */
 
-use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
-use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Render\Markup;
-use Drupal\field\Entity\FieldConfig;
-use Drupal\paragraphs\Entity\ParagraphsType;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\views\Views;
@@ -45,30 +40,36 @@ function a12sfactory_install() {
   // by a single method:
   // \Drupal::entityDefinitionUpdateManager()->applyUpdates()
   $entity_type_manager = \Drupal::entityTypeManager();
+  /** @var \Drupal\Core\Entity\EntityFieldManagerInterface $entity_field_manager */
   $entity_field_manager = \Drupal::service('entity_field.manager');
+  /** @var \Drupal\Core\Entity\EntityLastInstalledSchemaRepositoryInterface $entity_schema_repository */
   $entity_schema_repository = \Drupal::service('entity.last_installed_schema.repository');
   $entity_definition_manager = \Drupal::entityDefinitionUpdateManager();
+  /** @var \Drupal\Core\Field\FieldStorageDefinitionListenerInterface $field_storage_definition_listener */
   $field_storage_definition_listener = \Drupal::service('field_storage_definition.listener');
   if ($change_list = $entity_definition_manager->getChangeList()) {
     // In case there are changes, explicitly invalidate caches.
-    \Drupal::entityTypeManager()->clearCachedDefinitions();
-    \Drupal::service('entity_field.manager')->clearCachedFieldDefinitions();
+    $entity_type_manager->clearCachedDefinitions();
+    $entity_field_manager->clearCachedFieldDefinitions();
 
     foreach ($change_list as $entity_type_id => $change_item) {
       if (!empty($change_item['entity_type'])) {
         $entity_type = $entity_type_manager->getDefinition($entity_type_id);
-        $field_storage_definitions = \Drupal::service('entity_field.manager')->getFieldStorageDefinitions($entity_type_id);
+        $field_storage_definitions = $entity_field_manager->getFieldStorageDefinitions($entity_type_id);
+
+        /** @var \Drupal\Core\Entity\EntityTypeListenerInterface $entity_type_listener */
+        $entity_type_listener = \Drupal::service('entity_type.listener');
 
         switch ($change_item['entity_type']) {
           case EntityDefinitionUpdateManagerInterface::DEFINITION_CREATED:
-            \Drupal::service('entity_type.listener')->onEntityTypeCreate($entity_type);
+            $entity_type_listener->onEntityTypeCreate($entity_type);
             break;
 
           case EntityDefinitionUpdateManagerInterface::DEFINITION_UPDATED:
             $original = \Drupal::service('entity.last_installed_schema.repository')->getLastInstalledDefinition($entity_type_id);
             $original_field_storage_definitions = \Drupal::service('entity.last_installed_schema.repository')->getLastInstalledFieldStorageDefinitions($entity_type_id);
 
-            \Drupal::service('entity_type.listener')->onFieldableEntityTypeUpdate($entity_type, $original, $field_storage_definitions, $original_field_storage_definitions);
+            $entity_type_listener->onFieldableEntityTypeUpdate($entity_type, $original, $field_storage_definitions, $original_field_storage_definitions);
             break;
         }
       }

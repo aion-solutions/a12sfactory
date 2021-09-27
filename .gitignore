@@ -4,6 +4,9 @@
 
 /composer.lock
 
+/docker-compose.yml
+/.env.example
+/local/
 /.csslintrc
 /.editorconfig
 /.eslintignore
