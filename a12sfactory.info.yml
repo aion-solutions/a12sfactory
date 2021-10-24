@@ -65,7 +65,7 @@ dependencies:
   - eu_cookie_compliance:eu_cookie_compliance
   - focal_point:focal_point
   - ctools:ctools
-  - draggableviews:draggableviews
+#  - draggableviews:draggableviews
   - dropzonejs:dropzonejs
   - dropzonejs:dropzonejs_eb_widget
   - email_registration:email_registration

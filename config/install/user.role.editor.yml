@@ -9,7 +9,6 @@ permissions:
   - 'access administration pages'
   - 'access content overview'
   - 'access contextual links'
-  - 'access draggableviews'
   - 'access editor_image_browser entity browser pages'
   - 'access editor_media_browser entity browser pages'
   - 'access editor_video_browser entity browser pages'
