@@ -128,7 +128,17 @@
     "prefer-stable": true,
     "config": {
         "component-dir": "/tmp",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/console-extend-plugin": true,
+            "oomphinc/composer-installers-extender": true,
+            "robloach/component-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "wikimedia/composer-merge-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
     },
     "suggest": {
         "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it.",
