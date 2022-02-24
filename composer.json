@@ -38,7 +38,7 @@
         "drupal/config_perms": "~2.0",
         "drupal/console": "~1.9.4",
         "drupal/content_lock": "~2.0",
-        "drupal/core-recommended": "^9.0",
+        "drupal/core-recommended": "~9.2.0",
         "drupal/countup": "^2.0",
         "drupal/crop": "~2.0",
         "drupal/ctools": "^3.4",
@@ -105,7 +105,7 @@
         "drupal/views_infinite_scroll": "~1.6",
         "drupal/viewsreference": "~2.0-alpha6",
         "drupal/webform": "^5.15 || ^6.0",
-        "drupal/webp": "^1.0@beta",
+        "drupal/webp": "^1.0-beta6",
         "drush/drush": "^9.0 || ^10.0",
         "jonthornton/jquery-timepicker": "^1.11",
         "npm-asset/blazy": "^1.8",
@@ -128,7 +128,17 @@
     "prefer-stable": true,
     "config": {
         "component-dir": "/tmp",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "composer/installers": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "cweagans/composer-patches": true,
+            "drupal/console-extend-plugin": true,
+            "oomphinc/composer-installers-extender": true,
+            "robloach/component-installer": true,
+            "drupal/core-composer-scaffold": true,
+            "wikimedia/composer-merge-plugin": true
+        }
     },
     "suggest": {
         "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it.",
@@ -254,9 +264,6 @@
             },
             "drupal/viewsreference": {
                 "Issue #2919092: Viewsreference embeds Views without cache, breaking Dynamic page cache": "https://www.drupal.org/files/issues/2020-01-31/viewsreference-viewsreference-embeds-views-without-cache-2919092-12.patch"
-            },
-            "drupal/webp": {
-                "Issue #3161795: A recent commit causes image generation to fail on Windows platforms": "https://www.drupal.org/files/issues/2020-11-30/webp-issue-with-uppercase-lowercase-extensions-3161795-15.patch"
             }
         }
     }
