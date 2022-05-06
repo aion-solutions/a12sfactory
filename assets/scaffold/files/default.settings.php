@@ -761,15 +761,12 @@ $settings['entity_update_batch_size'] = 50;
 $settings['entity_update_backup'] = TRUE;
 
 /**
- * Swiftmailer configuration
+ * Symfony Mailer configuration
  */
-$config['swiftmailer.transport']['transport'] = getenv('SMTP_TRANSPORT');
-$config['swiftmailer.transport']['smtp_host'] = getenv('SMTP_HOST');
-$config['swiftmailer.transport']['smtp_port'] = getenv('SMTP_PORT');
-$config['swiftmailer.transport']['smtp_encryption'] = getenv('SMTP_ENCRYPTION');
-$config['swiftmailer.transport']['smtp_credential_provider'] = 'swiftmailer';
-$config['swiftmailer.transport']['smtp_credentials']['swiftmailer']['username'] = getenv('SMTP_USERNAME');
-$config['swiftmailer.transport']['smtp_credentials']['swiftmailer']['password'] = getenv('SMTP_PASSWORD');
+$config['symfony_mailer.mailer_transport.smtp']['configuration']['user'] = getenv('SMTP_USERNAME');
+$config['symfony_mailer.mailer_transport.smtp']['configuration']['pass'] = getenv('SMTP_PASSWORD');
+$config['symfony_mailer.mailer_transport.smtp']['configuration']['host'] = getenv('SMTP_HOST');
+$config['symfony_mailer.mailer_transport.smtp']['configuration']['port'] = getenv('SMTP_PORT');
 
 /**
  * Load local development override configuration, if available.

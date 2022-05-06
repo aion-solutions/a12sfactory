@@ -433,6 +433,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: weight
           entity_type: taxonomy_term
           entity_field: weight
           plugin_id: standard
@@ -447,6 +448,7 @@ display:
           exposed: false
           expose:
             label: ''
+            field_identifier: name
           entity_type: taxonomy_term
           entity_field: name
           plugin_id: standard

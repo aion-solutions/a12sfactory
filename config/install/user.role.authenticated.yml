@@ -1,6 +1,15 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.html_basic
+  module:
+    - filter
+    - honeypot
+    - media
+    - system
+    - taxonomy_access_fix
+    - userprotect
 id: authenticated
 label: 'Authenticated user'
 weight: -9

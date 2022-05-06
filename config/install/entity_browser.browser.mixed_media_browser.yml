@@ -52,8 +52,7 @@ widgets:
     id: entity_form
   78202ee8-c078-40df-841d-c070da64d66d:
     settings:
-      form_mode: default
-      media_type: image
+      submit_text: 'Select image'
       upload_location: 'public://images/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop image files here to upload them'
       max_filesize: 24M
@@ -64,7 +63,8 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: 'Select image'
+      media_type: image
+      form_mode: default
     uuid: 78202ee8-c078-40df-841d-c070da64d66d
     weight: -9
     label: 'Upload an image'

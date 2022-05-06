@@ -7,7 +7,7 @@ dependencies:
     - image.style.square_half_md
     - image.style.square_onethird_lg
     - image.style.square_onethird_xl
-  profile:
+  module:
     - a12sfactory
 id: square_onethird
 label: 'Square 1/3'

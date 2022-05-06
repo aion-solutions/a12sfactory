@@ -318,6 +318,7 @@ display:
           exposed: true
           expose:
             label: Created
+            field_identifier: created
           granularity: second
           entity_type: media
           entity_field: created
@@ -333,6 +334,7 @@ display:
           exposed: true
           expose:
             label: Name
+            field_identifier: name
           entity_type: media
           entity_field: name
           plugin_id: standard

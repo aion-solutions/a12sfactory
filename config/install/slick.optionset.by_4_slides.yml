@@ -3,8 +3,8 @@ status: true
 dependencies: {  }
 id: by_4_slides
 name: by_4_slides
-label: 'By 4 slides'
 weight: 0
+label: 'By 4 slides'
 group: ''
 skin: a12sfactory_clear
 breakpoints: 2

@@ -23,8 +23,7 @@ widget_selector_configuration: {  }
 widgets:
   f29282f7-d960-4cfe-b954-0d0546fa4d2e:
     settings:
-      form_mode: default
-      media_type: image
+      submit_text: 'Select image'
       upload_location: 'public://images/[date:custom:Y]-[date:custom:m]'
       dropzone_description: 'Drop the image here to upload it'
       max_filesize: 128M
@@ -35,7 +34,8 @@ widgets:
       resize_quality: !!float 1
       resize_method: contain
       thumbnail_method: contain
-      submit_text: 'Select image'
+      media_type: image
+      form_mode: default
     uuid: f29282f7-d960-4cfe-b954-0d0546fa4d2e
     weight: -9
     label: Upload

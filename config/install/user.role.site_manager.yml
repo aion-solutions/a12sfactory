@@ -1,6 +1,43 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - filter.format.html_code
+    - filter.format.html_full
+    - media.type.document
+    - media.type.image
+    - media.type.video
+    - node.type.hero_slide
+    - node.type.page
+    - taxonomy.vocabulary.hero_sliders
+    - taxonomy.vocabulary.icons
+  module:
+    - a12sfactory
+    - block
+    - block_content
+    - content_translation
+    - contextual
+    - dropzonejs
+    - entity_browser
+    - file
+    - filter
+    - locale
+    - media
+    - menu_link_content
+    - metatag
+    - node
+    - oembed_providers
+    - override_node_options
+    - paragraphs
+    - path
+    - rabbit_hole
+    - redirect
+    - roleassign
+    - system
+    - taxonomy
+    - taxonomy_access_fix
+    - toolbar
+    - webform
 id: site_manager
 label: 'Site manager'
 weight: -6

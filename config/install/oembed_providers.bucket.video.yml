@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - oembed_providers.provider.dailymotion
+    - oembed_providers.provider.facebook
+    - oembed_providers.provider.vimeo
+    - oembed_providers.provider.wistia
+    - oembed_providers.provider.youtube
+id: video
+label: 'Remote Video'
+description: null
+providers:
+  - Dailymotion
+  - Facebook
+  - Vimeo
+  - Wistia
+  - YouTube

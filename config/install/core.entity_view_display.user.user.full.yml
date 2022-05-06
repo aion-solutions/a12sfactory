@@ -7,6 +7,7 @@ dependencies:
     - field.field.user.user.field_last_password_reset
     - field.field.user.user.field_lastname
     - field.field.user.user.field_password_expiration
+    - field.field.user.user.field_pending_expire_sent
   module:
     - user
 id: user.user.full
@@ -19,6 +20,7 @@ hidden:
   field_last_password_reset: true
   field_lastname: true
   field_password_expiration: true
+  field_pending_expire_sent: true
   langcode: true
   member_for: true
   realname: true

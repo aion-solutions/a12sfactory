@@ -65,7 +65,7 @@ dependencies:
   - eu_cookie_compliance:eu_cookie_compliance
   - focal_point:focal_point
   - ctools:ctools
-#  - draggableviews:draggableviews
+  - draggableviews:draggableviews
   - dropzonejs:dropzonejs
   - dropzonejs:dropzonejs_eb_widget
   - email_registration:email_registration
@@ -86,7 +86,6 @@ dependencies:
   - imagemagick:imagemagick
   - inline_entity_form:inline_entity_form
   - linkit:linkit
-  - mailsystem:mailsystem
   - maxlength:maxlength
   - menu_breadcrumb:menu_breadcrumb
   - oembed_providers:oembed_providers
@@ -108,10 +107,11 @@ dependencies:
   - slick_views:slick_views
   - smart_trim:smart_trim
   - spamspan:spamspan
+  - symfony_mailer:symfony_mailer
   - structure_sync:structure_sync
-  - swiftmailer:swiftmailer
   - taxonomy_access_fix:taxonomy_access_fix
   - token:token
+  - twig_tweak:twig_tweak
   - userprotect:userprotect
   - views_field_formatter:views_field_formatter
   - views_infinite_scroll:views_infinite_scroll

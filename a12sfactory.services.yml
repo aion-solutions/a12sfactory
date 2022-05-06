@@ -15,3 +15,16 @@ services:
       - { name: event_subscriber }
   a12sfactory.background_image_css:
     class: Drupal\a12sfactory\BackgroundImageCss
+  a12sfactory.entity_helper:
+    class: Drupal\a12sfactory\Utility\EntityHelper
+    arguments: ['@entity_type.manager', '@current_route_match']
+  a12sfactory.page_match:
+    class: Drupal\a12sfactory\Utility\PageMatch
+    arguments: ['@plugin.manager.condition']
+  a12sfactory.theme_helper:
+    class: Drupal\a12sfactory\Utility\ThemeHelper
+  a12sfactory.twig_extension:
+    class: Drupal\a12sfactory\Template\TwigExtension
+    arguments: ['@a12sfactory.entity_helper', '@twig_tweak.twig_extension']
+    tags:
+      - { name: twig.extension }

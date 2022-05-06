@@ -3,8 +3,8 @@ status: true
 dependencies: {  }
 id: slider_simple
 name: slider_simple
-label: 'Simple slider'
 weight: 0
+label: 'Simple slider'
 group: main
 skin: a12sfactory_clear
 breakpoints: 2

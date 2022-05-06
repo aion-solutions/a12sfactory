@@ -3,11 +3,13 @@ status: true
 dependencies:
   module:
     - ace_editor
+    - blazy
     - countup
     - editor
     - entity_embed
     - linkit
     - pathologic
+    - slick
     - spamspan
 name: 'Advanced editor'
 format: html_full
@@ -25,9 +27,8 @@ filters:
       width: 700px
       font_size: 10pt
       line_numbers: '0'
-      show_invisibles: '0'
       print_margins: '0'
-      auto_complete: true
+      show_invisibles: '0'
       use_wrap_mode: '0'
   editor_file_reference:
     id: editor_file_reference
@@ -65,7 +66,7 @@ filters:
     status: true
     weight: -44
     settings:
-      allowed_html: '<p class> <a href hreflang class id data-toggle data-entity-substitution data-entity-type data-entity-uuid role aria-controls aria-selected rel rev> <br> <em> <strong> <cite> <blockquote cite> <code> <ul type class> <ol class start type> <li class> <dl class> <dt class> <dd class> <h2 id class> <h3 id class> <h4 id class> <h5 id class> <h6 id class> <u> <s> <sub> <sup> <img src alt data-entity-type data-entity-uuid data-align data-caption> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button alt title class> <pre> <div id role aria-labelledby aria-orientation class> <span class lang dir data-*> <table class> <caption> <tbody> <thead> <tfoot> <th class> <td class> <tr class> <hr class>'
+      allowed_html: '<br> <em> <strong> <cite> <blockquote cite> <code> <ol start type class> <dl class> <dt class> <dd class> <h2 id class> <h3 id class> <h4 id class> <h5 id class> <h6 id class> <u> <s> <sub> <sup> <img class src alt data-entity-type data-entity-uuid data-align data-caption> <pre> <div id role aria-labelledby aria-orientation class> <table class> <caption> <tbody> <thead> <tfoot> <th class> <td class> <tr class> <hr class> <a href hreflang id data-toggle data-entity-substitution data-entity-type data-entity-uuid role aria-controls aria-selected rel rev class> <ul type class> <li class> <drupal-entity data-entity-type data-entity-uuid data-entity-embed-display data-entity-embed-display-settings data-align data-caption data-embed-button alt title data-langcode class> <span lang dir data-* class> <p class>'
       filter_html_help: true
       filter_html_nofollow: false
   filter_htmlcorrector:
@@ -130,3 +131,49 @@ filters:
     status: true
     weight: 101
     settings: {  }
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      optionset: default
+      layout: ''
+      skin: ''
+      background: false
+      loading: ''
+      preload: false
+      responsive_image_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      overridables:
+        arrows: '0'
+        autoplay: '0'
+        dots: '0'
+        draggable: '0'
+        infinite: '0'
+        mouseWheel: '0'
+        randomize: '0'
+        variableWidth: '0'
+      optionset_thumbnail: ''
+      skin_thumbnail: ''
+      thumbnail_caption: ''
+      thumbnail_effect: ''
+      thumbnail_position: ''
+      override: false
+  blazy_filter:
+    id: blazy_filter
+    provider: blazy
+    status: false
+    weight: 3
+    settings:
+      media_switch: ''
+      hybrid_style: ''
+      box_style: ''
+      box_caption: ''
+      filter_tags:
+        img: img
+        iframe: iframe
+      use_data_uri: '0'

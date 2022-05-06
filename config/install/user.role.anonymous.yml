@@ -1,6 +1,11 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - eu_cookie_compliance
+    - media
+    - system
+    - taxonomy_access_fix
 id: anonymous
 label: 'Anonymous user'
 weight: -10

@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - slick
 name: 'Plain text'
 format: plain_text
 weight: -7
@@ -24,3 +26,11 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  slick_filter:
+    id: slick_filter
+    provider: slick
+    status: false
+    weight: 4
+    settings:
+      optionset: default
+      media_switch: ''

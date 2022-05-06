@@ -84,7 +84,6 @@ class TranslationSynchronization implements EventSubscriberInterface {
             // Do not publish the paragraph, the translators will need to review
             // and translate it before.
             $values['status'] = FALSE;
-
             $paragraph->addTranslation($language->getId(), $values);
           }
         }

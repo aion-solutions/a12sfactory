@@ -8,7 +8,6 @@ use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Installer\Form\SiteSettingsForm;
 use Drupal\Core\Template\Attribute;
 use Drupal\paragraphs\ParagraphInterface;
 
@@ -116,7 +115,7 @@ function a12sfactory_form_install_configure_form_alter(&$form, FormStateInterfac
  * @see hook_theme()
  */
 function a12sfactory_theme($existing, $type, $theme, $path) {
-  $path = drupal_get_path('module', 'a12sfactory') . '/templates';
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'a12sfactory') . '/templates';
   $baseParagraph = [
     'base hook' => 'paragraph',
     'path' => $path . '/paragraph',

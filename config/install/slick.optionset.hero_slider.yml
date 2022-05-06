@@ -6,8 +6,8 @@ dependencies:
       - slick
 id: hero_slider
 name: hero_slider
-label: 'Hero slider'
 weight: -10
+label: 'Hero slider'
 group: ''
 skin: a12sfactory_clear
 breakpoints: 0

@@ -7,6 +7,7 @@
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\FileStorage;
 use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
+use Drupal\symfony_mailer\Entity\MailerTransport;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
 use Drupal\views\Views;
@@ -154,7 +155,7 @@ function a12sfactory_import_config_from_file(string $name, string $filepath = NU
   $config_storage = \Drupal::service('config.storage');
 
   if (!isset($filepath)) {
-    $filepath = drupal_get_path('module', 'a12sfactory') . '/config/install';
+    $filepath = \Drupal::service('extension.path.resolver')->getPath('module', 'a12sfactory') . '/config/install';
   }
 
   if ($override || !\Drupal::service('config.storage')->exists($name)) {
@@ -184,3 +185,67 @@ function a12sfactory_update_field_storage(string $entity_type, array $field_name
   }
 }
 
+/**
+ * Implements hook_update_N().
+ *
+ * Migrate from Swiftmailer to Symfony mailer; enable twig_tweak module.
+ */
+function a12sfactory_update_8010(&$sandbox) {
+  $configFactory = \Drupal::configFactory();
+  // We distinguish the stored configuration from the real configuration which
+  // may be overridden in the settings.php or settings.*.php files.
+  // We try to keep the host, port, username and password overridden from those
+  // files if they used to be, and avoid storing sensitive information in the
+  // Drupal configuration that can be revealed from the database or the source
+  // code when configuration is kept in a source repository.
+  $storedConfig = $configFactory->getEditable('swiftmailer.transport');
+  $realConfig = \Drupal::config('swiftmailer.transport');
+
+  $theme = $configFactory->get('mailsystem.settings')->get('theme');
+  // @todo create theme policy. Handle "default" value.
+  // There is no equivalent for "current", but the closest behavior is the
+  // default one: "_active_fallback". So we can safely ignore this case.
+  if ($theme !== 'current') {
+    $configFactory->getEditable('symfony_mailer.mailer_policy._')
+      ->set('configuration.email_theme.theme', $theme === 'default' ? '_default' : $theme)
+      ->save();
+  }
+
+  /** @var \Drupal\Core\Extension\ModuleInstaller $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+  $moduleInstaller->uninstall(['swiftmailer', 'mailsystem']);
+
+  // We need to remove the existing configuration below, otherwise the Symfony
+  // Mailer fails, as it also define such configuration object.
+  $configToDelete = $configFactory->loadMultiple(['filter.format.email_html']);
+  if (isset($configToDelete['filter.format.email_html'])) {
+    $configFactory->getEditable('filter.format.email_html')->delete();
+  }
+
+  $moduleInstaller->install(['twig_tweak', 'symfony_mailer', 'symfony_mailer_bc'], TRUE);
+
+  if ($realConfig->get('transport') === 'smtp') {
+    // Delete the "sendmail" configuration.
+    $configFactory->getEditable('symfony_mailer.mailer_transport.sendmail')->delete();
+
+    // Create the "SMTP" configuration.
+    $config = [
+      'user' => $storedConfig->get('smtp_credentials.swiftmailer.username'),
+      'pass' => $storedConfig->get('smtp_credentials.swiftmailer.password'),
+      'host' => $storedConfig->get('smtp_host'),
+      'port' => $storedConfig->get('smtp_port'),
+    ];
+
+    $transport = MailerTransport::load('swiftmailer') ?? MailerTransport::create(['id' => 'smtp']);
+    $transport->setPluginId('smtp')
+      ->set('label', 'SMTP')
+      ->set('configuration', $config)
+      ->setAsDefault()
+      ->save();
+  }
+
+  return t('The Swiftmailer module has been replaced by Symfony Mailer. The Backward Compatibility module has also been enabled, as some modules may not use the new API. Take care of updating your environment variables if necessary, adapting your custom code for email templates and replacing the usages of hook_mail_alter(). You can find some resources in the <a href="@features_url">Features and status page</a> or in the <a href="@faq_url">Symfony Mailer FAQ</a>.', [
+    '@features_url' => 'https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status',
+    '@faq_url' => 'https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/faq-tips',
+  ]);
+}

@@ -1,6 +1,20 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - node.type.hero_slide
+    - node.type.page
+  module:
+    - contextual
+    - metatag
+    - node
+    - override_node_options
+    - path
+    - pathauto
+    - rabbit_hole
+    - redirect
+    - system
+    - toolbar
 id: seo_manager
 label: 'SEO manager'
 weight: -7

@@ -6,7 +6,7 @@ dependencies:
     - image.style.square_full_md
     - image.style.square_full_sm
     - image.style.square_full_xs
-  profile:
+  module:
     - a12sfactory
 id: de2e
 label: Edge-to-Edge

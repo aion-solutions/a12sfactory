@@ -826,7 +826,7 @@ index 0000000..eb9178c
 +   * {@inheritdoc}
 +   */
 +  public function getFile() {
-+    return drupal_get_path('module', 'icon_select') . '/js/iconselect/plugin.js';
++    return \Drupal::service('extension.path.resolver')->getPath('module', 'icon_select') . '/js/iconselect/plugin.js';
 +  }
 +
 +  /**

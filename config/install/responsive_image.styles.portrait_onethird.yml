@@ -7,7 +7,7 @@ dependencies:
     - image.style.portrait_half_md
     - image.style.portrait_onethird_lg
     - image.style.portrait_onethird_xl
-  profile:
+  module:
     - a12sfactory
 id: portrait_onethird
 label: 'Portrait 1/3'
