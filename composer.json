@@ -42,7 +42,6 @@
         "drupal/countup": "^2.0",
         "drupal/crop": "~2.0",
         "drupal/ctools": "^3.4",
-        "drupal/default_content": "^1.0",
         "drupal/diff": "~1.0",
         "drupal/draggableviews": "~1.2 || ^2.0",
         "drupal/dropzonejs": "~2.0",
@@ -142,10 +141,6 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
-    "suggest": {
-        "drupal/default_content": "DEPRECATED: Module will be removed in next minor release, disable it or require it.",
-        "drupal/slick_media": "DEPRECATED: Module will be removed in next minor release, disable it or require it in your root composer.json."
-    },
     "extra": {
         "merge-plugin": {
             "include": [
@@ -238,9 +233,6 @@
                 "Issue #2511548: Add a context array variable": "https://www.drupal.org/files/issues/2020-10-16/2511548-105.patch",
                 "Issue #3007424: Multiple usages of FieldPluginBase::getEntity do not check for NULL, leading to WSOD": "https://www.drupal.org/files/issues/2021-01-06/3007424-108.patch",
                 "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch"
-            },
-            "drupal/default_content": {
-                "Issue #2900089: Invalid translation language error when selected installation language does not match demo content language": "https://www.drupal.org/files/issues/2900089-14.patch"
             },
             "drupal/entity_reference_revisions": {
                 "Issue #2799479: Views doesn't recognize relationship to host": "https://www.drupal.org/files/issues/2021-04-16/entity_reference_2799479-158-no-tests.patch"
