@@ -3,7 +3,7 @@ version: "3.5"
 services:
   php:
     container_name: ${PROJECT_NAME}_php
-    image: docker.a12s.io/aion-solutions/container-images/php-7.3:7.3.15-xdebug-knauf-r1
+    image: docker.a12s.io/aion-solutions/container-images/php-8.0:8.0.3-xdebug-r3
     environment:
       APP_URL: $PROJECT_NAME.a12s.local
       PHP_IDE_CONFIG: serverName=$PROJECT_NAME-server
