@@ -4,10 +4,12 @@ services:
   php:
     container_name: ${PROJECT_NAME}_php
     image: docker.a12s.io/aion-solutions/container-images/php-8.0:8.0.3-xdebug-r3
+    env_file:
+      - .env
     environment:
       APP_URL: $PROJECT_NAME.a12s.local
       PHP_IDE_CONFIG: serverName=$PROJECT_NAME-server
-      XDEBUG_CONFIG: client_host=10.211.55.2 # On host => ifconfig |grep 10.211.55|cut -d" " -f2
+      XDEBUG_CONFIG: client_host=host.docker.internal
       DATABASE_NAME: $PROJECT_NAME
       DATABASE_DRIVER: mysql
       DATABASE_HOST: mariadb
@@ -24,7 +26,7 @@ services:
       - ../public/:/app/web/sites/default/files
       - ../private/:/app/private
       - ./local/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini:ro
-      - /home/aion/projects/development-toolbox/file/traefik-db/config/a12s.local.pem:/usr/local/share/ca-certificates/a12s.local.pem
+      - ${AION_CERTIFICATES_PATH}/a12s.local.pem:/usr/local/share/ca-certificates/a12s.local.pem
     labels:
       - traefik.enable=false
     entrypoint: /bin/sh -c "apk add --no-cache ca-certificates && update-ca-certificates && php-fpm"
