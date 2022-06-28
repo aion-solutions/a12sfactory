@@ -1,0 +1,11 @@
+langcode: en
+status: true
+dependencies: {  }
+id: smtp
+label: SMTP
+plugin: smtp
+configuration:
+  user: 'Use environment variables'
+  pass: 'Use environment variables'
+  host: use-environment-variables.com
+  port: null
