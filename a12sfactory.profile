@@ -165,7 +165,9 @@ function a12sfactory_preprocess_paragraph(&$variables) {
 
   // Add an ID so editors may use anchors inside their links, or attach
   // background images...
-  $variables['attributes']['id'] = 'p-' . $paragraph->uuid();
+  if (empty($variables['attributes']['id'])) {
+    $variables['attributes']['id'] = 'p-' . $paragraph->uuid();
+  }
 
   // This is used to handle rows width, as those cannot use their column to
   // specify the offset. It is only implemented in the following template:

@@ -270,7 +270,7 @@ class A12sDisplayBehavior extends ParagraphsBehaviorBase {
     }
 
     if (!empty($attributes_settings['id'])) {
-      $build['#attributes']['id'][] = $attributes_settings['id'];
+      $build['#attributes']['id'] = $attributes_settings['id'];
     }
   }
 
