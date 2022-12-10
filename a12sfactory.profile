@@ -343,6 +343,7 @@ function a12sfactory_preprocess_field__entity_reference_revisions(&$variables) {
         $firstItem = NULL;
         $lastItem = NULL;
         $extraOffset = NULL;
+        $colClassOverride = NULL;
 
         foreach ($variables['items'] as $index => &$item) {
           if (isset($item['content']['#paragraph'])) {
@@ -395,7 +396,17 @@ function a12sfactory_preprocess_field__entity_reference_revisions(&$variables) {
               }
             }
 
-            if (!empty($layout[$index])) {
+            if ($extraOffset) {
+              // Change classes when using "cover" behavior.
+              if ($colClassOverride) {
+                $item['attributes']->addClass($colClassOverride);
+                $colClassOverride = NULL;
+              }
+
+              $item['attributes']->addClass($extraOffset);
+              $extraOffset = NULL;
+            }
+            elseif (!empty($layout[$index])) {
               $item['attributes']->addClass($layout[$index]);
             }
 
@@ -437,7 +448,17 @@ function a12sfactory_preprocess_field__entity_reference_revisions(&$variables) {
 
                 // @todo manage correctly the order...
                 if (empty($order) && $index === 0 && preg_match('/\bcol' . preg_quote($columnBreakpoint) . '-(?<length>\d+)\b/', (string) $item['attributes']->getClass(), $colMatch)) {
-                  $extraOffset = "offset$columnBreakpoint-{$colMatch['length']}";
+                  if ($colMatch['length'] < 11) {
+                    $colMatchLength = max(1, $colMatch['length'] + 1);
+                    $extraOffset = "offset$columnBreakpoint-{$colMatchLength}";
+
+                    if (!empty($layout[$index])) {
+                      $colClassOverride = preg_replace('/-\d+$/', '-' . (12 - $colMatchLength), $layout[$index]);
+                    }
+                  }
+                  else {
+                    $extraOffset = "offset$columnBreakpoint-{$colMatch['length']}";
+                  }
                 }
               }
             }

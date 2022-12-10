@@ -27,6 +27,7 @@ dependencies:
   - drupal:content_translation
   - drupal:content_translation
   - drupal:contextual
+  - drupal:dblog
   - drupal:dynamic_page_cache
   - drupal:editor
   - drupal:field_ui
@@ -62,7 +63,7 @@ dependencies:
   - block_field:block_field
   - countup:countup
   - crop:crop
-  - eu_cookie_compliance:eu_cookie_compliance
+#  - eu_cookie_compliance:eu_cookie_compliance
   - focal_point:focal_point
   - ctools:ctools
   - draggableviews:draggableviews
