@@ -20,7 +20,7 @@ dependencies:
   - drupal:block_content
   - drupal:breakpoint
   - drupal:ckeditor
-  - drupal:color
+#  - drupal:color
   - drupal:components
   - drupal:config
   - drupal:config_translation
@@ -83,7 +83,7 @@ dependencies:
   - file_mdm:file_mdm_exif
   - focal_point:focal_point
   - honeypot:honeypot
-  - icon_select:icon_select
+#  - icon_select:icon_select
   - imagemagick:imagemagick
   - inline_entity_form:inline_entity_form
   - linkit:linkit
