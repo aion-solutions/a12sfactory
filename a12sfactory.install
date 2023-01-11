@@ -222,7 +222,16 @@ function a12sfactory_update_8010(&$sandbox) {
     $configFactory->getEditable('filter.format.email_html')->delete();
   }
 
-  $moduleInstaller->install(['twig_tweak', 'symfony_mailer', 'symfony_mailer_bc'], TRUE);
+  try {
+    $moduleInstaller->install([
+      'twig_tweak',
+      'symfony_mailer',
+      'symfony_mailer_bc'
+    ], TRUE);
+  }
+  catch (\Exception $e) {
+    watchdog_exception('a12sfactory', $e);
+  }
 
   if ($realConfig->get('transport') === 'smtp') {
     // Delete the "sendmail" configuration.
@@ -236,12 +245,14 @@ function a12sfactory_update_8010(&$sandbox) {
       'port' => $storedConfig->get('smtp_port'),
     ];
 
-    $transport = MailerTransport::load('swiftmailer') ?? MailerTransport::create(['id' => 'smtp']);
-    $transport->setPluginId('smtp')
-      ->set('label', 'SMTP')
-      ->set('configuration', $config)
-      ->setAsDefault()
-      ->save();
+    if (class_exists('Drupal\\symfony_mailer\\Entity\\MailerTransport')) {
+      $transport = MailerTransport::load('swiftmailer') ?? MailerTransport::create(['id' => 'smtp']);
+      $transport->setPluginId('smtp')
+        ->set('label', 'SMTP')
+        ->set('configuration', $config)
+        ->setAsDefault()
+        ->save();
+    }
   }
 
   return t('The Swiftmailer module has been replaced by Symfony Mailer. The Backward Compatibility module has also been enabled, as some modules may not use the new API. Take care of updating your environment variables if necessary, adapting your custom code for email templates and replacing the usages of hook_mail_alter(). You can find some resources in the <a href="@features_url">Features and status page</a> or in the <a href="@faq_url">Symfony Mailer FAQ</a>.', [
