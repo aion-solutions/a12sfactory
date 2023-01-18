@@ -128,5 +128,6 @@ dependencies:
 
 themes:
   - bartik
+  - claro
   # Custom themes
   - a12sfactory_admin
