@@ -27,8 +27,9 @@ filters:
       width: 700px
       font_size: 10pt
       line_numbers: '0'
-      print_margins: '0'
       show_invisibles: '0'
+      print_margins: '0'
+      auto_complete: true
       use_wrap_mode: '0'
   editor_file_reference:
     id: editor_file_reference
@@ -125,6 +126,7 @@ filters:
       spamspan_form_pattern: '<a href="%url?goto=%email">%displaytext</a>'
       spamspan_form_default_url: contact
       spamspan_form_default_displaytext: 'contact form'
+      spamspan_parse_dom: 1
   countup:
     id: countup
     provider: countup
@@ -138,6 +140,7 @@ filters:
     weight: 4
     settings:
       optionset: default
+      media_switch: ''
       layout: ''
       skin: ''
       background: false
@@ -145,7 +148,6 @@ filters:
       preload: false
       responsive_image_style: ''
       image_style: ''
-      media_switch: ''
       ratio: ''
       thumbnail_style: ''
       overridables:
@@ -169,11 +171,11 @@ filters:
     status: false
     weight: 3
     settings:
-      media_switch: ''
-      hybrid_style: ''
-      box_style: ''
-      box_caption: ''
       filter_tags:
         img: img
         iframe: iframe
+      media_switch: ''
+      box_style: ''
+      hybrid_style: ''
       use_data_uri: '0'
+      box_caption: ''

@@ -21,20 +21,20 @@ widget_selector_configuration: {  }
 widgets:
   01acd1d4-a99f-464a-b243-a6374cb9d0e9:
     settings:
-      view: browser
-      view_display: editor_video_browser
       submit_text: 'Select video'
       auto_select: false
+      view: browser
+      view_display: editor_video_browser
     uuid: 01acd1d4-a99f-464a-b243-a6374cb9d0e9
     weight: 1
     label: Library
     id: view
   fc993461-e7ad-41ca-9814-40ad48e5f64b:
     settings:
+      submit_text: 'Save video'
       entity_type: media
       bundle: video
       form_mode: default
-      submit_text: 'Save video'
     uuid: fc993461-e7ad-41ca-9814-40ad48e5f64b
     weight: 2
     label: Web

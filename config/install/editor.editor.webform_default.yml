@@ -2,10 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - filter.format.html_basic
+    - filter.format.webform_default
   module:
     - ckeditor
-format: html_basic
+    - webform
+format: webform_default
 editor: ckeditor
 settings:
   toolbar:
@@ -14,42 +15,38 @@ settings:
         -
           name: Formatting
           items:
+            - Format
             - Bold
             - Italic
-            - Underline
-            - Strike
-            - RemoveFormat
+            - Superscript
+            - Subscript
         -
-          name: Links
+          name: Media
           items:
-            - Linkit
+            - SpecialChar
+            - ImceImage
+        -
+          name: Linking
+          items:
             - DrupalLink
             - DrupalUnlink
         -
           name: Lists
           items:
-            - BulletedList
             - NumberedList
+            - BulletedList
+        -
+          name: Indentation
+          items:
             - Outdent
             - Indent
         -
-          name: Media
+          name: 'Block Formatting'
           items:
             - Blockquote
-            - DrupalImage
         -
           name: Tools
           items:
             - Source
-  plugins:
-    drupallink:
-      linkit_enabled: true
-      linkit_profile: editor
-image_upload:
-  status: true
-  scheme: public
-  directory: images/upload
-  max_size: '4 MB'
-  max_dimensions:
-    width: null
-    height: null
+            - Maximize
+  plugins: {  }

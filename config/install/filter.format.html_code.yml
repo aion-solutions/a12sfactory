@@ -116,6 +116,7 @@ filters:
       spamspan_form_pattern: '<a href="%url?goto=%email">%displaytext</a>'
       spamspan_form_default_url: contact
       spamspan_form_default_displaytext: 'contact form'
+      spamspan_parse_dom: 1
   slick_filter:
     id: slick_filter
     provider: slick

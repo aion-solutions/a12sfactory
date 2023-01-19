@@ -42,10 +42,10 @@ widgets:
     id: dropzonejs_media_entity_inline_entity_form
   9d842fc6-2a66-463e-a50b-e9d25f4bbe23:
     settings:
-      view: browser
-      view_display: editor_image_browser
       submit_text: 'Select an image'
       auto_select: false
+      view: browser
+      view_display: editor_image_browser
     uuid: 9d842fc6-2a66-463e-a50b-e9d25f4bbe23
     weight: -10
     label: Library

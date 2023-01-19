@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   theme:
-    - bartik
-id: bartik_page_title
-theme: bartik
-region: content
-weight: -2
+    - claro
+id: claro_page_title
+theme: claro
+region: header
+weight: -30
 provider: null
 plugin: page_title_block
 settings:
   id: page_title_block
-  label: 'Titre de page'
+  label: 'Page title'
   label_display: '0'
   provider: core
 visibility: {  }

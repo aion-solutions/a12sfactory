@@ -4,16 +4,16 @@ dependencies:
   module:
     - system
   theme:
-    - bartik
-id: bartik_main_content
-theme: bartik
+    - claro
+id: claro_content
+theme: claro
 region: content
-weight: 1
+weight: 0
 provider: null
 plugin: system_main_block
 settings:
   id: system_main_block
-  label: 'Contenu de la page principale'
+  label: 'Main page content'
   label_display: '0'
   provider: system
 visibility: {  }

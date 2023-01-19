@@ -9,3 +9,9 @@ configuration:
   pass: 'Use environment variables'
   host: use-environment-variables.com
   port: null
+  query:
+    verify_peer: true
+    local_domain: ''
+    restart_threshold: null
+    restart_threshold_sleep: null
+    ping_threshold: null

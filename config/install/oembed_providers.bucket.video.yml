@@ -9,10 +9,10 @@ dependencies:
     - oembed_providers.provider.youtube
 id: video
 label: 'Remote Video'
-description: null
 providers:
   - Dailymotion
   - Facebook
   - Vimeo
   - Wistia
   - YouTube
+description: null
