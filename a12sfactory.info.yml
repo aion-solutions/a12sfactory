@@ -83,7 +83,7 @@ dependencies:
   - file_mdm:file_mdm_exif
   - focal_point:focal_point
   - honeypot:honeypot
-#  - icon_select:icon_select
+  - icon_select:icon_select
   - imagemagick:imagemagick
   - inline_entity_form:inline_entity_form
   - linkit:linkit
@@ -127,6 +127,6 @@ dependencies:
   - a12sfactory:media_thumbnail_formatters
 
 themes:
-  - bartik
+  - olivero
   # Custom themes
   - a12sfactory_admin

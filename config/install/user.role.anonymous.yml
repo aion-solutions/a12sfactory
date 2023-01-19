@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   module:
-    - eu_cookie_compliance
     - media
     - system
     - taxonomy_access_fix
@@ -12,7 +11,6 @@ weight: -10
 is_admin: false
 permissions:
   - 'access content'
-  - 'display eu cookie compliance popup'
   - 'search content'
   - 'view media'
   - 'view terms in icons'
