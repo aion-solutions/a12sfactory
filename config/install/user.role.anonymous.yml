@@ -1,6 +1,8 @@
 langcode: en
 status: true
 dependencies:
+  config:
+    - taxonomy.vocabulary.icons
   module:
     - media
     - system
@@ -12,5 +14,7 @@ is_admin: false
 permissions:
   - 'access content'
   - 'search content'
+  - 'select terms in icons'
   - 'view media'
+  - 'view term names in icons'
   - 'view terms in icons'
