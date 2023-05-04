@@ -114,6 +114,7 @@ permissions:
   - 'revert hero_slide revisions'
   - 'revert page revisions'
   - 'select terms in hero_sliders'
+  - 'select terms in icons'
   - 'show format selection for block_content'
   - 'show format selection for media'
   - 'show format selection for node'
