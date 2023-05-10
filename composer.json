@@ -36,7 +36,7 @@
         "drupal/config_ignore": "~3.0-beta2",
         "drupal/config_perms": "~2.0",
         "drupal/content_lock": "~2.0",
-        "drupal/core": "^9.5.8",
+        "drupal/core": "9.5.9",
         "drupal/countup": "^2.0",
         "drupal/crop": "~2.0",
         "drupal/ctools": "^4.0",
@@ -233,7 +233,6 @@
                 "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch",
                 "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2022-12-20/2689459-161.patch",
                 "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2020-12-04/2546212-168.patch",
-                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2022-12-28/core-csrf-check-fails-for-users-without-session-2730351-116-9.5.0.patch",
                 "Issue #3222107: jQuery UI library order is incorrect when a large number of javascript files is loaded between two jQuery UI libraries": "https://www.drupal.org/files/issues/2022-11-11/3222107-2.patch",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch"
             },
