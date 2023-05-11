@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - filter.format.html_basic
+    - taxonomy.vocabulary.icons
   module:
     - filter
     - honeypot
@@ -33,4 +34,5 @@ permissions:
   - userprotect.mail.edit
   - userprotect.pass.edit
   - 'view media'
+  - 'view term names in icons'
   - 'view terms in icons'

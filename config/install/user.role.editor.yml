@@ -1,4 +1,4 @@
-langcode: en
+slangcode: en
 status: true
 dependencies:
   config:
@@ -113,6 +113,8 @@ permissions:
   - 'reorder terms in icons'
   - 'revert hero_slide revisions'
   - 'revert page revisions'
+  - 'select terms in hero_sliders'
+  - 'select terms in icons'
   - 'show format selection for block_content'
   - 'show format selection for media'
   - 'show format selection for node'
@@ -141,6 +143,7 @@ permissions:
   - 'view own unpublished content'
   - 'view own unpublished media'
   - 'view page revisions'
+  - 'view term names in hero_sliders'
   - 'view terms in hero_sliders'
   - 'view the administration theme'
   - 'view unpublished paragraphs'
