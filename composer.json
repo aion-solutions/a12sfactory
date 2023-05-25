@@ -226,7 +226,7 @@
                 "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
                 "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
                 "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
-                "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2018-07-16/views_multiple_refresh_fix-2986041-2.patch",
+                "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2022-11-07/2986041-25.patch",
                 "Issue #2810355: Default translation issue when changing it, causing file/image field usage to be set to zero": "https://www.drupal.org/files/issues/2021-01-12/2810355-92.patch",
                 "Issue #2511548: Add a context array variable": "https://www.drupal.org/files/issues/2022-06-21/core-render-context-2511548-124-no-testing-9.4.0.patch",
                 "Issue #3007424: Multiple usages of FieldPluginBase::getEntity do not check for NULL, leading to WSOD": "https://www.drupal.org/files/issues/2023-01-05/3007424-146-9.5.x.patch",
