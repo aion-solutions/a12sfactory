@@ -1,0 +1,51 @@
+a12s_layout.display_options.settings:
+  path: '/admin/appearance/a12s-layout-display-options'
+  defaults:
+    _form: '\Drupal\a12s_layout\Form\DisplayOptionsSettingsForm'
+    _title: 'Display options settings'
+  requirements:
+    _permission: 'administer a12s layout display options'
+
+entity.a12s_layout_display_options.collection:
+  path: '/admin/appearance/a12s-layout-display-options/instance'
+  defaults:
+    _entity_list: 'a12s_layout_display_options'
+    _title: 'Display Options instance configuration'
+  requirements:
+    _permission: 'administer a12s layout display options'
+
+entity.a12s_layout_display_options.add_form:
+  path: '/admin/appearance/a12s-layout-display-options/instance/add'
+  defaults:
+    _entity_form: 'a12s_layout_display_options.add'
+    _title: 'Add a display options instance'
+  requirements:
+    _permission: 'administer a12s layout display options'
+
+entity.a12s_layout_display_options.edit_form:
+  path: '/admin/appearance/a12s-layout-display-options/instance/{a12s_layout_display_options}'
+  defaults:
+    _entity_form: 'a12s_layout_display_options.edit'
+    _title: 'Edit a display options instance'
+  requirements:
+    _permission: 'administer a12s layout display options'
+
+entity.a12s_layout_display_options.delete_form:
+  path: '/admin/appearance/a12s-layout-display-options/instance/{a12s_layout_display_options}/delete'
+  defaults:
+    _entity_form: 'a12s_layout_display_options.delete'
+    _title: 'Delete a display options instance'
+  requirements:
+    _permission: 'administer a12s layout display options'
+
+layout_paragraphs.builder.edit_display_options_item:
+  path: '/layout-paragraphs-builder/{layout_paragraphs_layout}/edit-display-options/{component_uuid}'
+  defaults:
+    _form: '\Drupal\a12s_layout\Form\LayoutParagraphEditDisplayOptionsForm'
+    operation: 'update'
+  options:
+    parameters:
+      layout_paragraphs_layout:
+        layout_paragraphs_layout_tempstore: TRUE
+  requirements:
+    _layout_paragraphs_builder_access: 'TRUE'

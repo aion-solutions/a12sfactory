@@ -3,7 +3,7 @@ version: "3.5"
 services:
   php:
     container_name: ${PROJECT_NAME}_php
-    image: docker.a12s.io/aion-solutions/container-images/php-8.0:8.0.3-xdebug-r3
+    image: docker.a12s.io/aion-solutions/container-images/php-8.2:8.2.2-xdebug-r1
     env_file:
       - .env
     environment:

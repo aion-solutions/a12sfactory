@@ -1,11 +1,8 @@
 langcode: en
 status: true
 dependencies:
-  config:
-    - oembed_providers.bucket.video
   module:
     - crop
-    - oembed_providers
 third_party_settings:
   crop:
     image_field: null

@@ -1,0 +1,5 @@
+entity.a12s_layout_display_options.add_form:
+  route_name: 'entity.a12s_layout_display_options.add_form'
+  title: 'Add display options instance'
+  appears_on:
+    - entity.a12s_layout_display_options.collection

@@ -1,0 +1,18 @@
+.spacing-container .fieldset__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spacing-container-item {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .spacing-container .fieldset__wrapper {
+    gap: 2em;
+  }
+
+  .spacing-container-item {
+    width: calc(50% - 1em);
+  }
+}

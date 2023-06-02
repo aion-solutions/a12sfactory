@@ -1,65 +1,22 @@
 langcode: en
 status: true
 dependencies:
+  content:
+    - 'file:file:83de8f97-8790-46d5-8c3f-67e062b0c37c'
   module:
-    - a12sfactory
+    - a12s_layout
 id: image
 label: Image
-icon_uuid: null
-icon_default: null
-description: ''
+icon_uuid: 83de8f97-8790-46d5-8c3f-67e062b0c37c
+icon_default: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FscXVlXzEiIGRhdGEtbmFtZT0iQ2FscXVlIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1MCAxNTAiPgogIDxwYXRoIGQ9Im0xNDAsMEgxMEM0LjQ4LDAsMCw0LjQ4LDAsMTB2MTMwYzAsNS41Miw0LjQ4LDEwLDEwLDEwaDEzMGM1LjUyLDAsMTAtNC40OCwxMC0xMFYxMGMwLTUuNTItNC40OC0xMC0xMC0xMFptLTM1LDIwYzguMjgsMCwxNSw2LjcyLDE1LDE1cy02LjcyLDE1LTE1LDE1LTE1LTYuNzItMTUtMTUsNi43Mi0xNSwxNS0xNVptMjUsMTA3YzAsMi43Ni0yLjI0LDUtNSw1SDI1Yy0yLjc2LDAtNS0yLjI0LTUtNXYtNDFsMjMuMTUtMjcuNzhjMy43MS00LjQ1LDEwLjQtNC44MywxNC41OS0uODNsMjkuOTUsMjguNjEsOS42NC0xMC4yNWMzLjk1LTQuMiwxMC42Mi00LjIsMTQuNTcsMGwxOC4xLDE5LjI1djMyWiIvPgo8L3N2Zz4='
+description: 'Add an image with an optional link.'
 behavior_plugins:
-  a12sfactory_paragraph_display:
+  a12s_layout_display_options:
     enabled: true
-    features:
-      background_style: background_style
-      attributes: attributes
-      spacing: spacing
-      background_image: 0
-    spacing:
-      margin: margin
-      padding: padding
-    attributes:
-      class: class
-      id: 0
-    background_image:
-      background_size:
-        option: global
-        custom: null
-      background_position:
-        option: global
-        custom: null
-      scheme: public
-      directory: images/components/background-images
-      max_size: '2 Mo'
-      max_dimensions:
-        width: '1800'
-        height: '1400'
-  a12sfactory_paragraph_grid:
-    enabled: true
-    is_row: 0
-    row_type: ''
-    remove_edge_column_spacing: 0
-    no_container_gutters: 1
-    column_breakpoint: lg
-  a12sfactory_paragraph_parallax:
-    factor:
-      default: 0
-      breakpoints:
-        xs:
-          enabled: false
-          value: 0
-        sm:
-          enabled: false
-          value: 0
-        md:
-          enabled: false
-          value: 0
-        lg:
-          enabled: false
-          value: 0
-        xl:
-          enabled: false
-          value: 0
-    type: background
-    direction: vertical
+    options_sets:
+      'spacing:margin':
+        enabled: 1
+      'spacing:padding':
+        enabled: 1
+      width:
+        enabled: 1

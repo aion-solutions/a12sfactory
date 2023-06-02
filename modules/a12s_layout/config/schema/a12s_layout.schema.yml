@@ -1,0 +1,24 @@
+a12s_layout.a12s_layout_display_options.*:
+  type: config_entity
+  label: Display Options instance
+  mapping:
+    id:
+      type: string
+      label: ID
+    label:
+      type: label
+      label: Label
+    uuid:
+      type: string
+    provider:
+      type: string
+      label: 'Provider'
+    plugin:
+      type: string
+      label: 'Plugin'
+    optionsSets:
+      type: sequence
+      label: 'Display options sets'
+      sequence:
+        type: string
+        label: 'Option set ID'

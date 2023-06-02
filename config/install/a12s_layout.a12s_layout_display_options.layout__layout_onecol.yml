@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies: {  }
+id: layout__layout_onecol
+provider: null
+plugin: 'layout:layout_onecol'
+optionsSets:
+  - attribute_class
+  - attribute_id
+  - background_color
+  - background_image
+  - grid_attribute_class
+  - grid_layout
+  - grid_region_order
+  - grid_vertical_alignment
+  - 'spacing:margin'
+  - 'spacing:padding'
+  - width
+settings: {  }

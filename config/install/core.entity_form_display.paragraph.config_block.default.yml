@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.field.paragraph.config_block.field_config_block
+    - field.field.paragraph.config_block.config_block
     - paragraphs.paragraphs_type.config_block
   module:
     - block_field
@@ -11,7 +11,7 @@ targetEntityType: paragraph
 bundle: config_block
 mode: default
 content:
-  field_config_block:
+  config_block:
     weight: 0
     settings:
       configuration_form: full

@@ -4,7 +4,7 @@ dependencies:
   config:
     - entity_browser.browser.image_browser
     - field.field.node.page.field_meta_tags
-    - field.field.node.page.field_page_paragraphs
+    - field.field.node.page.field_paragraph_layout
     - field.field.node.page.field_subtitle
     - field.field.node.page.teaser_description_field
     - field.field.node.page.teaser_display_field
@@ -13,8 +13,8 @@ dependencies:
   module:
     - entity_browser
     - field_group
+    - layout_paragraphs
     - metatag
-    - paragraphs
     - path
     - text
 third_party_settings:
@@ -23,47 +23,47 @@ third_party_settings:
       children:
         - group_htab_settings
         - group_htab_teaser
+      label: Wrapper
+      region: content
       parent_name: ''
       weight: 0
       format_type: tabs
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         direction: horizontal
-      label: Wrapper
-      region: content
     group_htab_settings:
       children:
         - title
         - field_subtitle
         - langcode
+      label: Settings
+      region: content
       parent_name: group_htabs_wrapper
       weight: 6
       format_type: tab
       format_settings:
-        description: ''
-        formatter: open
-        required_fields: true
-        id: ''
         classes: ''
-      label: Settings
-      region: content
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
     group_htab_teaser:
       children:
         - teaser_image_field
         - teaser_display_field
         - teaser_description_field
+      label: Teaser
+      region: content
       parent_name: group_htabs_wrapper
       weight: 7
       format_type: tab
       format_settings:
-        id: ''
         classes: ''
+        id: ''
         formatter: closed
         description: ''
         required_fields: true
-      label: Teaser
-      region: content
 id: node.page.default
 targetEntityType: node
 bundle: page
@@ -76,39 +76,31 @@ content:
     settings: {  }
     third_party_settings: {  }
   field_meta_tags:
-    weight: 3
+    type: metatag_firehose
+    weight: 2
+    region: content
     settings:
       sidebar: true
+      use_details: true
     third_party_settings: {  }
-    type: metatag_firehose
-    region: content
-  field_page_paragraphs:
-    type: paragraphs
+  field_paragraph_layout:
+    type: layout_paragraphs
     weight: 1
     region: content
     settings:
-      title: Component
-      title_plural: Components
-      edit_mode: closed
-      closed_mode: summary
-      autocollapse: none
-      closed_mode_threshold: 1
-      add_mode: modal
-      form_display_mode: default
-      default_paragraph_type: _none
-      features:
-        add_above: add_above
-        collapse_edit_all: collapse_edit_all
-        duplicate: '0'
+      preview_view_mode: preview
+      nesting_depth: 3
+      require_layouts: 0
+      empty_message: ''
     third_party_settings: {  }
   field_subtitle:
+    type: string_textfield
     weight: 5
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    type: string_textfield
-    region: content
   langcode:
     type: language_select
     weight: 6
@@ -118,16 +110,16 @@ content:
     third_party_settings: {  }
   path:
     type: path
-    weight: 4
+    weight: 3
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
   status:
     type: boolean_checkbox
-    settings:
-      display_label: true
     weight: 7
     region: content
+    settings:
+      display_label: true
     third_party_settings: {  }
   teaser_description_field:
     type: text_textarea
@@ -138,12 +130,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
   teaser_display_field:
+    type: boolean_checkbox
     weight: 1
+    region: content
     settings:
       display_label: true
     third_party_settings: {  }
-    type: boolean_checkbox
-    region: content
   teaser_image_field:
     type: entity_browser_entity_reference
     weight: 0
@@ -151,31 +143,31 @@ content:
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
-      field_widget_display_settings:
-        view_mode: browser_preview
       field_widget_edit: true
       field_widget_remove: true
-      open: true
-      selection_mode: selection_append
       field_widget_replace: false
+      open: true
+      field_widget_display_settings:
+        view_mode: browser_preview
+      selection_mode: selection_append
     third_party_settings: {  }
   title:
     type: string_textfield
     weight: 4
+    region: content
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-    region: content
   uid:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 4
+    region: content
     settings:
       match_operator: CONTAINS
-      size: '60'
-      placeholder: ''
       match_limit: 10
-    region: content
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   url_redirects:
     weight: 5

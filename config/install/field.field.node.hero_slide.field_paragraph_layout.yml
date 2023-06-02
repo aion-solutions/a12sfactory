@@ -1,0 +1,61 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraph_layout
+    - node.type.hero_slide
+    - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.hero_slide.field_paragraph_layout
+field_name: field_paragraph_layout
+entity_type: node
+bundle: hero_slide
+label: 'Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      layout: layout
+      text: text
+      webform: webform
+    negate: 0
+    target_bundles_drag_drop:
+      config_block:
+        weight: -18
+        enabled: false
+      image:
+        weight: -16
+        enabled: false
+      layout:
+        weight: -21
+        enabled: true
+      slider:
+        weight: -15
+        enabled: false
+      tab_section:
+        weight: -14
+        enabled: false
+      tabs:
+        weight: -13
+        enabled: false
+      text:
+        weight: -20
+        enabled: true
+      video:
+        weight: -17
+        enabled: false
+      view:
+        weight: -12
+        enabled: false
+      webform:
+        weight: -19
+        enabled: true
+field_type: entity_reference_revisions

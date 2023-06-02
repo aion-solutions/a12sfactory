@@ -1,0 +1,296 @@
+<?php
+/**
+ * @file
+ * Provides a12s layout.
+ */
+
+use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\Component\Serialization\Json;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Layout\LayoutDefinition;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Template\Attribute;
+use Drupal\Core\Url;
+use Drupal\layout_paragraphs\Utility\Dialog;
+use Drupal\paragraphs\ParagraphInterface;
+use Drupal\a12s_layout\DisplayOptions\DisplayTemplatePluginManager;
+use Drupal\a12s_layout\Plugin\paragraphs\Behavior\A12sLayoutDisplayBehavior;
+use Drupal\a12s_layout\Plugin\A12sLayoutDisplayTemplate\Layout;
+
+/**
+ * Implements hook_help().
+ */
+function a12s_layout_help(string $routeName): string {
+  return $routeName === 'help.page.a12s_layout' ?
+    sprintf('<pre>%s</pre>', file_get_contents(__DIR__ . '/README.md')) : '';
+}
+
+
+/**
+ * @see hook_theme()
+ */
+function a12s_layout_theme($existing, $type, $theme, $path): array {
+  $path = \Drupal::service('extension.path.resolver')->getPath('module', 'a12s_layout') . '/templates';
+  $baseParagraph = [
+    'base hook' => 'paragraph',
+    'path' => $path . '/paragraph',
+  ];
+  $baseField = [
+    'base hook' => 'field',
+    'path' => $path . '/field',
+  ];
+
+  return [
+    'paragraph__default' => $baseParagraph,
+    'paragraph__image' => $baseParagraph,
+    'field__entity_reference_revisions' => $baseField,
+  ];
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ *
+ * @param array &$attachments
+ *   Array of all attachments provided by hook_page_attachments() implementations.
+ *
+ * @see hook_page_attachments()
+ * @see \Drupal\a12s_layout\Plugin\A12sLayoutDisplayOptionsSet\BackgroundImage::preprocessVariables()
+ */
+function a12s_layout_page_attachments_alter(array &$attachments): void {
+  $hashes = [];
+
+  // Ensure the background image definitions are added once.
+  foreach ($attachments['#attached']['html_head'] ?? [] as $key => $head) {
+    $matches = [];
+
+    if (isset($head[1]) && preg_match('/^display-options--background-image--(<?hash>.+)$/', $head[1], $matches)) {
+      if (in_array($matches['hash'], $hashes)) {
+        unset($attachments['#attached']['html_head'][$key]);
+      }
+      else {
+        $hashes[] = $matches['hash'];
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function a12s_layout_form_paragraphs_type_edit_form_alter(&$form, FormStateInterface $form_state) {
+  if ($element = &$form['behavior_plugins']['a12s_layout_display_options']) {
+    $element['enabled']['#states']['disabled'] = [
+      ':input[name="behavior_plugins[layout_paragraphs][enabled]"]' => ['checked' => TRUE],
+    ];
+
+    $element['settings']['#states']['visible'][] = [
+      ':input[name="behavior_plugins[layout_paragraphs][enabled]"]' => ['checked' => FALSE],
+    ];
+  }
+}
+
+/**
+ * Alter the Layout Paragraphs component controls ui.
+ *
+ * @see layout_paragraphs_preprocess_layout_paragraphs_builder_controls()
+ */
+function a12s_layout_preprocess_layout_paragraphs_builder_controls(array &$variables): void {
+  /** @var \Drupal\layout_paragraphs\LayoutParagraphsLayout $layout */
+  $layout = $variables['layout_paragraphs_layout'];
+  $uuid = $variables['uuid'];
+  $component = $layout->getComponentByUuid($uuid);
+  $entity = $component->getEntity();
+  $displayDisplayOptionsControl = FALSE;
+
+  if ($entity instanceof ParagraphInterface) {
+    $paragraphType = $entity->getParagraphType();
+
+    // Check if we are dealing with a Paragraph Layout...
+    if ($paragraphType->hasEnabledBehaviorPlugin('layout_paragraphs')) {
+      $layoutId = $entity->getBehaviorSetting('layout_paragraphs', 'layout');
+
+      if ($layoutId && Layout::getDisplayTemplate($entity, $layoutId)?->getOptionsSets()) {
+        $displayDisplayOptionsControl = TRUE;
+      }
+    }
+    // Or with a paragraph which "a12s_layout_display_options" behavior is enabled.
+    elseif ($paragraphType->hasEnabledBehaviorPlugin('a12s_layout_display_options')) {
+      $config = $paragraphType->getBehaviorPlugin('a12s_layout_display_options')->getConfiguration();
+
+      if (!empty($config['options_sets'])) {
+        $displayDisplayOptionsControl = TRUE;
+      }
+    }
+  }
+
+  if ($displayDisplayOptionsControl) {
+    $variables['controls']['edit_display_options'] = [
+      '#type' => 'link',
+      '#url' => Url::fromRoute('layout_paragraphs.builder.edit_display_options_item', [
+        'layout_paragraphs_layout' => $layout->id(),
+        'component_uuid' => $entity->uuid(),
+      ]),
+      '#title' => t('Display'),
+      '#attributes' => [
+        'class' => [
+          'lpb-edit',
+          'lpb-edit-display-options',
+          'use-ajax',
+        ],
+        'data-dialog-type' => 'dialog',
+        'data-dialog-options' => Json::encode(Dialog::dialogSettings($layout)),
+        'title' => t('Display'),
+      ],
+      '#access' => $variables['edit_access'],
+      '#weight' => 61,
+      '#attached' => [
+        'library' => ['a12s_layout/layout-paragraphs-builder'],
+      ],
+    ];
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function a12s_layout_form_layout_paragraphs_component_form_alter(&$form, FormStateInterface $form_state): void {
+  $paragraph = $form['#paragraph'] ?? NULL;
+
+  if ($paragraph instanceof ParagraphInterface) {
+    $paragraphType = $paragraph->getParagraphType();
+
+    if ($paragraphType->hasEnabledBehaviorPlugin('layout_paragraphs')) {
+      $form['layout_paragraphs']['#process'][] = [Layout::class, 'alterLayoutParagraphsComponentForm'];
+
+      if (!empty($form['#display_options'])) {
+        $form['layout_paragraphs']['#element_validate'][] = [Layout::class, 'validateLayoutParagraphsComponentForm'];
+      }
+    }
+    elseif ($paragraphType->hasEnabledBehaviorPlugin('a12s_layout_display_options')) {
+      $form['behavior_plugins']['#process'][] = [A12sLayoutDisplayBehavior::class, 'alterLayoutParagraphsComponentForm'];
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function a12s_layout_preprocess_paragraph(array &$variables): void {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+  $parent = $paragraph->getParentEntity();
+  $paragraphIsNested = $parent instanceof ParagraphInterface || $paragraph->getBehaviorSetting('layout_paragraphs', 'parent_uuid') !== NULL;
+  $variables += [
+    'add_container' => !$paragraphIsNested,
+    'add_grid' => FALSE,
+  ];
+
+  if (!$paragraphIsNested) {
+    $variables['attributes']['class'][] = 'paragraph-root';
+  }
+
+  if ($paragraph->getParagraphType()->hasEnabledBehaviorPlugin('layout_paragraphs')) {
+    $layoutId = $paragraph->getBehaviorSetting('layout_paragraphs', 'layout');
+
+    if ($layoutId) {
+      $displayOptions = $paragraph->getBehaviorSetting('layout_paragraphs', ['config', 'display_options'], []);
+      DisplayTemplatePluginManager::preprocessVariables('layout:' . $layoutId, 'paragraph', $displayOptions, $variables);
+    }
+  }
+
+  // @todo make this configurable.
+  $defaults = [
+    'container_attributes' => 'container',
+    'row_attributes' => 'row',
+    'column_attributes' => 'col-12',
+  ];
+
+  foreach ($defaults as $key => $default) {
+    if (!isset($variables[$key]) || !($variables[$key] instanceof Attribute)) {
+      if (!empty($variables[$key])) {
+        $variables[$key] = new Attribute($variables[$key]);
+      }
+      else {
+        $variables[$key] = new Attribute(['class' => [$default]]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_HOOK().
+ */
+function a12s_layout_preprocess_layout(array &$variables): void {
+  foreach (Element::children($variables['content']) as $region) {
+    foreach (Element::children($variables['content'][$region]) as $key) {
+      // @todo make this class configurable?
+      $variables['content'][$region][$key]['#attributes']['class'][] = 'layout-grid-item';
+    }
+  }
+
+  if ($variables['layout'] instanceof LayoutDefinition) {
+    $displayOptions = $variables['settings']['display_options'] ?? [];
+    DisplayTemplatePluginManager::preprocessVariables('layout:' . $variables['layout']->id(), 'layout', $displayOptions, $variables);
+  }
+}
+
+
+/**
+ * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+ *   The paragraph entity.
+ *
+ * @see hook_ENTITY_TYPE_insert()
+ */
+//function a12s_layout_paragraph_insert(ParagraphInterface $paragraph): void {
+//  try {
+//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
+//    $plugin->addFileUsage($paragraph);
+//  }
+//  catch (PluginException $e) {}
+//}
+
+/**
+ * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+ *   The paragraph entity.
+ *
+ * @see hook_ENTITY_TYPE_update()
+ */
+//function a12s_layout_paragraph_update(ParagraphInterface $paragraph): void {
+//  try {
+//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
+//    $plugin->mergeFileUsage($paragraph);
+//  }
+//  catch (PluginException $e) {}
+//}
+
+/**
+ * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+ *   The paragraph entity.
+ *
+ * @see hook_ENTITY_TYPE_delete()
+ */
+//function a12s_layout_paragraph_delete(ParagraphInterface $paragraph) {
+//  try {
+//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
+//    $plugin->deleteFileUsage($paragraph, 0);
+//  }
+//  catch (PluginException $e) {}
+//}
+
+/**
+ * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+ *   The paragraph entity.
+ *
+ * @see hook_ENTITY_TYPE_revision_delete()
+ */
+//function a12s_layout_paragraph_revision_delete(ParagraphInterface $paragraph) {
+//  try {
+//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
+//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
+//    $plugin->deleteFileUsage($paragraph);
+//  }
+//  catch (PluginException $e) {}
+//}

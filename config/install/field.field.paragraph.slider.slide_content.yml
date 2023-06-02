@@ -3,9 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.slide_content
-    - paragraphs.paragraphs_type.columns
-    - paragraphs.paragraphs_type.columns_three_uneven
-    - paragraphs.paragraphs_type.columns_two_uneven
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.slider
     - paragraphs.paragraphs_type.text
@@ -30,34 +27,10 @@ settings:
       image: image
       text: text
       video: video
-      columns: columns
-      columns_two_uneven: columns_two_uneven
-      columns_three_uneven: columns_three_uneven
     target_bundles_drag_drop:
-      accordion:
-        weight: -22
-        enabled: false
-      accordion_section:
-        weight: -23
-        enabled: false
-      columns:
-        enabled: true
-        weight: -20
-      columns_single:
-        weight: -21
-        enabled: false
-      columns_three_uneven:
-        enabled: true
-        weight: -18
-      columns_two_uneven:
-        enabled: true
-        weight: -19
       image:
         enabled: true
         weight: -31
-      modal:
-        weight: -26
-        enabled: false
       slider:
         weight: -29
         enabled: false

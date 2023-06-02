@@ -1,0 +1,23 @@
+{%
+set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+]
+%}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if add_container %}<div{{ container_attributes }}>{% endif %}
+  {% if add_grid %}<div{{ row_attributes.addClass('row') }}><div{{ column_attributes }}>{% endif %}
+
+  {{ title_prefix }}
+  {{ title_suffix }}
+
+  {% block content %}
+    {# @todo wrap with <div{{ content_attributes }}> #}
+    {{ content }}
+  {% endblock content %}
+
+  {% if add_grid %}</div></div>{% endif %}
+  {% if add_container %}</div>{% endif %}
+</div>

@@ -3,14 +3,13 @@ status: true
 dependencies:
   module:
     - node
-id: editor
 label: Editor
+id: editor
 description: ''
 matchers:
   5560602d-0ad7-49b9-b831-f008a5ac7fa4:
-    uuid: 5560602d-0ad7-49b9-b831-f008a5ac7fa4
     id: 'entity:node'
-    weight: 0
+    uuid: 5560602d-0ad7-49b9-b831-f008a5ac7fa4
     settings:
       result_description: ''
       bundles:
@@ -20,10 +19,10 @@ matchers:
       metadata: ''
       substitution_type: canonical
       limit: 100
-  11ebf2f8-654d-43f4-b505-3f3c54c89c4d:
-    uuid: 11ebf2f8-654d-43f4-b505-3f3c54c89c4d
-    id: 'entity:media'
     weight: 0
+  11ebf2f8-654d-43f4-b505-3f3c54c89c4d:
+    id: 'entity:media'
+    uuid: 11ebf2f8-654d-43f4-b505-3f3c54c89c4d
     settings:
       result_description: ''
       bundles:
@@ -32,3 +31,4 @@ matchers:
       metadata: '[media:field_document_file:description]'
       substitution_type: media
       limit: 100
+    weight: 0

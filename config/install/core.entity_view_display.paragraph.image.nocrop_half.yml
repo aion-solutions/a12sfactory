@@ -3,9 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.nocrop_half
-    - field.field.paragraph.image.field_view_mode
     - field.field.paragraph.image.image_field
     - field.field.paragraph.image.link
+    - field.field.paragraph.image.paragraph_view_mode
     - paragraphs.paragraphs_type.image
     - responsive_image.styles.nocrop_half
   module:
@@ -18,57 +18,12 @@ mode: nocrop_half
 content:
   image_field:
     type: blazy_media
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: ''
-      thumbnail_style: ''
-      responsive_image_style: nocrop_half
-      media_switch: ''
-      ratio: ''
-      sizes: ''
-      breakpoints:
-        xs:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        sm:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        md:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        lg:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-        xl:
-          image_style: ''
-          width: ''
-          breakpoint: ''
-      current_view_mode: nocrop_half
-      background: false
       caption:
         title: '0'
         alt: '0'
-      icon: ''
-      layout: ''
-      view_mode: ''
-      cache: 0
       optionset: default
-      skin: ''
-      style: ''
-      box_caption: ''
-      box_caption_custom: ''
-      box_style: ''
-      box_media_style: ''
-      grid: 0
-      grid_header: ''
-      grid_medium: 0
-      grid_small: 0
       class: ''
       id: ''
       image: ''
@@ -76,11 +31,54 @@ content:
       overlay: ''
       title: ''
       vanilla: false
+      layout: ''
+      view_mode: ''
+      cache: 0
+      skin: ''
+      style: ''
+      background: false
+      box_caption: ''
+      box_caption_custom: ''
+      box_media_style: ''
+      responsive_image_style: nocrop_half
+      box_style: ''
+      image_style: ''
+      media_switch: ''
+      ratio: ''
+      thumbnail_style: ''
+      grid: '0'
+      grid_medium: '0'
+      grid_small: '0'
+      breakpoints:
+        xs:
+          breakpoint: ''
+          width: ''
+          image_style: ''
+        sm:
+          breakpoint: ''
+          width: ''
+          image_style: ''
+        md:
+          breakpoint: ''
+          width: ''
+          image_style: ''
+        lg:
+          breakpoint: ''
+          width: ''
+          image_style: ''
+        xl:
+          breakpoint: ''
+          width: ''
+          image_style: ''
+      current_view_mode: nocrop_half
+      icon: ''
+      sizes: ''
+      grid_header: ''
     third_party_settings: {  }
+    weight: 0
+    region: content
   link:
     type: link
-    weight: 2
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -89,5 +87,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
-  field_view_mode: true
+  paragraph_view_mode: true

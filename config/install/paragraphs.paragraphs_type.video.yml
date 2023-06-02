@@ -1,44 +1,26 @@
 langcode: en
 status: true
 dependencies:
+  content:
+    - 'file:file:2d5cd1df-57f9-4392-b873-21cccb59624e'
   module:
-    - a12sfactory
+    - a12s_layout
 id: video
 label: Video
-icon_uuid: null
-icon_default: null
-description: ''
+icon_uuid: 2d5cd1df-57f9-4392-b873-21cccb59624e
+icon_default: 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBpZD0iQ2FscXVlXzEiIGRhdGEtbmFtZT0iQ2FscXVlIDEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDE1MCAxNTAiPgogIDxwYXRoIGQ9Im0xNDAsMEgxMEM0LjQ4LDAsMCw0LjQ4LDAsMTB2MTMwYzAsNS41Miw0LjQ4LDEwLDEwLDEwaDEzMGM1LjUyLDAsMTAtNC40OCwxMC0xMFYxMGMwLTUuNTItNC40OC0xMC0xMC0xMFptLTQ1LjQsODAuMjZsLTIzLjMsMjAuNDZjLTMuMjMsMi44NC04LjMuNTQtOC4zLTMuNzZ2LTQwLjkxYzAtNC4zLDUuMDctNi41OSw4LjMtMy43NmwyMy4zLDIwLjQ2YzIuMjcsMS45OSwyLjI3LDUuNTIsMCw3LjUxWiIvPgo8L3N2Zz4='
+description: 'Embed a video from the defined providers.'
 behavior_plugins:
-  a12sfactory_paragraph_display:
+  a12s_layout_display_options:
     enabled: true
-    features:
-      background_style: background_style
-      attributes: attributes
-      spacing: spacing
-      background_image: 0
-    spacing:
-      margin: margin
-      padding: padding
-    attributes:
-      class: class
-      id: 0
-    background_image:
-      background_size:
-        option: global
-        custom: null
-      background_position:
-        option: global
-        custom: null
-      scheme: public
-      directory: images/components/background-images
-      max_size: '2 Mo'
-      max_dimensions:
-        width: '1800'
-        height: '1400'
-  a12sfactory_paragraph_grid:
-    enabled: true
-    is_row: 0
-    row_type: ''
-    remove_edge_column_spacing: 0
-    no_container_gutters: 0
-    column_breakpoint: lg
+    options_sets:
+      attribute_class:
+        enabled: 1
+      attribute_id:
+        enabled: 1
+      'spacing:margin':
+        enabled: 1
+      'spacing:padding':
+        enabled: 1
+      width:
+        enabled: 1

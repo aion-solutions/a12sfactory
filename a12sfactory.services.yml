@@ -13,8 +13,6 @@ services:
     arguments: ['@bare_html_page_renderer', '@entity_type.manager', '@cache.discovery']
     tags:
       - { name: event_subscriber }
-  a12sfactory.background_image_css:
-    class: Drupal\a12sfactory\BackgroundImageCss
   a12sfactory.entity_helper:
     class: Drupal\a12sfactory\Utility\EntityHelper
     arguments: ['@entity_type.manager', '@current_route_match']

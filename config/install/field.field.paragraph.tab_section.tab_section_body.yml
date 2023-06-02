@@ -3,9 +3,6 @@ status: true
 dependencies:
   config:
     - field.storage.paragraph.tab_section_body
-    - paragraphs.paragraphs_type.columns
-    - paragraphs.paragraphs_type.columns_three_uneven
-    - paragraphs.paragraphs_type.columns_two_uneven
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.slider
     - paragraphs.paragraphs_type.tab_section
@@ -34,34 +31,10 @@ settings:
       video: video
       view: view
       slider: slider
-      columns: columns
-      columns_three_uneven: columns_three_uneven
-      columns_two_uneven: columns_two_uneven
     target_bundles_drag_drop:
-      accordion:
-        weight: -22
-        enabled: false
-      accordion_section:
-        weight: -21
-        enabled: false
-      columns:
-        enabled: true
-        weight: -19
-      columns_single:
-        weight: -20
-        enabled: false
-      columns_three_uneven:
-        enabled: true
-        weight: -18
-      columns_two_uneven:
-        enabled: true
-        weight: -17
       image:
         enabled: true
         weight: -30
-      modal:
-        weight: -25
-        enabled: false
       slider:
         enabled: true
         weight: -27

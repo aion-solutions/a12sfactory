@@ -6,10 +6,10 @@ dependencies:
     - field.field.node.hero_slide.field_hero_sliders
     - field.field.node.hero_slide.field_media
     - field.field.node.hero_slide.field_multiline_title
-    - field.field.node.hero_slide.field_page_paragraphs
+    - field.field.node.hero_slide.field_paragraph_layout
     - node.type.hero_slide
   module:
-    - entity_reference_revisions
+    - layout_paragraphs
     - link
     - user
 id: node.hero_slide.default
@@ -18,7 +18,7 @@ bundle: hero_slide
 mode: default
 content:
   field_call2action_links:
-    weight: 3
+    type: link
     label: hidden
     settings:
       trim_length: 80
@@ -27,39 +27,39 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    type: link
+    weight: 3
     region: content
   field_media:
-    weight: 0
+    type: entity_reference_entity_view
     label: hidden
     settings:
       view_mode: hero_slide
       link: false
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    weight: 0
     region: content
   field_multiline_title:
-    weight: 1
+    type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    type: string
+    weight: 1
     region: content
-  field_page_paragraphs:
-    weight: 2
+  field_paragraph_layout:
+    type: layout_paragraphs
     label: hidden
     settings:
-      view_mode: view_mode_selector
+      view_mode: default
       link: ''
     third_party_settings: {  }
-    type: entity_reference_revisions_entity_view
+    weight: 2
     region: content
   flag_slider_queue:
-    weight: 10
-    region: content
     settings: {  }
     third_party_settings: {  }
+    weight: 10
+    region: content
 hidden:
   field_hero_sliders: true
   langcode: true

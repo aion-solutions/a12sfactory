@@ -3,22 +3,22 @@ status: true
 dependencies:
   config:
     - block_content.type.complex
-    - field.field.block_content.complex.field_paragraphs
+    - field.field.block_content.complex.field_paragraph_layout
   module:
-    - entity_reference_revisions
+    - layout_paragraphs
 id: block_content.complex.default
 targetEntityType: block_content
 bundle: complex
 mode: default
 content:
-  field_paragraphs:
-    type: entity_reference_revisions_entity_view
-    weight: 2
+  field_paragraph_layout:
+    type: layout_paragraphs
     label: hidden
     settings:
-      view_mode: view_mode_selector
+      view_mode: default
       link: ''
     third_party_settings: {  }
+    weight: 0
     region: content
 hidden:
   langcode: true

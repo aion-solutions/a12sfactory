@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies: {  }
+id: layout__layout_threecol_section
+provider: null
+plugin: 'layout:layout_threecol_section'
+optionsSets:
+  - attribute_class
+  - attribute_id
+  - background_color
+  - background_image
+  - grid_attribute_class
+  - grid_layout
+  - grid_region_order
+  - grid_vertical_alignment
+  - grid_gap
+  - 'spacing:margin'
+  - 'spacing:padding'
+  - width
+settings: {  }

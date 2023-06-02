@@ -3,9 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
-    - field.field.paragraph.image.field_view_mode
     - field.field.paragraph.image.image_field
     - field.field.paragraph.image.link
+    - field.field.paragraph.image.paragraph_view_mode
     - image.style.medium
     - paragraphs.paragraphs_type.image
   module:
@@ -18,17 +18,15 @@ mode: preview
 content:
   image_field:
     type: media_thumbnail
-    weight: 0
-    region: content
     label: hidden
     settings:
-      image_style: medium
       image_link: ''
+      image_style: medium
     third_party_settings: {  }
+    weight: 0
+    region: content
   link:
     type: link
-    weight: 1
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -37,5 +35,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
-  field_view_mode: true
+  paragraph_view_mode: true

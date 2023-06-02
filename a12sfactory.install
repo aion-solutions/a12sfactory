@@ -10,7 +10,6 @@ use Drupal\Core\Entity\EntityDefinitionUpdateManagerInterface;
 use Drupal\symfony_mailer\Entity\MailerTransport;
 use Drupal\user\Entity\User;
 use Drupal\user\UserInterface;
-use Drupal\views\Views;
 
 /**
  * Implements hook_install().
@@ -36,7 +35,7 @@ function a12sfactory_install() {
   \Drupal::configFactory()->getEditable('node.settings')->set('use_admin_theme', TRUE)->save(TRUE);
 
   // Entity updates to clear up any mismatched entity and/or field definitions
-  // and Fix changes were detected in the entity type and field definitions.
+  // and fix changes were detected in the entity type and field definitions.
   // In previous Drupal versions, the 55 following lines of code were executed
   // by a single method:
   // \Drupal::entityDefinitionUpdateManager()->applyUpdates()
@@ -100,13 +99,6 @@ function a12sfactory_install() {
         }
       }
     }
-  }
-
-  // Disable the Taxonomy Term view as it is not useful and causes issues
-  // with the REST module (DELETE).
-  if ($view = Views::getView('taxonomy_term')) {
-    $view->storage->setStatus(FALSE);
-    $view->save();
   }
 }
 
@@ -259,4 +251,21 @@ function a12sfactory_update_8010(&$sandbox) {
     '@features_url' => 'https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/features-and-status',
     '@faq_url' => 'https://www.drupal.org/docs/contributed-modules/symfony-mailer-0/faq-tips',
   ]);
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Add the A12S Layout module.
+ */
+function a12sfactory_update_8011(&$sandbox) {
+  /** @var \Drupal\Core\Extension\ModuleInstaller $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  try {
+    $moduleInstaller->install(['a12s_layout'], TRUE);
+  }
+  catch (\Exception $e) {
+    watchdog_exception('a12sfactory', $e);
+  }
 }

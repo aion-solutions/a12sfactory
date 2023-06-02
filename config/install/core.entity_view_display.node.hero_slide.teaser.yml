@@ -7,7 +7,7 @@ dependencies:
     - field.field.node.hero_slide.field_hero_sliders
     - field.field.node.hero_slide.field_media
     - field.field.node.hero_slide.field_multiline_title
-    - field.field.node.hero_slide.field_page_paragraphs
+    - field.field.node.hero_slide.field_paragraph_layout
     - node.type.hero_slide
   module:
     - user
@@ -24,5 +24,5 @@ hidden:
   field_hero_sliders: true
   field_media: true
   field_multiline_title: true
-  field_page_paragraphs: true
+  field_paragraph_layout: true
   langcode: true

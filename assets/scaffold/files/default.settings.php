@@ -585,7 +585,7 @@ $settings['file_private_path'] = '../private';
  *
  * Note: This setting does not apply to installation and update pages.
  */
-# $settings['maintenance_theme'] = 'bartik';
+# $settings['maintenance_theme'] = 'olivero';
 
 /**
  * PHP settings:

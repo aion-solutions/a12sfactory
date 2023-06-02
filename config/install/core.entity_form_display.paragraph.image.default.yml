@@ -3,47 +3,67 @@ status: true
 dependencies:
   config:
     - entity_browser.browser.image_browser
-    - field.field.paragraph.image.field_view_mode
     - field.field.paragraph.image.image_field
     - field.field.paragraph.image.link
+    - field.field.paragraph.image.paragraph_view_mode
     - paragraphs.paragraphs_type.image
   module:
     - entity_browser
     - link
-    - view_mode_selector
+    - paragraph_view_mode
 id: paragraph.image.default
 targetEntityType: paragraph
 bundle: image
 mode: default
 content:
-  field_view_mode:
-    weight: 2
-    settings: {  }
-    third_party_settings: {  }
-    type: view_mode_selector_select
-    region: content
   image_field:
     type: entity_browser_entity_reference
-    weight: 0
+    weight: 1
     region: content
     settings:
       entity_browser: image_browser
       field_widget_display: rendered_entity
       field_widget_edit: true
       field_widget_remove: true
-      open: true
-      selection_mode: selection_append
-      field_widget_display_settings:
-        view_mode: field_preview
       field_widget_replace: false
+      open: true
+      field_widget_display_settings:
+        view_mode: browser_preview
+      selection_mode: selection_append
     third_party_settings: {  }
   link:
     type: link_default
-    weight: 1
+    weight: 2
     region: content
     settings:
       placeholder_url: ''
       placeholder_title: ''
+    third_party_settings: {  }
+  paragraph_view_mode:
+    type: paragraph_view_mode
+    weight: -100
+    region: content
+    settings:
+      view_modes:
+        default: Default
+        de2e: Edge-to-Edge
+        landscape_half: 'Landscape 1/2'
+        landscape_onefourth: 'Landscape 1/4'
+        landscape_onethird: 'Landscape 1/3'
+        nocrop_full: 'No-crop full'
+        nocrop_half: 'No-crop 1/2'
+        nocrop_onefourth: 'No-crop 1/4'
+        nocrop_onethird: 'No-crop 1/3'
+        portrait_half: 'Portrait 1/2'
+        portrait_onefourth: 'Portrait 1/4'
+        portrait_onethird: 'Portrait 1/3'
+        preview: Preview
+        square_full: 'Square full'
+        square_half: 'Square 1/2'
+        square_onefourth: 'Square 1/4'
+        square_onethird: 'Square 1/3'
+      default_view_mode: default
+      form_mode_bind: true
     third_party_settings: {  }
   status:
     type: boolean_checkbox

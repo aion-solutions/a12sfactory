@@ -1,0 +1,15 @@
+background_color:
+  colors:
+    bg-primary: Primary
+    bg-white: White
+    bg-light: Light
+    bg-dark: Dark
+background_image:
+  background_size: cover
+  background_position: center
+  max_size: 1Mo
+  max_dimensions:
+    width: '2000'
+    height: '2000'
+spacing_margin: {  }
+spacing_padding: {  }

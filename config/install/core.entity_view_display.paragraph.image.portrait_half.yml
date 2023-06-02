@@ -3,9 +3,9 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.paragraph.portrait_half
-    - field.field.paragraph.image.field_view_mode
     - field.field.paragraph.image.image_field
     - field.field.paragraph.image.link
+    - field.field.paragraph.image.paragraph_view_mode
     - paragraphs.paragraphs_type.image
     - responsive_image.styles.portrait_half
   module:
@@ -18,17 +18,15 @@ mode: portrait_half
 content:
   image_field:
     type: media_thumbnail_formatters_responsive
-    weight: 0
-    region: content
     label: hidden
     settings:
-      responsive_image_style: portrait_half
       image_link: ''
+      responsive_image_style: portrait_half
     third_party_settings: {  }
+    weight: 0
+    region: content
   link:
     type: link
-    weight: 1
-    region: content
     label: hidden
     settings:
       trim_length: 80
@@ -37,5 +35,7 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
-  field_view_mode: true
+  paragraph_view_mode: true

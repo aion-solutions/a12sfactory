@@ -1,9 +1,22 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - a12s_layout
 id: tab_section
 label: 'Tab Section'
 icon_uuid: null
 icon_default: null
-description: null
-behavior_plugins: {  }
+description: "Add a tab content and title to a tabbed interface.\t"
+behavior_plugins:
+  a12s_layout_display_options:
+    enabled: true
+    options_sets:
+      background_color:
+        enabled: 1
+      background_image:
+        enabled: 1
+      'spacing:margin':
+        enabled: 1
+      'spacing:padding':
+        enabled: 1

@@ -1,0 +1,51 @@
+.radios-range-slider .form-radios {
+  display: flex;
+  position: relative;
+  text-align: center;
+  user-select: none;
+  width: 100%;
+}
+
+.radios-range-slider .form-type--radio {
+  flex-grow: 1;
+  flex-shrink: 0;
+  margin-left: 0;
+}
+
+.radios-range-slider input[type="radio"] {
+  display: none;
+}
+
+.radios-range-slider label.option {
+  border: 1px solid black;
+  cursor: pointer;
+  display: block;
+  margin: 0;
+  padding: .2em .5em;
+  transition: background-color .5s ease 0s, color .5s ease 0s;
+  width: calc(100% - 1em - 1px);
+}
+
+.radios-range-slider .form-type--radio + .form-type--radio label {
+  border-left: 0 none;
+}
+
+.radios-range-slider .form-type--radio:first-child label {
+  border-bottom-left-radius: 1em;
+  border-top-left-radius: 1em;
+}
+
+.radios-range-slider .form-type--radio:last-child label {
+  border-bottom-right-radius: 1em;
+  border-top-right-radius: 1em;
+}
+
+.radios-range-slider label:hover::after {
+  transform: translate(-50%, -50%) scale(1.25);
+}
+
+.radios-range-slider input.form-radio:checked + label {
+  background-color: #0071b8;
+  color: white;
+  font-weight: 800;
+}

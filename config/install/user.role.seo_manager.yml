@@ -5,7 +5,6 @@ dependencies:
     - node.type.hero_slide
     - node.type.page
   module:
-    - contextual
     - metatag
     - node
     - override_node_options
@@ -22,7 +21,6 @@ is_admin: null
 permissions:
   - 'access administration pages'
   - 'access content overview'
-  - 'access contextual links'
   - 'access toolbar'
   - 'administer meta tags'
   - 'administer pathauto'

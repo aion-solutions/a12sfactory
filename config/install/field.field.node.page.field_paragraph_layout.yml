@@ -1,0 +1,73 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_paragraph_layout
+    - node.type.page
+    - paragraphs.paragraphs_type.config_block
+    - paragraphs.paragraphs_type.image
+    - paragraphs.paragraphs_type.layout
+    - paragraphs.paragraphs_type.slider
+    - paragraphs.paragraphs_type.tabs
+    - paragraphs.paragraphs_type.text
+    - paragraphs.paragraphs_type.video
+    - paragraphs.paragraphs_type.view
+    - paragraphs.paragraphs_type.webform
+  module:
+    - entity_reference_revisions
+id: node.page.field_paragraph_layout
+field_name: field_paragraph_layout
+entity_type: node
+bundle: page
+label: 'Content'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      layout: layout
+      text: text
+      image: image
+      video: video
+      config_block: config_block
+      view: view
+      webform: webform
+      slider: slider
+      tabs: tabs
+    negate: 0
+    target_bundles_drag_drop:
+      config_block:
+        weight: -18
+        enabled: true
+      image:
+        weight: -20
+        enabled: true
+      layout:
+        weight: 13
+        enabled: true
+      slider:
+        weight: -15
+        enabled: true
+      tab_section:
+        weight: -13
+        enabled: false
+      tabs:
+        weight: -14
+        enabled: true
+      text:
+        weight: -21
+        enabled: true
+      video:
+        weight: -19
+        enabled: true
+      view:
+        weight: -17
+        enabled: true
+      webform:
+        weight: -16
+        enabled: true
+field_type: entity_reference_revisions
