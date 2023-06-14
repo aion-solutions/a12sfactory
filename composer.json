@@ -104,7 +104,7 @@
         "drupal/viewsreference": "~2.0-alpha6",
         "drupal/webform": "^5.15 || ^6.2.0-beta5",
         "drupal/webp": "^1.0-beta7",
-        "drush/drush": "^11.0",
+        "drush/drush": ">=11.0",
         "jonthornton/jquery-timepicker": "^1.11",
         "npm-asset/blazy": "^1.8",
         "npm-asset/dropzone": "^5.7",
