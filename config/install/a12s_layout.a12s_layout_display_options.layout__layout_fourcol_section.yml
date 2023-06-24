@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - layout_builder
 id: layout__layout_fourcol_section
 provider: null
 plugin: 'layout:layout_fourcol_section'

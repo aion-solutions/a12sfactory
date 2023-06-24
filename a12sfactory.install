@@ -263,7 +263,7 @@ function a12sfactory_update_8011(&$sandbox) {
   $moduleInstaller = \Drupal::service('module_installer');
 
   try {
-    $moduleInstaller->install(['a12s_layout'], TRUE);
+    $moduleInstaller->install(['a12s_layout', 'layout_builder', 'paragraph_view_mode'], TRUE);
   }
   catch (\Exception $e) {
     watchdog_exception('a12sfactory', $e);

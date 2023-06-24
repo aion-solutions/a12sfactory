@@ -3,11 +3,13 @@
 namespace Drupal\a12s_layout\Plugin\A12sLayoutDisplayOptionsSet;
 
 use Drupal\breakpoint\BreakpointManagerInterface;
+use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Render\FormattableMarkup;
 use Drupal\Component\Utility\Bytes;
 use Drupal\Component\Utility\Environment;
 use Drupal\Component\Utility\Html;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\File\FileUrlGeneratorInterface;
@@ -17,7 +19,9 @@ use Drupal\Core\Render\Element\FormElement;
 use Drupal\Core\StreamWrapper\StreamWrapperInterface;
 use Drupal\Core\StreamWrapper\StreamWrapperManagerInterface;
 use Drupal\file\FileInterface;
+use Drupal\file\FileUsage\FileUsageInterface;
 use Drupal\image\Entity\ImageStyle;
+use Drupal\paragraphs\ParagraphInterface;
 use Drupal\responsive_image\Entity\ResponsiveImageStyle;
 use Drupal\responsive_image\ResponsiveImageStyleInterface;
 use Drupal\a12s_layout\DisplayOptions\DisplayOptionsSetInterface;
@@ -55,6 +59,8 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
    *   The breakpoint manager.
    * @param \Drupal\Core\Extension\ModuleHandlerInterface $moduleHandler
    *   The module handler.
+   * @param \Drupal\file\FileUsage\FileUsageInterface $file_usage
+   *   The file usage service.
    */
   public function __construct(
     array $configuration,
@@ -66,7 +72,8 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
     protected EntityStorageInterface $responsiveImageStyleStorage,
     protected FileUrlGeneratorInterface $fileUrlGenerator,
     protected BreakpointManagerInterface $breakpointManager,
-    protected ModuleHandlerInterface $moduleHandler
+    protected ModuleHandlerInterface $moduleHandler,
+    protected FileUsageInterface $fileUsage
   ) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $configFactory);
   }
@@ -87,7 +94,8 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
       $entityTypeManager->getStorage('responsive_image_style'),
       $container->get('file_url_generator'),
       $container->get('breakpoint.manager'),
-      $container->get('module_handler')
+      $container->get('module_handler'),
+      $container->get('file.usage')
     );
   }
 
@@ -115,33 +123,24 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
     if (!empty($configuration['background_image'])) {
       $responsiveImageStyleId = $configuration['responsive_image_style'] ?? $this->globalConfiguration['responsive_image_style'] ?? NULL;
 
-      if ($responsiveImageStyleId) {
-        $fid = reset($configuration['background_image']);
+      if ($responsiveImageStyleId && ($file = $this->getImage($configuration))) {
+        $fid = $file->id();
 
-        try {
-          $file = $this->fileStorage->load($fid);
-
-          if ($file instanceof FileInterface) {
-            if (isset($variables['attributes']['style'])) {
-              unset($variables['attributes']['style']);
-            }
-
-            $hash = sha1($fid . '-' . $responsiveImageStyleId);
-            $cssSelector = 'background-image-' . $hash;
-            $style = $this->buildBackgroundImageCss('html.loaded .' . $cssSelector . ':before', $file, $responsiveImageStyleId, $configuration);
-
-            if ($style) {
-              $variables['attributes']['class'][] = $cssSelector;
-              $variables['attributes']['class'][] = 'background-image';
-              $variables['content']['#attached']['html_head'][] = [
-                ['#tag' => 'style', '#value' => $style],
-                'display-options--background-image--' . $hash,
-              ];
-            }
-          }
+        if (isset($variables['attributes']['style'])) {
+          unset($variables['attributes']['style']);
         }
-        catch (\Exception $e) {
-          watchdog_exception('a12s_layout', $e);
+
+        $hash = sha1($fid . '-' . $responsiveImageStyleId);
+        $cssSelector = 'background-image-' . $hash;
+        $style = $this->buildBackgroundImageCss('html.loaded .' . $cssSelector . ':before', $file, $responsiveImageStyleId, $configuration);
+
+        if ($style) {
+          $variables['attributes']['class'][] = $cssSelector;
+          $variables['attributes']['class'][] = 'background-image';
+          $variables['content']['#attached']['html_head'][] = [
+            ['#tag' => 'style', '#value' => $style],
+            'display-options--background-image--' . $hash,
+          ];
         }
       }
     }
@@ -382,6 +381,7 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
 
     // Handle default values for "select_or_other".
     foreach (['background_size', 'background_position'] as $key) {
+      $form[$key]['#other_option'] = $this->t('- Other -');
       $value = $default[$key];
       $options = $form[$key]['#options'];
 
@@ -539,7 +539,6 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
       ],
       '#regex' => '^(?:(?:(?:(?:\d+)(?:%|r?em|px|cm|ch|vw|vh)|auto)(?:\s+(?:(?:\d+)(?:%|r?em|px|cm|ch|vw|vh)|auto)?))|cover|contain)$',
       '#element_validate' => [[static::class, 'validateSelectOrOtherRegex']],
-      '#default_value' => NULL,
     ];
 
     $form['background_position'] = [
@@ -562,7 +561,6 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
       // so obvious errors that we can ignore it.
       '#regex' => '^(?:(?:(?:(?:\d+)(?:%|r?em|px|cm|ch|vw|vh)|0|top|bottom|left|right|center)(?:\h+(?:(?:\d+)(?:%|r?em|px|cm|ch|vw|vh)|0|top|bottom|left|right|center))?)|inherit|initial|unset)$',
       '#element_validate' => [[static::class, 'validateSelectOrOtherRegex']],
-      '#default_value' => NULL,
     ];
 
     $form['background_repeat'] = [
@@ -613,6 +611,141 @@ class BackgroundImage extends DisplayOptionsSetPluginBase implements ContainerFa
     }
 
     return $options;
+  }
+
+  /**
+   * Load the background image from the configuration, when possible.
+   *
+   * @param array $configuration
+   *
+   * @return \Drupal\file\FileInterface|null
+   */
+  protected function getImage(array $configuration): ?FileInterface {
+    if (!empty($configuration['background_image'])) {
+      $fid = reset($configuration['background_image']);
+
+      try {
+        $file = $this->fileStorage->load($fid);
+        return $file instanceof FileInterface ? $file : NULL;
+      }
+      catch (\Exception $e) {
+        watchdog_exception('a12s_layout', $e);
+      }
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Load the background image for the given paragraph, when possible.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *
+   * @return \Drupal\file\FileInterface|null
+   */
+  protected function getImageFromParagraph(ParagraphInterface $paragraph): ?FileInterface {
+    $configuration = $paragraph->getBehaviorSetting('a12s_layout_display_options', 'display_options', [])['background_image'] ?? [];
+    return $this->getImage($configuration);
+  }
+
+  /**
+   * Get an instance of BackgroundImage for the given paragraph, if applicable.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *
+   * @return \Drupal\a12s_layout\Plugin\A12sLayoutDisplayOptionsSet\BackgroundImage|null
+   */
+  public static function getInstance(ParagraphInterface $paragraph): ?BackgroundImage {
+    try {
+      /** @var \Drupal\a12s_layout\DisplayOptions\DisplayOptionsSetPluginManager $pluginManagerDisplayOptionsSet */
+      $pluginManagerDisplayOptionsSet = \Drupal::service('plugin.manager.a12s_layout_display_options_set');
+      $configuration = ['id' => 'background_image', 'paragraph' => $paragraph];
+      $backgroundImage = $pluginManagerDisplayOptionsSet->createInstance('background_image', $configuration);
+      return $backgroundImage instanceof BackgroundImage ? $backgroundImage : NULL;
+    }
+    catch (PluginException $e) {
+      watchdog_exception('a12s_layout', $e);
+    }
+
+    return NULL;
+  }
+
+  /**
+   * Add file usage of files referenced by background images.
+   *
+   * Every referenced file that does not yet have the FILE_STATUS_PERMANENT
+   * state, will be given that state.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *   The paragraph entity to inspect for file references on behavior plugins.
+   */
+  public function addFileUsage(ParagraphInterface $paragraph) {
+    if ($file = $this->getImageFromParagraph($paragraph)) {
+      if ($file->get('status')->value !== FileInterface::STATUS_PERMANENT) {
+        $file->setPermanent();
+
+        try {
+          $file->save();
+        }
+        catch (EntityStorageException $e) {
+          watchdog_exception('a12s_layout', $e);
+        }
+      }
+
+      $this->fileUsage->add($file, 'a12s_layout', $paragraph->getEntityTypeId(), $paragraph->id());
+    }
+  }
+
+  /**
+   * Merge file usage of files referenced by background images.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *   The paragraph entity to inspect for file references on behavior plugins.
+   */
+  public function mergeFileUsage(ParagraphInterface $paragraph) {
+    if (!empty($paragraph->original)) {
+      // On new revisions, all files are considered to be a new usage and no
+      // deletion of previous file usages are necessary.
+      if ($paragraph->getRevisionId() != $paragraph->original->getRevisionId()) {
+        $this->addFileUsage($paragraph);
+      }
+      // On modified revisions, detect which file references have been added (and
+      // record their usage) and which ones have been removed (delete their usage).
+      // File references that existed both in the previous version of the revision
+      // and in the new one don't need their usage to be updated.
+      else {
+        $original_file = $this->getImageFromParagraph($paragraph->original);
+        $file = $this->getImageFromParagraph($paragraph);
+
+        if ($original_file && (empty($file) || $original_file->uuid() != $file->uuid())) {
+          $this->deleteFileUsage($paragraph->original);
+        }
+
+        if ($file && (empty($original_file) || $original_file->uuid() != $file->uuid())) {
+          $this->addFileUsage($paragraph);
+        }
+      }
+    }
+    else {
+      $this->addFileUsage($paragraph);
+    }
+  }
+
+  /**
+   * Deletes file usage of files referenced by background images.
+   *
+   * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   *   The paragraph entity to inspect for file references on behavior plugins.
+   * @param  int  $count
+   *   The number of references to delete. Should be 1 when deleting a single
+   *   revision and 0 when deleting an entity entirely.
+   *
+   * @see \Drupal\file\FileUsage\FileUsageInterface::delete()
+   */
+  public function deleteFileUsage(ParagraphInterface $paragraph, int $count = 1) {
+    if ($file = $this->getImageFromParagraph($paragraph)) {
+      $this->fileUsage->delete($file, 'a12s_layout', $paragraph->getEntityTypeId(), $paragraph->id(), $count);
+    }
   }
 
 }

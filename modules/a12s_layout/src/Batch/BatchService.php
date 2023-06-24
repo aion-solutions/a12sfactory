@@ -3,6 +3,7 @@
 namespace Drupal\a12s_layout\Batch;
 
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\field\FieldConfigInterface;
 use Drupal\paragraph_view_mode\StorageManagerInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\a12s_layout\Exception\A12sLayoutException;
@@ -21,7 +22,7 @@ class BatchService {
    *
    * @throws \Drupal\a12s_layout\Exception\A12sLayoutException
    */
-  public static function migrateViewModeSelectorToParagraphViewMode(int $paragraphId, string $viewModeField) {
+  public static function migrateViewModeSelectorToParagraphViewMode(int $paragraphId, string $viewModeField): void {
     /** @var Paragraph $paragraph */
     $paragraph = \Drupal::entityTypeManager()->getStorage('paragraph')->loadRevision($paragraphId);
 
@@ -32,7 +33,7 @@ class BatchService {
     /** @var ModuleHandlerInterface $moduleHandler */
     $moduleHandler = \Drupal::service('module_handler');
 
-    // This must not happen.
+    // The view mode field should exist.
     if (!$paragraph->hasField($viewModeField)) {
       throw new A12sLayoutException("Paragraph revision $paragraphId of type {$paragraph->bundle()} does not have a $viewModeField field");
     }

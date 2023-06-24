@@ -7,10 +7,12 @@ use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\field\FieldConfigInterface;
 use Drupal\paragraph_view_mode\StorageManagerInterface;
 use Drupal\a12s_layout\Batch\BatchService;
 use Drupal\a12s_layout\Exception\A12sLayoutException;
 use Drupal\a12s_layout\Service\MigrationManager;
+use Drupal\paragraphs\Entity\ParagraphsType;
 use Drush\Commands\DrushCommands;
 
 /**
@@ -220,11 +222,6 @@ class A12sLayoutCommands extends DrushCommands {
     foreach ($this->entityTypeBundleInfo->getBundleInfo('paragraph') as $bundleName => $bundleInfo) {
       $fields = $this->entityFieldManager->getFieldDefinitions('paragraph', $bundleName);
 
-      // Check if the paragraph view mode is enabled.
-      if (empty($fields[StorageManagerInterface::FIELD_NAME])) {
-        continue;
-      }
-
       // Look for the view mode selector field.
       foreach ($fields as $field) {
         if ($field->getType() === 'view_mode_selector') {
@@ -236,20 +233,37 @@ class A12sLayoutCommands extends DrushCommands {
 
     if (empty($paragraphTypes)) {
       $this->output()->writeln('Nothing to migrate.');
-      exit();
+      return;
     }
 
     $batchBuilder = new BatchBuilder();
+    $operationCount = 0;
 
-    foreach ($paragraphTypes as $paragraphType => $viewModeSelectorField) {
+    foreach ($paragraphTypes as $bundle => $viewModeSelectorField) {
+      $paragraphType = ParagraphsType::load($bundle);
+      $storageManager = \Drupal::service('paragraph_view_mode.storage_manager');
+
+      // Enable paragraph view mode if not already done.
+      if (!($storageManager->getField($bundle) instanceof FieldConfigInterface)) {
+        $configName = StorageManagerInterface::CONFIG_NAME;
+
+        if ($storageManager->addField($bundle)) {
+          $storageManager->addToFormDisplay($bundle);
+          $paragraphType->setThirdPartySetting($configName, 'enabled', TRUE);
+          $paragraphType->save();
+          $this->output()->writeln('Paragraph view mode has been enabled for paragraph type: ' . $bundle);
+        }
+      }
+
       $pids = \Drupal::entityQuery('paragraph')
-        ->condition('type', $paragraphType)
+        ->condition('type', $bundle)
         ->allRevisions()
         ->accessCheck(FALSE)
         ->execute();
 
       // Loop through the revision ids.
       foreach (array_keys($pids) as $revisionId) {
+        $operationCount++;
         $batchBuilder->addOperation(
           BatchService::class . "::migrateViewModeSelectorToParagraphViewMode",
           [$revisionId, $viewModeSelectorField],
@@ -257,10 +271,14 @@ class A12sLayoutCommands extends DrushCommands {
       }
     }
 
-    batch_set($batchBuilder->toArray());
-
-    $this->output()->writeln("Start migration...");
-    drush_backend_batch_process();
+    if ($operationCount) {
+      batch_set($batchBuilder->toArray());
+      $this->output()->writeln("Start migration...");
+      drush_backend_batch_process();
+    }
+    else {
+      $this->output()->writeln("No paragraph needs to be migrated.");
+    }
   }
 
 }

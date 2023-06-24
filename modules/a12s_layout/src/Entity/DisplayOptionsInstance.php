@@ -4,6 +4,7 @@ namespace Drupal\a12s_layout\Entity;
 
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Core\Config\Entity\ConfigEntityBase;
+use Drupal\Core\Entity\EntityWithPluginCollectionInterface;
 use Drupal\Core\Plugin\DefaultLazyPluginCollection;
 use Drupal\Core\Plugin\DefaultSingleLazyPluginCollection;
 use Drupal\a12s_layout\DisplayOptions\DisplayTemplatePluginInterface;
@@ -51,7 +52,7 @@ use Drupal\a12s_layout\DisplayOptions\DisplayTemplatePluginInterface;
  *   }
  * )
  */
-class DisplayOptionsInstance extends ConfigEntityBase implements DisplayOptionsInstanceInterface {
+class DisplayOptionsInstance extends ConfigEntityBase implements DisplayOptionsInstanceInterface, EntityWithPluginCollectionInterface {
 
   /**
    * The display options instance ID.
@@ -159,6 +160,13 @@ class DisplayOptionsInstance extends ConfigEntityBase implements DisplayOptionsI
   }
 
   /**
+   * {@inheritDoc}
+   */
+  public function getPluginCollections(): array {
+    return ['a12s_layout_display_template' => $this->getPluginCollection()];
+  }
+
+  /**
    * Encapsulates the creation of the display options' LazyPluginCollection.
    *
    * @return \Drupal\Core\Plugin\DefaultSingleLazyPluginCollection
@@ -168,7 +176,14 @@ class DisplayOptionsInstance extends ConfigEntityBase implements DisplayOptionsI
     if (!isset($this->pluginCollection)) {
       $this->pluginCollection = new DefaultSingleLazyPluginCollection(\Drupal::service('plugin.manager.a12s_layout_display_template'), $this->plugin, $this->get('settings'));
     }
-    return $this->pluginCollection;
+      return $this->pluginCollection;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function calculateDependencies() {
+    return parent::calculateDependencies();
   }
 
 }

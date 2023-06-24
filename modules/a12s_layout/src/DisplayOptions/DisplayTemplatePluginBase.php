@@ -2,7 +2,6 @@
 
 namespace Drupal\a12s_layout\DisplayOptions;
 
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
 use Drupal\Component\Plugin\PluginBase as BasePlugin;
 use Drupal\a12s_layout\Entity\DisplayOptionsInstanceInterface;
 
@@ -51,6 +50,13 @@ abstract class DisplayTemplatePluginBase extends BasePlugin implements DisplayTe
         $optionsSet->preprocessVariables($variables, $displayOptions[$optionsSetId] ?? []);
       }
     }
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public function calculateDependencies(): array {
+    return [];
   }
 
 }

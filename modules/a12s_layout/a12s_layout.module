@@ -4,7 +4,7 @@
  * Provides a12s layout.
  */
 
-use Drupal\Component\Plugin\Exception\PluginNotFoundException;
+use Drupal\a12s_layout\Plugin\A12sLayoutDisplayOptionsSet\BackgroundImage;
 use Drupal\Component\Serialization\Json;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Layout\LayoutDefinition;
@@ -236,61 +236,57 @@ function a12s_layout_preprocess_layout(array &$variables): void {
 
 
 /**
+ * Handle background image on paragraph insertion.
+ *
  * @param \Drupal\paragraphs\ParagraphInterface $paragraph
  *   The paragraph entity.
  *
  * @see hook_ENTITY_TYPE_insert()
  */
-//function a12s_layout_paragraph_insert(ParagraphInterface $paragraph): void {
-//  try {
-//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
-//    $plugin->addFileUsage($paragraph);
-//  }
-//  catch (PluginException $e) {}
-//}
+function a12s_layout_paragraph_insert(ParagraphInterface $paragraph): void {
+  if ($backgroundImage = BackgroundImage::getInstance($paragraph)) {
+    $backgroundImage->addFileUsage($paragraph);
+  }
+}
 
 /**
+ * Handle background image on paragraph update.
+ *
  * @param \Drupal\paragraphs\ParagraphInterface $paragraph
  *   The paragraph entity.
  *
  * @see hook_ENTITY_TYPE_update()
  */
-//function a12s_layout_paragraph_update(ParagraphInterface $paragraph): void {
-//  try {
-//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
-//    $plugin->mergeFileUsage($paragraph);
-//  }
-//  catch (PluginException $e) {}
-//}
+function a12s_layout_paragraph_update(ParagraphInterface $paragraph): void {
+  if ($backgroundImage = BackgroundImage::getInstance($paragraph)) {
+    $backgroundImage->mergeFileUsage($paragraph);
+  }
+}
 
 /**
+ * Handle background image on paragraph deletion.
+ *
  * @param \Drupal\paragraphs\ParagraphInterface $paragraph
  *   The paragraph entity.
  *
  * @see hook_ENTITY_TYPE_delete()
  */
-//function a12s_layout_paragraph_delete(ParagraphInterface $paragraph) {
-//  try {
-//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
-//    $plugin->deleteFileUsage($paragraph, 0);
-//  }
-//  catch (PluginException $e) {}
-//}
+function a12s_layout_paragraph_delete(ParagraphInterface $paragraph): void {
+  if ($backgroundImage = BackgroundImage::getInstance($paragraph)) {
+    $backgroundImage->mergeFileUsage($paragraph);
+  }
+}
 
 /**
+ * Handle background image on paragraph revision deletion.
+ *
  * @param \Drupal\paragraphs\ParagraphInterface $paragraph
  *   The paragraph entity.
  *
  * @see hook_ENTITY_TYPE_revision_delete()
  */
-//function a12s_layout_paragraph_revision_delete(ParagraphInterface $paragraph) {
-//  try {
-//    /** @var \Drupal\a12sfactory\Plugin\paragraphs\Behavior\A12sDisplayBehavior $plugin */
-//    $plugin = $paragraph->getParagraphType()->getBehaviorPlugin('a12sfactory_paragraph_display');
-//    $plugin->deleteFileUsage($paragraph);
-//  }
-//  catch (PluginException $e) {}
-//}
+function a12s_layout_paragraph_revision_delete(ParagraphInterface $paragraph): void {
+  if ($backgroundImage = BackgroundImage::getInstance($paragraph)) {
+    $backgroundImage->mergeFileUsage($paragraph);
+  }
+}

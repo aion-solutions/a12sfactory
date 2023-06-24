@@ -231,4 +231,16 @@ class Layout extends DisplayTemplatePluginBase implements ContainerFactoryPlugin
     return [];
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  public function calculateDependencies(): array {
+    if (isset($this->layout)) {
+      $pluginDefinition = $this->layout->getPluginDefinition();
+      return $pluginDefinition->getConfigDependencies();
+    }
+
+    return [];
+  }
+
 }

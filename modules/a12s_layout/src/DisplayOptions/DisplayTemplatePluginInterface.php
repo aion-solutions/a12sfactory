@@ -3,11 +3,12 @@
 namespace Drupal\a12s_layout\DisplayOptions;
 
 use Drupal\a12s_layout\Entity\DisplayOptionsInstanceInterface;
+use Drupal\Component\Plugin\DependentPluginInterface;
 
 /**
  * Interface for Display Template plugins.
  */
-interface DisplayTemplatePluginInterface {
+interface DisplayTemplatePluginInterface extends DependentPluginInterface {
 
   /**
    * Returns the translated plugin label.
