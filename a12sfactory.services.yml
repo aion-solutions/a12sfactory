@@ -8,21 +8,3 @@ services:
     arguments: [ '@entity_field.manager' ]
     tags:
       - { name: event_subscriber }
-  a12sfactory.php_errors:
-    class: Drupal\a12sfactory\EventSubscriber\PhpErrorsSubscriber
-    arguments: ['@bare_html_page_renderer', '@entity_type.manager', '@cache.discovery']
-    tags:
-      - { name: event_subscriber }
-  a12sfactory.entity_helper:
-    class: Drupal\a12sfactory\Utility\EntityHelper
-    arguments: ['@entity_type.manager', '@current_route_match']
-  a12sfactory.page_match:
-    class: Drupal\a12sfactory\Utility\PageMatch
-    arguments: ['@plugin.manager.condition']
-  a12sfactory.theme_helper:
-    class: Drupal\a12sfactory\Utility\ThemeHelper
-  a12sfactory.twig_extension:
-    class: Drupal\a12sfactory\Template\TwigExtension
-    arguments: ['@a12sfactory.entity_helper', '@twig_tweak.twig_extension']
-    tags:
-      - { name: twig.extension }

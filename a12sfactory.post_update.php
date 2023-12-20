@@ -9,8 +9,8 @@
  *
  * @see a12sfactory_update_8004()
  */
-function a12sfactory_post_update_8004() {
-  module_load_include('install', 'a12sfactory');
+function a12sfactory_post_update_8004(): void {
+  \Drupal::moduleHandler()->loadInclude('a12sfactory', 'install');
   a12sfactory_update_field_storage(
     'paragraph',
     [
@@ -31,15 +31,15 @@ function a12sfactory_post_update_8004() {
  *
  * @see a12sfactory_update_8005()
  */
-function a12sfactory_post_update_8005() {
-  module_load_include('install', 'a12sfactory');
+function a12sfactory_post_update_8005(): void {
+  \Drupal::moduleHandler()->loadInclude('a12sfactory', 'install');
   a12sfactory_update_field_storage('paragraph', ['field_card_image_link']);
 }
 
 /**
  * Handle Blazy update to 2.x.
  */
-function a12sfactory_post_update_8006() {
+function a12sfactory_post_update_8006(): void {
   // Clear cache, otherwise config changes are not applied.
   drupal_flush_all_caches();
 }

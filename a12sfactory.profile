@@ -7,6 +7,7 @@
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Site\SettingsEditor;
 use Drupal\paragraphs\ParagraphInterface;
 
 /**
@@ -56,18 +57,18 @@ function a12sfactory_form_install_settings_form_submit(array &$form, FormStateIn
 
       // Perform same tasks as in @see SiteSettingsForm::submitForm(), without
       // writing the database definition to the settings as it already exists.
-      $settings = [];
-      $settings['settings']['hash_salt'] = (object) [
-        'value'    => Crypt::randomBytesBase64(55),
-        'required' => TRUE,
-      ];
-      // Remember the profile which was used.
-      $settings['settings']['install_profile'] = (object) [
-        'value' => $installState['parameters']['profile'],
-        'required' => TRUE,
-      ];
-
-      drupal_rewrite_settings($settings);
+//      $settings = [];
+//      $settings['settings']['hash_salt'] = (object) [
+//        'value'    => Crypt::randomBytesBase64(55),
+//        'required' => TRUE,
+//      ];
+//      // Remember the profile which was used.
+//      $settings['settings']['install_profile'] = (object) [
+//        'value' => $installState['parameters']['profile'],
+//        'required' => TRUE,
+//      ];
+//
+//      SettingsEditor::rewrite($settings);
       $installState['settings_verified'] = TRUE;
       $installState['config_verified'] = TRUE;
       $installState['database_verified'] = TRUE;
@@ -134,7 +135,7 @@ function a12sfactory_slick_skins_info(): string {
  *
  * @see https://www.drupal.org/project/paragraphs/issues/2887353
  *
- * @ingroup "Paragraph symetric translations"
+ * @ingroup "Paragraph symmetric translations"
  *
  * @todo Use the new patch from added on April 4, 2023? It defines a new module
  *   that handles the expected feature, but it would need a hook_update_N()

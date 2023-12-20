@@ -2,6 +2,7 @@
 
 namespace Drupal\a12sfactory;
 
+use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
 
 /**
@@ -14,21 +15,21 @@ class EmbedView {
    *
    * @var string
    */
-  protected $view_id;
+  protected string $view_id;
 
   /**
    * The display ID.
    *
    * @var string
    */
-  protected $display_id;
+  protected string $display_id;
 
   /**
    * The view arguments.
    *
    * @var array
    */
-  protected $arguments;
+  protected array $arguments;
 
   /**
    * EmbedView constructor.
@@ -41,7 +42,7 @@ class EmbedView {
    * @param ...
    *   Any additional parameters will be passed as view arguments.
    */
-  public function __construct($view_id, $display_id = 'default') {
+  public function __construct($view_id, string $display_id = 'default') {
     $this->view_id = $view_id;
     $this->display_id = $display_id;
 
@@ -58,10 +59,12 @@ class EmbedView {
    * @return \Drupal\views\ViewExecutable|null
    *   A view executable instance, from the loaded entity.
    */
-  protected function getView() {
+  protected function getView(): ?ViewExecutable {
     if (\Drupal::service('module_handler')->moduleExists('views')) {
       return Views::getView($this->view_id);
     }
+
+    return NULL;
   }
 
   /**
@@ -71,7 +74,7 @@ class EmbedView {
    *   A renderable array containing the view title and output or NULL if the
    *   display ID of the view to be executed doesn't exist.
    */
-  public function build() {
+  public function build(): ?array {
     $view = $this->getView();
 
     if ($view && $view->access($this->display_id)) {
@@ -97,6 +100,8 @@ class EmbedView {
         return $build;
       }
     }
+
+    return NULL;
   }
 
 }

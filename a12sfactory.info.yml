@@ -1,7 +1,7 @@
 name: A12s Factory
 type: profile
 description: 'This distribution provides advanced features and automation for managing Websites.'
-core_version_requirement: '^8.7.7 || ^9'
+core_version_requirement: '^9 || ^10'
 php: 8.0
 distribution:
   name: A12S Factory
@@ -12,7 +12,7 @@ distribution:
 dependencies:
   - drupal:block
   - drupal:breakpoint
-  - drupal:ckeditor
+  - drupal:ckeditor5
   - drupal:config
   - drupal:config_translation
   - drupal:content_translation
@@ -59,11 +59,9 @@ install:
   - auto_entitylabel:auto_entitylabel # @todo replace by ECA
   - blazy:blazy
   - block_field:block_field
-  - countup:countup
   - crop:crop
   # @todo add menu_link_attributes with optional configuration?
 #  - eu_cookie_compliance:eu_cookie_compliance # @todo make this optional, but add an option when installing the profile (manually or by CLI)
-  - focal_point:focal_point
   - ctools:ctools
   - draggableviews:draggableviews
   - dropzonejs:dropzonejs
@@ -121,9 +119,11 @@ install:
   - viewsreference:viewsreference
 
   # Custom modules
-  - a12s_layout:a12s_layout
-  - a12sfactory:a12sfactory_seo # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - a12sfactory:media_thumbnail_formatters
+  - a12s:a12s_core
+  - a12s:a12s_layout
+  - a12s:a12s_theme_builder
+#  - a12s:a12s_seo # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
+  - a12sfactory:media_thumbnail_formatters # @todo remove this in a future release
 
 themes:
   - olivero

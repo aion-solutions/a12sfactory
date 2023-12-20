@@ -10,7 +10,7 @@ use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\Core\Entity\EntityFieldManagerInterface;
 use Drupal\paragraphs\Entity\Paragraph;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 class TranslationSynchronization implements EventSubscriberInterface {
@@ -55,7 +55,7 @@ class TranslationSynchronization implements EventSubscriberInterface {
    * Creates translations for the paragraph for all languages, the parent entity
    * is currently translated to.
    */
-  public function sync(PostResponseEvent $event) {
+  public function sync(TerminateEvent $event) {
     foreach ($this->scheduledParagraphs as $id) {
       $paragraph = Paragraph::load($id);
       /** @var ContentEntityInterface|null $parent */

@@ -1,3 +1,9 @@
+# Migrate to 4.x
+
+Important: you need to migrate from the 3.x version first!
+The 3.x version takes care of migrating the deprecated paragraph behaviors to the paragraph layout system.
+
+
 # Migrate to 3.x
 
 The 3.x version introduces big changes in the way paragraph are used, as it relies now on Layout module.
@@ -82,7 +88,7 @@ The following paragraph types have been removed:
 
 ## Required updates in custom themes
 
-You need to change the namespace ""@a12sfactory" to "@a12s_layout" in all TWIG templates.
+You need to change the namespace "@a12sfactory" to "@a12s_layout" in all TWIG templates.
 
 Boostrap framework is abandoned, so several paragraph types will no more work:
 - paragraph__cards

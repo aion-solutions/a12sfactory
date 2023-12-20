@@ -5,6 +5,7 @@ namespace Drupal\a12sfactory\Utility;
 use Drupal\Component\Plugin\Exception\PluginException;
 use Drupal\Component\Plugin\Factory\FactoryInterface;
 use Drupal\Core\Condition\ConditionInterface;
+use Drupal\Core\Utility\Error;
 
 /**
  * Class ThemeManager
@@ -49,7 +50,7 @@ class PageMatch implements PageMatchInterface {
       return $condition->evaluate();
     }
     catch (PluginException $e) {
-      watchdog_exception('a12sfactory', $e);
+      Error::logException(\Drupal::logger('a12sfactory'), $e);
     }
 
     return FALSE;
