@@ -1,0 +1,103 @@
+body.install-page {
+  background-attachment: fixed;
+  background-clip: initial;
+  background-color: initial;
+  background-image: url('../../assets/images/a12sfactory-bg.jpg');
+  background-origin: initial;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+body.install-page .layout-container {
+  border-bottom-right-radius: 0;
+  margin-bottom: 75px !important;
+  position: relative;
+}
+
+body.install-page footer {
+  color: white;
+  position: absolute;
+  right: 0;
+  text-align: right;
+  top: calc(100% + 1px);
+  width: 100%;
+}
+[dir="rtl"] body.install-page footer {
+  text-align: left;
+}
+
+body.install-page footer #credit {
+  align-items: center;
+  background: rgba(0,0,0,0.6);
+  outline: 1px solid white;
+  border-radius: 0 0 5px 5px;
+  display: inline-flex;
+  font-size: 11px;
+  gap: 5px;
+  padding: 5px 20px;
+}
+
+body.install-page footer #credit a {
+  clear: right;
+  float: right;
+  height: 0;
+  overflow: hidden;
+  padding: 50px 0 0;
+  width: 125px;
+}
+
+body.install-page h1.site-name {
+  align-items: flex-end;
+  display: flex;
+}
+
+body.install-page .installer-logo {
+  margin-bottom: -4px;
+  width: 222px;
+}
+
+body.install-page .logo a {
+  background-attachment: initial;
+  background-clip: initial;
+  background-color: transparent;
+  background-image: url(../../assets/images/a12sfactory-white-logo.png);
+  background-origin: initial;
+  background-position: center 38%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+body.install-page .install-page .site-version {
+  color: #f99d33;
+  font-size: 0.6em;
+  font-weight: bold;
+  padding-left: 10px;
+  vertical-align: initial !important;
+}
+
+@media (min-width: 48em) {
+  body.install-page .page-title {
+    color: #4192c8;
+    margin-left: 1.3em !important;
+  }
+}
+
+.layout-container.messages__wrapper {
+  border: 0 none;
+  box-shadow: none;
+  padding: 0;
+}
+
+.layout-container.messages__wrapper .messages {
+  margin: 0;
+}
+
+.layout-container.messages__wrapper .messages + .messages {
+  margin-top: 1rem;
+}
+
+.layout-container.messages__wrapper .messages .messages__header {
+  background: transparent none;
+}

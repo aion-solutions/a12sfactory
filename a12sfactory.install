@@ -1,8 +1,11 @@
 <?php
+
 /**
  * @file
  * Install, update and uninstall functions for the A12S Factory profile.
  */
+
+include "includes/install.inc";
 
 use Drupal\Core\Config\Config;
 use Drupal\Core\Config\FileStorage;

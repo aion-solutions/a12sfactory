@@ -77,15 +77,15 @@ class EmbedView {
   public function build(): ?array {
     $view = $this->getView();
 
-    if ($view && $view->access($this->display_id)) {
+    if ($view?->access($this->display_id)) {
       // Set display, so we get the expected title.
       $view->setDisplay($this->display_id);
 
       // Execute the view to get the total rows count.
       $view->setArguments($this->arguments);
-      $title = $view->getTitle();
 
       if ($view->execute()) {
+        $title = $view->getTitle();
         $build = [
           'content' => [
             '#type' => 'view',

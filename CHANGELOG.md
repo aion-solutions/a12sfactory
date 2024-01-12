@@ -1,3 +1,9 @@
+# 4.0.0-alpha2
+
+- Drop module auto_entitylabel, which can be replaced by ECA.
+- The "SEO Manager" role is no more created.
+
+
 # Migrate to 4.x
 
 Important: you need to migrate from the 3.x version first!

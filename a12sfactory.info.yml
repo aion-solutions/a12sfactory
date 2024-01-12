@@ -14,12 +14,9 @@ dependencies:
   - drupal:breakpoint
   - drupal:ckeditor5
   - drupal:config
-  - drupal:config_translation
-  - drupal:content_translation
   - drupal:editor
   - drupal:file
   - drupal:image
-  - drupal:locale
   - drupal:node
   - drupal:options
   - drupal:text
@@ -31,7 +28,6 @@ install:
   - drupal:admin_toolbar
   - drupal:admin_toolbar_tools
   - drupal:block_content
-  - drupal:components
 #  - drupal:contextual # @todo make this optional, but install it by default when installing the profile (manually or by CLI). Add some default permissions if enabled.
   - drupal:dblog # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - drupal:dynamic_page_cache
@@ -42,7 +38,6 @@ install:
   - drupal:media
   - drupal:menu_link_content
   - drupal:menu_ui
-  - drupal:metatag # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - drupal:page_cache
   - drupal:path
   - drupal:responsive_image
@@ -56,13 +51,11 @@ install:
   - advagg:advagg # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - advagg:advagg_css_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - advagg:advagg_js_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - auto_entitylabel:auto_entitylabel # @todo replace by ECA
   - blazy:blazy
   - block_field:block_field
   - crop:crop
   # @todo add menu_link_attributes with optional configuration?
 #  - eu_cookie_compliance:eu_cookie_compliance # @todo make this optional, but add an option when installing the profile (manually or by CLI)
-  - ctools:ctools
   - draggableviews:draggableviews
   - dropzonejs:dropzonejs
   - dropzonejs:dropzonejs_eb_widget
@@ -80,12 +73,12 @@ install:
   - file_mdm:file_mdm_exif
   - focal_point:focal_point
   - honeypot:honeypot
-  - icon_select:icon_select # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - imagemagick:imagemagick # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - inline_entity_form:inline_entity_form
   - linkit:linkit
   - maxlength:maxlength
   - menu_breadcrumb:menu_breadcrumb
+  - metatag:metatag # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - oembed_providers:oembed_providers
   - override_node_options:override_node_options
   - paragraphs:paragraphs
@@ -96,8 +89,6 @@ install:
   - pathauto:pathauto
   - pathologic:pathologic
   - rabbit_hole:rabbit_hole
-  - rabbit_hole:rh_node
-  - rabbit_hole:rh_taxonomy
   - realname:realname
   - redirect:redirect
   - roleassign:roleassign

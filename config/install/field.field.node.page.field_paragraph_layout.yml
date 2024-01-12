@@ -8,7 +8,6 @@ dependencies:
     - paragraphs.paragraphs_type.image
     - paragraphs.paragraphs_type.layout
     - paragraphs.paragraphs_type.slider
-    - paragraphs.paragraphs_type.tabs
     - paragraphs.paragraphs_type.text
     - paragraphs.paragraphs_type.video
     - paragraphs.paragraphs_type.view

@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-name: 'Hero sliders'
-vid: hero_sliders
-description: ''
-weight: 0

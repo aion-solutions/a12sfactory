@@ -4,7 +4,6 @@ dependencies:
   module:
     - ace_editor
     - blazy
-    - countup
     - editor
     - entity_embed
     - linkit
@@ -127,12 +126,6 @@ filters:
       spamspan_form_default_url: contact
       spamspan_form_default_displaytext: 'contact form'
       spamspan_parse_dom: 1
-  countup:
-    id: countup
-    provider: countup
-    status: true
-    weight: 101
-    settings: {  }
   slick_filter:
     id: slick_filter
     provider: slick
