@@ -2,6 +2,15 @@
 
 - Drop module auto_entitylabel, which can be replaced by ECA.
 - The "SEO Manager" role is no more created.
+- Remove the `Slick` and `Sliwk views` modules, so if you depend on it, you
+  should require `drupal/slick` and `drupal/slick_views` in the root composer
+  file. Note that Slick relies on jQuery, which is going to be removed by Drupal
+  core in the future.
+  - Remove the `slider` block type.
+  - Remove the `slider_media_browser` entity browser.
+  - Remove the `slick` and `hero_slide` view modes for media entity.
+- Add new dependency on [Swiper formatter](https://www.drupal.org/project/swiper_formatter),
+  as a Carousel engine.
 
 
 # Migrate to 4.x
