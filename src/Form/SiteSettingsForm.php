@@ -2,11 +2,10 @@
 
 namespace Drupal\a12sfactory\Form;
 
-use Drupal\Core\Installer\Form\SiteSettingsForm as SiteSettingsFormBase;
-
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Installer\Form\SiteSettingsForm as SiteSettingsFormBase;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Site\SettingsEditor;
 
@@ -19,6 +18,7 @@ class SiteSettingsForm extends SiteSettingsFormBase {
 
   /**
    * {@inheritdoc}
+   *
    * @throws \Exception
    */
   public function submitForm(array &$form, FormStateInterface $form_state): void {

@@ -1,7 +1,0 @@
-langcode: en
-status: true
-dependencies: {  }
-id: slider
-label: Slider
-revision: 1
-description: 'This type of block provides a responsive slider.'
