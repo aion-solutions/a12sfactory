@@ -2,9 +2,11 @@
 
 namespace Drupal\a12sfactory\Form;
 
+use Drupal\a12sfactory\Utility\InstallationHelper;
 use Drupal\Core\Extension\InfoParserInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\SubformState;
 use Drupal\Core\StringTranslation\TranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -67,6 +69,7 @@ class FeaturesForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state, array &$install_state = NULL): array {
     $form['#title'] = $this->t('Extra components');
+
     $form['extra_components_introduction'] = [
       '#weight' => -1,
       '#prefix' => '<p>',
@@ -74,142 +77,62 @@ class FeaturesForm extends FormBase {
       '#suffix' => '</p>',
     ];
 
-    // Extra Features.
-    //$extraFeatures = ConfigBit::getList('configbit/extra.components.varbase.bit.yml', 'show_extra_components', TRUE, 'dependencies', 'profile', 'varbase');
-    $extraFeatures = [];
-    if (count($extraFeatures)) {
+    $helper = InstallationHelper::instance();
 
-      $form['extra_features'] = [
-        '#type' => 'fieldset',
-        '#title' => $this->t('Site features'),
-      ];
+    $form['extra_features'] = [
+      '#tree' => TRUE,
+    ];
 
-      foreach ($extraFeatures as $extra_feature_key => $extra_feature_info) {
-
-        $checkbox_title = '';
-        $checkbox_description = '';
-        $checkbox_selected = FALSE;
-
-        if (isset($extra_feature_info['title'])) {
-          $checkbox_title = $extra_feature_info['title'];
-        }
-
-        if (isset($extra_feature_info['description'])) {
-          $checkbox_description = $extra_feature_info['description'];
-        }
-
-        if (isset($extra_feature_info['selected'])) {
-          $checkbox_selected = $extra_feature_info['selected'];
-        }
-
-        $form['extra_features'][$extra_feature_key] = [
-          '#type' => 'checkbox',
-          '#title' => $checkbox_title,
-          '#description' => $checkbox_description,
-          '#default_value' => $checkbox_selected,
+    $extraFeatures = $helper->getFeatures();
+    if (!empty($extraFeatures)) {
+      foreach ($extraFeatures as $extraFeatureKey => $extraFeatureInfo) {
+        $form['extra_features'][$extraFeatureKey] = [
+          '#type' => 'fieldset',
         ];
 
-        if (isset($extra_feature_info['config_form']) &&
-                   $extra_feature_info['config_form'] == TRUE) {
-          $form['extra_features'][$extra_feature_key . '_config'] = [
+        $form['extra_features'][$extraFeatureKey]['enabled'] = [
+          '#type' => 'checkbox',
+          '#title' => $extraFeatureInfo['name'] ?? $extraFeatureKey,
+          '#description' => $extraFeatureInfo['description'] ?? NULL,
+        ];
+
+        if (!empty($extraFeatureInfo['forms'])) {
+          $form['extra_features'][$extraFeatureKey]['config'] = [
             '#type' => 'fieldset',
-            '#title' => $checkbox_title,
+            '#title' => $this->t('Configuration'),
             '#states' => [
               'visible' => [
-                ':input[name="' . $extra_feature_key . '"]' => ['checked' => TRUE],
-              ],
-              'invisible' => [
-                ':input[name="' . $extra_feature_key . '"]' => ['checked' => FALSE],
+                ':input[name="extra_features[' . $extraFeatureKey . '][enabled]"]' => ['checked' => TRUE],
               ],
             ],
           ];
 
-          if (isset($extra_feature_info['formbit'])) {
-            $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $extra_feature_info['formbit'];
-            if (file_exists($formbit_file_name)) {
-
-              include_once $formbit_file_name;
-              // Add configuration form element in the formbit position.
-              call_user_func_array($extra_feature_key . "_build_formbit",
-                [&$form['extra_features'][$extra_feature_key . '_config'],
-                  &$form_state,
-                  &$install_state,
-                ]
-              );
+          /*
+          foreach ($extraFeatureInfo['form'] as $elementId => $element) {
+            foreach ($element as $k => $v) {
+              $element['#' . $k] = $v;
+              unset($element[$k]);
             }
+
+            $form['extra_features'][$extraFeatureKey]['config'][$elementId] = $element;
+          }
+          */
+
+          // @todo better way to do this...
+          // Include the needed classes.
+          foreach (glob($helper->getFeaturesFolder() . '/' . $extraFeatureKey . '/src/*.php') as $filename) {
+            include $filename;
           }
 
-        }
+          foreach ($extraFeatureInfo['forms'] as $formClass) {
+            $featureForm = new $formClass;
 
-      }
-    }
+            $subForm = [];
+            $subformState = SubformState::createForSubform($subForm, $form, $form_state);
 
-    // Demo Content.
-    //$demoContent = ConfigBit::getList('configbit/demo.content.varbase.bit.yml', 'show_demo', TRUE, 'dependencies', 'profile', 'varbase');
-    $demoContent = [];
-    if (count($demoContent) > 0) {
-      $form['demo_content'] = [
-        '#type' => 'fieldset',
-        '#title' => $this->t('Demo content'),
-      ];
-
-      foreach ($demoContent as $demo_content_key => $demo_content_info) {
-
-        $checkbox_title = '';
-        $checkbox_description = '';
-        $checkbox_selected = FALSE;
-
-        if (isset($demo_content_info['title'])) {
-          $checkbox_title = $demo_content_info['title'];
-        }
-
-        if (isset($demo_content_info['description'])) {
-          $checkbox_description = $demo_content_info['description'];
-        }
-
-        if (isset($demo_content_info['selected'])) {
-          $checkbox_selected = $demo_content_info['selected'];
-        }
-
-        $form['demo_content'][$demo_content_key] = [
-          '#type' => 'checkbox',
-          '#title' => $checkbox_title,
-          '#description' => $checkbox_description,
-          '#default_value' => $checkbox_selected,
-        ];
-
-        if (isset($demo_content_info['config_form']) &&
-                  $demo_content_info['config_form'] == TRUE) {
-          $form['demo_content'][$demo_content_key . '_config'] = [
-            '#type' => 'fieldset',
-            '#title' => $checkbox_title,
-            '#states' => [
-              'visible' => [
-                ':input[name="' . $demo_content_key . '"]' => ['checked' => TRUE],
-              ],
-              'invisible' => [
-                ':input[name="' . $demo_content_key . '"]' => ['checked' => FALSE],
-              ],
-            ],
-          ];
-
-          if (isset($demo_content_info['formbit'])) {
-            $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $demo_content_info['formbit'];
-            if (file_exists($formbit_file_name)) {
-
-              include_once $formbit_file_name;
-              // Add configuration form element in the formbit position.
-              call_user_func_array($demo_content_key . "_build_formbit",
-                [&$form['demo_content'][$demo_content_key . '_config'],
-                  &$form_state,
-                  &$install_state,
-                ]
-              );
-            }
+            $form['extra_features'][$extraFeatureKey]['config'] += $featureForm->buildForm($subForm, $subformState);
           }
-
         }
-
       }
     }
 
@@ -230,27 +153,39 @@ class FeaturesForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    global $install_state;
+
+    $extraFeatures = $form_state->getValue('extra_features');
+    $features = [];
+    foreach ($extraFeatures as $featureId => $feature) {
+      if ($feature['enabled']) {
+        $features[$featureId] = $feature['config'] ?? [];
+      }
+    }
+
+    $install_state['a12sfactory_features'] = $features;
+
 
     // Extra Features.
     //$extraFeatures = ConfigBit::getList('configbit/extra.components.varbase.bit.yml', 'show_extra_components', TRUE, 'dependencies', 'profile', 'varbase');
+    /*
     $extraFeatures = [];
     if (count($extraFeatures)) {
       $extra_features_values = [];
 
-      foreach ($extraFeatures as $extra_feature_key => $extra_feature_info) {
+      foreach ($extraFeatures as $extraFeatureKey => $extraFeatureInfo) {
 
         // If form state has got value for this extra feature.
-        if ($form_state->hasValue($extra_feature_key)) {
-          $extra_features_values[$extra_feature_key] = $form_state->getValue($extra_feature_key);
+        if ($form_state->hasValue($extraFeatureKey)) {
+          $extra_features_values[$extraFeatureKey] = $form_state->getValue($extraFeatureKey);
         }
 
-        if (isset($extra_feature_info['config_form']) &&
-                  $extra_feature_info['config_form'] == TRUE) {
-          $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $extra_feature_info['formbit'];
+        if (isset($extraFeatureInfo['config_form']) && $extraFeatureInfo['config_form'] == TRUE) {
+          $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $extraFeatureInfo['formbit'];
           if (file_exists($formbit_file_name)) {
 
             include_once $formbit_file_name;
-            $extra_features_editable_configs = call_user_func_array($extra_feature_key . "_get_editable_config_names", []);
+            $extra_features_editable_configs = call_user_func_array($extraFeatureKey . "_get_editable_config_names", []);
 
             if (count($extra_features_editable_configs)) {
               foreach ($extra_features_editable_configs as $extra_features_editable_config_key => $extra_features_editable_config) {
@@ -269,45 +204,7 @@ class FeaturesForm extends FormBase {
 
       $GLOBALS['install_state']['varbase']['extra_features_values'] = $extra_features_values;
     }
-
-    // Demo Content.
-    //$demoContent = ConfigBit::getList('configbit/demo.content.varbase.bit.yml', 'show_demo', TRUE, 'dependencies', 'profile', 'varbase');
-    $demoContent = [];
-    if (count($demoContent)) {
-      $demo_content_values = [];
-
-      foreach ($demoContent as $demo_content_key => $demo_content_info) {
-
-        // If form state has got value for this demo content.
-        if ($form_state->hasValue($demo_content_key)) {
-          $demo_content_values[$demo_content_key] = $form_state->getValue($demo_content_key);
-        }
-
-        if (isset($demo_content_info['config_form']) &&
-                  $demo_content_info['config_form'] == TRUE) {
-          $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $demo_content_info['formbit'];
-          if (file_exists($formbit_file_name)) {
-
-            include_once $formbit_file_name;
-            $demo_content_editable_configs = call_user_func_array($demo_content_key . "_get_editable_config_names", []);
-
-            if (count($demo_content_editable_configs)) {
-              foreach ($demo_content_editable_configs as $demo_content_editable_config_key => $demo_content_editable_config) {
-                foreach ($demo_content_editable_config as $demo_content_config_item_key => $demo_content_config_item_value) {
-                  if ($form_state->hasValue($demo_content_config_item_key)) {
-                    $demo_content_editable_configs[$demo_content_editable_config_key][$demo_content_config_item_key] = $form_state->getValue($demo_content_config_item_key);
-                  }
-                }
-              }
-            }
-
-            $GLOBALS['install_state']['varbase']['demo_content_configs'] = $demo_content_editable_configs;
-          }
-        }
-      }
-
-      $GLOBALS['install_state']['varbase']['demo_content_values'] = $demo_content_values;
-    }
+    */
   }
 
 }

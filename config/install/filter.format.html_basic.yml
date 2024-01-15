@@ -7,7 +7,6 @@ dependencies:
     - entity_embed
     - linkit
     - pathologic
-    - slick
     - spamspan
 name: 'Basic editor'
 format: html_basic
@@ -125,11 +124,3 @@ filters:
       spamspan_form_default_url: contact
       spamspan_form_default_displaytext: 'contact form'
       spamspan_parse_dom: 1
-  slick_filter:
-    id: slick_filter
-    provider: slick
-    status: false
-    weight: 4
-    settings:
-      optionset: default
-      media_switch: ''

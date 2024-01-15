@@ -55,7 +55,6 @@ install:
   - block_field:block_field
   - crop:crop
   # @todo add menu_link_attributes with optional configuration?
-#  - eu_cookie_compliance:eu_cookie_compliance # @todo make this optional, but add an option when installing the profile (manually or by CLI)
   - draggableviews:draggableviews
   - dropzonejs:dropzonejs
   - dropzonejs:dropzonejs_eb_widget
@@ -92,9 +91,6 @@ install:
   - realname:realname
   - redirect:redirect
   - roleassign:roleassign
-  - slick:slick # @todo make this optional, but install it by default when installing the profile (manually or by CLI). This implies some work as some configurations rely on this...
-  - slick:slick_ui # @todo make this optional, but install it by default when installing the profile (manually or by CLI) This implies some work as some configurations rely on this...
-  - slick_views:slick_views # @todo make this optional, but install it by default when installing the profile (manually or by CLI) This implies some work as some configurations rely on this...
   - smart_trim:smart_trim
   - spamspan:spamspan
   - symfony_mailer:symfony_mailer
@@ -113,7 +109,6 @@ install:
   - a12s:a12s_core
   - a12s:a12s_layout
   - a12s:a12s_theme_builder
-#  - a12s:a12s_seo # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - a12sfactory:media_thumbnail_formatters # @todo remove this in a future release
 
 themes:

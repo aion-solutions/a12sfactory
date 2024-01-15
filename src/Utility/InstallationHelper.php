@@ -4,6 +4,7 @@ namespace Drupal\a12sfactory\Utility;
 
 use Drupal\Component\Serialization\Exception\InvalidDataTypeException;
 use Drupal\Component\Serialization\Yaml;
+use Drupal\Core\Config\StorageInterface;
 use Drupal\Core\DependencyInjection\DependencySerializationTrait;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
@@ -40,11 +41,13 @@ class InstallationHelper {
    *   The entity type manager.
    */
   protected function __construct(
+    protected string $root,
     protected MessengerInterface $messenger,
     protected ModuleInstallerInterface $moduleInstaller,
     protected ModuleHandlerInterface $moduleHandler,
     protected FileSystemInterface $fileSystem,
-    protected EntityTypeManagerInterface $entityTypeManager
+    protected EntityTypeManagerInterface $entityTypeManager,
+    protected StorageInterface $configStorage,
   ) {}
 
   /**
@@ -58,11 +61,13 @@ class InstallationHelper {
     if (!$instance) {
       $container = \Drupal::getContainer();
       $instance = new static(
+        $container->getParameter('app.root'),
         $container->get('messenger'),
         $container->get('module_installer'),
         $container->get('module_handler'),
         $container->get('file_system'),
-        $container->get('entity_type.manager')
+        $container->get('entity_type.manager'),
+        $container->get('config.storage'),
       );
     }
 
@@ -137,6 +142,50 @@ class InstallationHelper {
         '%feature' => $feature,
       ]));
     }
+  }
+
+  /**
+   * Retrieves extra features from Yaml files.
+   *
+   * This method loads extra features from Yaml files located in a specified folder.
+   *
+   * @return array An array containing the extra features.
+   */
+  public function getFeatures(): array {
+    // Load extra features from Yaml
+    $extraFeaturesFolder = $this->getFeaturesFolder();
+
+    if (file_exists($extraFeaturesFolder) && is_dir($extraFeaturesFolder)) {
+      $directories = glob($extraFeaturesFolder . '/*', GLOB_ONLYDIR);
+      foreach ($directories as $dir) {
+        $infoFile = $dir . '/info.yml';
+        if (file_exists($infoFile)) {
+          $extraFeatures[basename($dir)] = \Symfony\Component\Yaml\Yaml::parse(file_get_contents($infoFile));
+        }
+      }
+    }
+
+    return $extraFeatures ?? [];
+  }
+
+  /**
+   * Retrieves the folder path for extra features.
+   *
+   * This method returns the folder path where the extra features are stored.
+   *
+   * @return string The folder path for extra features.
+   */
+  public function getFeaturesFolder(): string {
+    return $this->root . '/' . \Drupal::service('extension.list.profile')->getPath('a12sfactory') . '/config/features';
+  }
+
+  /**
+   * @param string $configName
+   * @param array $data
+   * @return void
+   */
+  public function writeConfig(string $configName, array $data) {
+    $this->configStorage->write($configName, $data);
   }
 
 }
