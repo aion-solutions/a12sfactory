@@ -107,23 +107,6 @@ class FeaturesForm extends FormBase {
             ],
           ];
 
-          /*
-          foreach ($extraFeatureInfo['form'] as $elementId => $element) {
-            foreach ($element as $k => $v) {
-              $element['#' . $k] = $v;
-              unset($element[$k]);
-            }
-
-            $form['extra_features'][$extraFeatureKey]['config'][$elementId] = $element;
-          }
-          */
-
-          // @todo better way to do this...
-          // Include the needed classes.
-          foreach (glob($helper->getFeaturesFolder() . '/' . $extraFeatureKey . '/src/*.php') as $filename) {
-            include $filename;
-          }
-
           foreach ($extraFeatureInfo['forms'] as $formClass) {
             $featureForm = new $formClass;
 
@@ -152,59 +135,33 @@ class FeaturesForm extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(array &$form, FormStateInterface $form_state): void {
     global $install_state;
+    $helper = InstallationHelper::instance();
 
-    $extraFeatures = $form_state->getValue('extra_features');
-    $features = [];
-    foreach ($extraFeatures as $featureId => $feature) {
+    $settings = [];
+    $features = $helper->getFeatures();
+
+    foreach ($form_state->getValue('extra_features') as $featureId => $feature) {
       if ($feature['enabled']) {
-        $features[$featureId] = $feature['config'] ?? [];
-      }
-    }
+        $settings[$featureId] = [];
 
-    $install_state['a12sfactory_features'] = $features;
+        if (!empty($features[$featureId]['forms'])) {
+          foreach ($features[$featureId]['forms'] as $formClass) {
+            $featureForm = new $formClass;
 
+            $subForm = &$form['extra_features'][$featureId]['config'];
+            $subformState = SubformState::createForSubform($subForm, $form, $form_state);
 
-    // Extra Features.
-    //$extraFeatures = ConfigBit::getList('configbit/extra.components.varbase.bit.yml', 'show_extra_components', TRUE, 'dependencies', 'profile', 'varbase');
-    /*
-    $extraFeatures = [];
-    if (count($extraFeatures)) {
-      $extra_features_values = [];
+            $featureForm->submitForm($subForm, $subformState);
 
-      foreach ($extraFeatures as $extraFeatureKey => $extraFeatureInfo) {
-
-        // If form state has got value for this extra feature.
-        if ($form_state->hasValue($extraFeatureKey)) {
-          $extra_features_values[$extraFeatureKey] = $form_state->getValue($extraFeatureKey);
-        }
-
-        if (isset($extraFeatureInfo['config_form']) && $extraFeatureInfo['config_form'] == TRUE) {
-          $formbit_file_name = \Drupal::service('extension.list.profile')->getPath('varbase') . '/' . $extraFeatureInfo['formbit'];
-          if (file_exists($formbit_file_name)) {
-
-            include_once $formbit_file_name;
-            $extra_features_editable_configs = call_user_func_array($extraFeatureKey . "_get_editable_config_names", []);
-
-            if (count($extra_features_editable_configs)) {
-              foreach ($extra_features_editable_configs as $extra_features_editable_config_key => $extra_features_editable_config) {
-                foreach ($extra_features_editable_config as $extra_features_config_item_key => $extra_features_config_item_value) {
-                  if ($form_state->hasValue($extra_features_config_item_key)) {
-                    $extra_features_editable_configs[$extra_features_editable_config_key][$extra_features_config_item_key] = $form_state->getValue($extra_features_config_item_key);
-                  }
-                }
-              }
-            }
-
-            $GLOBALS['install_state']['varbase']['extra_features_configs'] = $extra_features_editable_configs;
+            $settings[$featureId] = $form_state->getValue(['extra_features', $featureId, 'config']);
           }
         }
       }
-
-      $GLOBALS['install_state']['varbase']['extra_features_values'] = $extra_features_values;
     }
-    */
+
+    $install_state['a12sfactory_features'] = $settings;
   }
 
 }

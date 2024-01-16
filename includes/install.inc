@@ -98,7 +98,7 @@ function a12sfactory_install_features(array $install_state): array {
 
     $batch['title'] = t('Adding features');
 
-    foreach ($install_state['a12sfactory_features'] as $featureId => $config) {
+    foreach ($install_state['a12sfactory_features'] as $featureId => $settings) {
       $feature = $features[$featureId];
 
       // Install dependencies.
@@ -112,6 +112,17 @@ function a12sfactory_install_features(array $install_state): array {
         $yamlFiles = glob($path . '/*.yml');
         foreach ($yamlFiles as $file) {
           $batch['operations'][] = [[$helper, 'writeConfig'], [basename($file), Yaml::parse(file_get_contents($file))]];
+        }
+      }
+
+      // Manage custom processes.
+      if (!empty($feature['forms'])) {
+        foreach ($feature['forms'] as $formClass) {
+          $form = new $formClass;
+
+          foreach ($form->batchOperations($settings) as $operation) {
+            $batch['operations'][] = $operation;
+          }
         }
       }
     }

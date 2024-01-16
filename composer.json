@@ -134,6 +134,11 @@
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
+    "autoload": {
+        "psr-4": {
+            "Drupal\\a12sfactory\\features\\": "config/features/"
+        }
+    },
     "extra": {
         "merge-plugin": {
             "include": [
