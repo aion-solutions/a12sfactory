@@ -232,7 +232,8 @@
                 "Issue #3392572: Deprecated function: strnatcasecmp(): Passing null to parameter #1 ($string1) of type string is deprecated in LayoutPluginManager": "https://www.drupal.org/files/issues/2023-11-01/3392572-26.patch",
                 "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch",
                 "Issue #3272629: Media Library widget display doesn't return to first page on applying filters": "https://www.drupal.org/files/issues/2022-03-30/media_library_pager_fix.patch",
-                "Issue #3375860: Dynamic permissions issue on profile installation": "./patches/drupal-3375860-ignore-role-permission-checks-on-install-custom.patch.txt"
+                "Issue #3375860: Dynamic permissions issue on profile installation": "./patches/drupal-3375860-ignore-role-permission-checks-on-install-custom.patch.txt",
+                "Issue #1903010: Notice: Undefined index: #field_name in file_managed_file_save_upload()": "https://www.drupal.org/files/issues/2022-03-21/1903010-76.patch"
             },
             "drupal/entity_reference_revisions": {
                 "Issue #2799479: Views doesn't recognize relationship to host": "https://www.drupal.org/files/issues/2021-04-16/entity_reference_2799479-158-no-tests.patch"
