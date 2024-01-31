@@ -6,10 +6,11 @@
  */
 
 use Drupal\a12sfactory\Form\ConfigureMultilingualForm;
-// Use Drupal\a12sfactory\Form\FeaturesForm;.
+use Drupal\a12sfactory\Form\FeaturesForm;
 use Drupal\a12sfactory\Utility\InstallationHelper;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
+use Symfony\Component\Yaml\Yaml;
 
 /**
  * Add custom tasks when installing Drupal.
@@ -27,16 +28,15 @@ function a12sfactory_install_tasks(&$install_state): array {
       'display_name' => t('Multilingual installation'),
       'type' => 'batch',
     ],
-    // 'a12sfactory_configure_features' => [
-    //      // Examples: Cookie banner, SEO features, reroute_email...
-    //      'display_name' => t('Extra features configuration'),
-    //      'type' => 'form',
-    //      'function' => FeaturesForm::class,
-    //    ],
-    //    'a12sfactory_install_features' => [
-    //      'display_name' => t('Extra features installation'),
-    //      'type' => 'batch',
-    //    ],
+    'a12sfactory_configure_features' => [
+      'display_name' => t('Extra features configuration'),
+      'type' => 'form',
+      'function' => FeaturesForm::class,
+    ],
+    'a12sfactory_install_features' => [
+      'display_name' => t('Extra features installation'),
+      'type' => 'batch',
+    ],
   ];
 }
 
@@ -78,6 +78,53 @@ function a12sfactory_install_multilingual(array $install_state): array {
         [$helper, 'installLanguages'],
         [$install_state['a12sfactory_multilingual_languages']],
       ];
+    }
+  }
+
+  return $batch;
+}
+
+/**
+ * @param array $install_state
+ * @return array
+ */
+function a12sfactory_install_features(array $install_state): array {
+  $batch = [];
+
+  if (!empty($install_state['a12sfactory_features'])) {
+    $helper = InstallationHelper::instance();
+    $featuresFolder = $helper->getFeaturesFolder();
+    $features = $helper->getFeatures();
+
+    $batch['title'] = t('Adding features');
+
+    foreach ($install_state['a12sfactory_features'] as $featureId => $settings) {
+      $feature = $features[$featureId];
+
+      // Install dependencies.
+      if (!empty($feature['dependencies'])) {
+        $batch['operations'][] = [[$helper, 'installModules'], [$feature['dependencies']]];
+      }
+
+      // Import configuration.
+      $path = $featuresFolder . '/' . $featureId .'/config';
+      if (file_exists($path)) {
+        $yamlFiles = glob($path . '/*.yml');
+        foreach ($yamlFiles as $file) {
+          $batch['operations'][] = [[$helper, 'writeConfig'], [basename($file), Yaml::parse(file_get_contents($file))]];
+        }
+      }
+
+      // Manage custom processes.
+      if (!empty($feature['forms'])) {
+        foreach ($feature['forms'] as $formClass) {
+          $form = new $formClass;
+
+          foreach ($form->batchOperations($settings) as $operation) {
+            $batch['operations'][] = $operation;
+          }
+        }
+      }
     }
   }
 

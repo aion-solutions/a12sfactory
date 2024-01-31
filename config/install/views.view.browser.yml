@@ -369,7 +369,6 @@ display:
         - 'config:core.entity_view_display.media.document.default'
         - 'config:core.entity_view_display.media.image.browser_preview'
         - 'config:core.entity_view_display.media.image.default'
-        - 'config:core.entity_view_display.media.image.slick'
         - 'config:core.entity_view_display.media.video.browser_preview'
         - 'config:core.entity_view_display.media.video.default'
   editor_image_browser:

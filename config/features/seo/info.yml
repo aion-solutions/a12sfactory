@@ -1,0 +1,4 @@
+name: SEO
+description: "Provides various SEO features."
+dependencies:
+  - a12s_seo

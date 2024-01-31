@@ -1,17 +1,6 @@
 langcode: en
 status: true
-dependencies:
-  module:
-    - slick
 name: 'Email HTML'
 format: email_html
 weight: 0
-filters:
-  slick_filter:
-    id: slick_filter
-    provider: slick
-    status: false
-    weight: 4
-    settings:
-      optionset: default
-      media_switch: ''
+filters: {}

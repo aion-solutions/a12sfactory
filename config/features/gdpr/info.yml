@@ -1,2 +1,4 @@
 name: GDPR
 description: "Provides support for General Data Protection Regulation."
+dependencies:
+  - eu_cookie_compliance
