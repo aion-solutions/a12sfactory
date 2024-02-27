@@ -23,7 +23,7 @@
     "require": {
         "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.6",
-        "drupal/a12s": "~1.0.0-alpha3",
+        "drupal/a12s": "^1.0.0-beta1",
         "drupal/access_unpublished": "~1.0-beta1",
         "drupal/ace_editor": "^2.0",
         "drupal/admin_toolbar": "~2.0 || ^3.0",
@@ -226,7 +226,6 @@
                 "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
                 "Issue #2810355: Default translation issue when changing it, causing file/image field usage to be set to zero": "https://www.drupal.org/files/issues/2021-01-12/2810355-92.patch",
-                "Issue #2511548: Add a context array variable": "https://www.drupal.org/files/issues/2023-07-24/2511548-render-context-no-testing-10.1.1.patch",
                 "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch",
                 "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2022-12-20/2689459-161.patch",
                 "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2020-12-04/2546212-168.patch",
