@@ -241,7 +241,7 @@
                 "Issue #1903010: Notice: Undefined index: #field_name in file_managed_file_save_upload()": "https://www.drupal.org/files/issues/2022-03-21/1903010-76.patch"
             },
             "drupal/entity_reference_revisions": {
-                "Issue #2799479: Views doesn't recognize relationship to host": "https://www.drupal.org/files/issues/2021-04-16/entity_reference_2799479-158-no-tests.patch"
+                "Issue #2799479: Views doesn't recognize relationship to host": "patches/entity_reference_2799479-158-custom.patch.txt"
             },
             "drupal/field_group": {
                 "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2022-10-28/3114825-20.patch"
@@ -255,6 +255,9 @@
             },
             "drupal/password_policy": {
                 "Issue #3348548: Fix Entity queries must explicitly set whether the query should be access checked or not in Password Policy": "https://www.drupal.org/files/issues/2023-03-16/3348548-3.patch"
+            },
+            "drupal/swiper_formatter": {
+                "Issue #3376409: Deprecated function - Creation of dynamic property": "https://www.drupal.org/files/issues/2023-08-23/3376409-4.patch"
             },
             "drupal/symfony_mailer": {
                 "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "https://git.drupalcode.org/project/symfony_mailer/-/commit/58a66f9bb53e7e2f6efe5a28db98cff7cb01f21d.patch"
