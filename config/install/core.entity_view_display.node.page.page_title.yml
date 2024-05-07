@@ -10,7 +10,7 @@ dependencies:
     - field.field.node.page.teaser_display_field
     - field.field.node.page.teaser_image_field
     - node.type.page
-    - responsive_image.styles.de2e
+    - responsive_image.styles.e2e
   module:
     - blazy
     - user
@@ -52,7 +52,7 @@ content:
       box_caption: ''
       box_caption_custom: ''
       box_media_style: ''
-      responsive_image_style: de2e
+      responsive_image_style: e2e
       box_style: ''
       image_style: ''
       media_switch: ''

@@ -1,24 +1,58 @@
+a12sfactory.xs-min:
+  label: "All (xs-min)"
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+    - 3x
+  group: a12sfactory
 a12sfactory.sm-min:
-  label: Small Min
+  label: "Mobile Large Min (sm-min)"
   mediaQuery: 'all and (min-width: 576px)'
-  weight: 1
+  weight: 3
   multipliers:
-      - 1x
+    - 1x
+    - 2x
+    - 3x
+  group: a12sfactory
 a12sfactory.md-min:
-  label: Medium Min
+  label: "Tablets Small Min (md-min)"
   mediaQuery: 'all and (min-width: 768px)'
-  weight: 1
+  weight: 5
   multipliers:
     - 1x
+    - 2x
+  group: a12sfactory
 a12sfactory.lg-min:
-  label: Large min
+  label: "Tablets Medium Min (lg-min)"
   mediaQuery: 'all and (min-width: 992px)'
-  weight: 1
+  weight: 8
   multipliers:
     - 1x
+    - 2x
+  group: a12sfactory
 a12sfactory.xl-min:
-  label: X-Large min
+  label: "Desktop Small Min (xl-min)"
   mediaQuery: 'all and (min-width: 1200px)'
-  weight: 1
+  weight: 11
   multipliers:
     - 1x
+    - 2x
+  group: a12sfactory
+a12sfactory.xxl-min:
+  label: "Desktop Medium Min (xxl-min)"
+  mediaQuery: 'all and (min-width: 1520px)'
+  weight: 12
+  multipliers:
+    - 1x
+    - 2x
+  group: a12sfactory
+a12sfactory.ll-min:
+  label: "Desktop Large Min (ll-min)"
+  mediaQuery: 'all and (min-width: 1920px)'
+  weight: 13
+  multipliers:
+    - 1x
+    - 2x
+  group: a12sfactory

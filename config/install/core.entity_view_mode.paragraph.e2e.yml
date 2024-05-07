@@ -3,7 +3,7 @@ status: true
 dependencies:
   module:
     - paragraphs
-id: paragraph.de2e
+id: paragraph.e2e
 label: Edge-to-Edge
 targetEntityType: paragraph
 cache: true

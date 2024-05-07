@@ -2,26 +2,26 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.paragraph.de2e
+    - core.entity_view_mode.paragraph.e2e
     - field.field.paragraph.image.image_field
     - field.field.paragraph.image.link
     - field.field.paragraph.image.paragraph_view_mode
     - paragraphs.paragraphs_type.image
-    - responsive_image.styles.de2e
+    - responsive_image.styles.e2e
   module:
     - link
     - media_thumbnail_formatters
-id: paragraph.image.de2e
+id: paragraph.image.e2e
 targetEntityType: paragraph
 bundle: image
-mode: de2e
+mode: e2e
 content:
   image_field:
     type: media_thumbnail_formatters_responsive
     label: hidden
     settings:
       image_link: ''
-      responsive_image_style: de2e
+      responsive_image_style: e2e
     third_party_settings: {  }
     weight: 0
     region: content

@@ -46,7 +46,7 @@ content:
     settings:
       view_modes:
         default: Default
-        de2e: Edge-to-Edge
+        e2e: Edge-to-Edge
         landscape_half: 'Landscape 1/2'
         landscape_onefourth: 'Landscape 1/4'
         landscape_onethird: 'Landscape 1/3'
