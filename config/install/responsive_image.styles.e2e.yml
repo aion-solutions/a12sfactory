@@ -2,7 +2,8 @@ langcode: en
 status: true
 dependencies:
   config:
-    - image.style.e2e
+    - image.style.e2e_lg
+    - image.style.e2e_xl
     - image.style.square_full_md
     - image.style.square_full_sm
     - image.style.square_full_xs
@@ -18,12 +19,12 @@ image_style_mappings:
     image_mapping:
       sizes: 100vw
       sizes_image_styles:
-        - e2e
+        - e2e_xl
   -
     breakpoint_id: a12sfactory.lg-min
     multiplier: 1x
     image_mapping_type: image_style
-    image_mapping: e2e
+    image_mapping: e2e_lg
   -
     breakpoint_id: a12sfactory.md-min
     multiplier: 1x
