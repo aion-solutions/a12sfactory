@@ -28,6 +28,7 @@
         "drupal/ace_editor": "^2.0",
         "drupal/admin_toolbar": "~2.0 || ^3.0",
         "drupal/advagg": "^6.0",
+        "drupal/antibot": "^2.0.3",
         "drupal/better_exposed_filters": "^6.0",
         "drupal/blazy": "^2.1",
         "drupal/block_field": "^1.0@RC",
@@ -37,7 +38,7 @@
         "drupal/config_ignore": "~3.0-beta2",
         "drupal/config_perms": "~2.0",
         "drupal/content_lock": "~2.0",
-        "drupal/core": "10.2.4",
+        "drupal/core": "10.2.6",
         "drupal/crop": "~2.0",
         "drupal/diff": "~1.0",
         "drupal/draggableviews": "~1.2 || ^2.1.3",
@@ -72,7 +73,7 @@
         "drupal/override_node_options": "~2.7",
         "drupal/paragraphs": "~1.11",
         "drupal/paragraph_view_mode": "^3.1",
-        "drupal/password_policy": "^4.0",
+        "drupal/password_policy": "^4.0.1",
         "drupal/pathauto": "^1.8",
         "drupal/pathologic": "~2.0.0-alpha1",
         "drupal/rabbit_hole": "^2.0",
@@ -87,7 +88,7 @@
         "drupal/simple_sitemap": "^4.1.4",
         "drupal/smart_trim": "~2.0",
         "drupal/spamspan": "^3.0",
-        "drupal/swiper_formatter": "^1.0.6",
+        "drupal/swiper_formatter": "^2.0.1-beta4",
         "drupal/symfony_mailer": "^1.2",
         "drupal/symfony_mailer_reroute": "^1.2@beta",
         "drupal/taxonomy_access_fix": "^3.1 || ^4.0",
@@ -100,7 +101,7 @@
         "drupal/views_infinite_scroll": "~2.0",
         "drupal/viewsreference": "^2.0-beta7",
         "drupal/webform": "^5.15 || ^6.2.0-beta5",
-        "drupal/webp": "^1.0-beta7",
+        "drupal/webp": "^1.0-rc2",
         "drush/drush": ">=11.0",
         "jonthornton/jquery-timepicker": "^1.11",
         "npm-asset/blazy": "^1.8",
@@ -250,12 +251,6 @@
                 "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
                 "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
             },
-            "drupal/password_policy": {
-                "Issue #3348548: Fix Entity queries must explicitly set whether the query should be access checked or not in Password Policy": "https://www.drupal.org/files/issues/2023-03-16/3348548-3.patch"
-            },
-            "drupal/swiper_formatter": {
-                "Issue #3376409: Deprecated function - Creation of dynamic property": "https://www.drupal.org/files/issues/2023-08-23/3376409-4.patch"
-            },
             "drupal/symfony_mailer": {
                 "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "https://git.drupalcode.org/project/symfony_mailer/-/commit/58a66f9bb53e7e2f6efe5a28db98cff7cb01f21d.patch"
             },
@@ -264,9 +259,6 @@
             },
             "drupal/username_enumeration_prevention": {
                 "Issue #2871931: hook_requirements error on install phase": "https://www.drupal.org/files/issues/username_enumeration_prevention-check_phase_runtime-2871931-5.patch"
-            },
-            "drupal/webp": {
-                "Issue #3177103: Do not regenerate the webp file each time it is requested": "https://www.drupal.org/files/issues/2023-09-20/webp-stampede-prevention-22.patch"
             }
         }
     }
