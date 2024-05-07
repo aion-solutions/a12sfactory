@@ -51,6 +51,7 @@ install:
   - advagg:advagg # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - advagg:advagg_css_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
   - advagg:advagg_js_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
+  - antibot:antibot
   - blazy:blazy
   - block_field:block_field
   - crop:crop

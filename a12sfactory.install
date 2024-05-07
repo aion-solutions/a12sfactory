@@ -245,3 +245,19 @@ function a12sfactory_update_8012(): void {
     }
   }
 }
+
+/**
+ * Implements hook_update_N().
+ *
+ * Install antibot contrib module.
+ */
+function a12sfactory_update_8013(): void {
+  /** @var \Drupal\Core\Extension\ModuleInstaller $moduleInstaller */
+  $moduleInstaller = \Drupal::service('module_installer');
+
+  try {
+    $moduleInstaller->install(['antibot']);
+  } catch (\Exception $e) {
+    Error::logException(\Drupal::logger('a12sfactory'), $e);
+  }
+}

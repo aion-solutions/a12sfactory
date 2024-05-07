@@ -1,9 +1,13 @@
-langcode: fr
+langcode: en
 status: open
 dependencies:
   enforced:
     module:
+      - antibot
       - webform
+third_party_settings:
+  antibot:
+    antibot: true
 weight: 0
 open: null
 close: null
@@ -13,8 +17,8 @@ archive: false
 id: contact
 title: Contact
 description: 'Basic email contact webform.'
-category: ''
-elements: |
+categories: {  }
+elements: |-
   name:
     '#title': 'Your Name'
     '#type': textfield
@@ -144,7 +148,7 @@ settings:
   confirmation_type: url_message
   confirmation_url: '<front>'
   confirmation_title: ''
-  confirmation_message: 'Votre message a été envoyé.'
+  confirmation_message: 'Your message has been sent.'
   confirmation_attributes: {  }
   confirmation_back: true
   confirmation_back_label: ''
@@ -224,7 +228,7 @@ handlers:
   email_confirmation:
     id: email
     handler_id: email_confirmation
-    label: 'Courriel de confirmation'
+    label: 'Email confirmation'
     notes: ''
     status: true
     conditions: {  }
@@ -261,7 +265,7 @@ handlers:
   email_notification:
     id: email
     handler_id: email_notification
-    label: 'Notification par courriel'
+    label: 'Email notification'
     notes: ''
     status: true
     conditions: {  }
@@ -280,8 +284,8 @@ handlers:
       from_name: _default
       reply_to: '[webform_submission:values:name:raw]'
       return_path: ''
-      sender_mail: ''
-      sender_name: ''
+      sender_mail: '[webform_submission:values:email:raw]'
+      sender_name: '[webform_submission:values:name:raw]'
       subject: '[webform_submission:values:subject:raw]'
       body: '[webform_submission:values:message:value]'
       excluded_elements: {  }
