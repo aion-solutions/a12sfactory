@@ -54,7 +54,7 @@
         "drupal/extlink": "~1.1",
         "drupal/facets": "^2.0 || ^3.0",
         "drupal/field_group": "^3.4",
-        "drupal/focal_point": "~2.0",
+        "drupal/focal_point": "^2.1.0",
         "drupal/honeypot": "~1.30 || ^2.0",
         "drupal/imagemagick": "~3.0",
         "drupal/inline_entity_form": "^1.0-rc15",
@@ -244,9 +244,6 @@
             },
             "drupal/field_group": {
                 "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2022-10-28/3114825-20.patch"
-            },
-            "drupal/focal_point": {
-                "Issue #3328807: FocalPointManager::saveCropEntity(): Argument #3 must be of type int, null given": "https://www.drupal.org/files/issues/2023-01-06/3328807-focal_point-image_width_when_no_image_to_crop.patch"
             },
             "drupal/paragraphs": {
                 "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
