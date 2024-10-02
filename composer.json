@@ -29,7 +29,7 @@
         "drupal/admin_toolbar": "~2.0 || ^3.0",
         "drupal/advagg": "^6.0",
         "drupal/antibot": "^2.0.3",
-        "drupal/better_exposed_filters": "^6.0",
+        "drupal/better_exposed_filters": "^6.0 || ^7.0",
         "drupal/blazy": "^2.1",
         "drupal/block_field": "^1.0@RC",
         "drupal/captcha": "^2.0",
