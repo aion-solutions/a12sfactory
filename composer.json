@@ -30,7 +30,7 @@
         "drupal/advagg": "^6.0",
         "drupal/antibot": "^2.0.3",
         "drupal/better_exposed_filters": "^6.0 || ^7.0",
-        "drupal/blazy": "^2.1",
+        "drupal/blazy": "^3.0",
         "drupal/block_field": "^1.0@RC",
         "drupal/captcha": "^2.0",
         "drupal/ckeditor_media_embed": "^2.0",
@@ -51,7 +51,7 @@
         "drupal/entity_embed": "~1.0",
         "drupal/entity_reference_revisions": "~1.9",
         "drupal/eu_cookie_compliance": "^1.20",
-        "drupal/extlink": "~1.1",
+        "drupal/extlink": "^2.0",
         "drupal/facets": "^2.0 || ^3.0",
         "drupal/field_group": "^3.4",
         "drupal/focal_point": "^2.1.0",
@@ -63,7 +63,7 @@
         "drupal/layout_paragraphs": "^2.0",
         "drupal/login_destination": "~1.0 || ^2.0",
         "drupal/masquerade": "~2.0-beta2",
-        "drupal/maxlength": "^2.1.1",
+        "drupal/maxlength": "^3.1",
         "drupal/menu_breadcrumb": "^2.0",
         "drupal/menu_item_extras": "^3.0",
         "drupal/menu_link_attributes": "~1.0",
@@ -214,35 +214,28 @@
             }
         },
         "patches": {
-            "drupal/admin_toolbar": {
-                "Issue #3338408: Resolve access check errors for D10 compatibility": "https://www.drupal.org/files/issues/2023-05-30/3338408-fix-access-check-error.patch"
-            },
             "drupal/core": {
-                "Issue #2663316: Broken title in modal dialog when title is a render array": "https://www.drupal.org/files/issues/2019-10-21/2663316-76.drupal.Broken-title-in-modal-dialog-when-title-is-a-render-array.patch",
                 "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/2020-09-11/2893892-19.patch",
-                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://www.drupal.org/files/issues/2021-12-15/2888320-78.patch",
+                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://www.drupal.org/files/issues/2024-06-21/2888320-92.patch",
                 "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
                 "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
                 "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
                 "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch",
-                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2024-02-21/2689459-188.patch",
+                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2024-06-26/2689459_d10.3.0.patch",
                 "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2020-12-04/2546212-168.patch",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
                 "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
                 "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://www.drupal.org/files/issues/2024-09-19/3328425-50-drupal-core-10.3.5-ckeditor5-ballon.patch",
                 "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2024-11-11/drupal-core-10.3.7-2730351-135.patch",
                 "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch",
-                "Issue #3272629: Media Library widget display doesn't return to first page on applying filters": "https://www.drupal.org/files/issues/2022-03-30/media_library_pager_fix.patch",
-                "Issue #3375860: Dynamic permissions issue on profile installation": "./patches/drupal-3375860-ignore-role-permission-checks-on-install-custom.patch.txt",
-                "Issue #1903010: Notice: Undefined index: #field_name in file_managed_file_save_upload()": "https://www.drupal.org/files/issues/2022-03-21/1903010-76.patch",
-                "Issue #3158130: Many calls to ContextRepository::getAvailableContexts() due to entity upcasting": "https://www.drupal.org/files/issues/2024-05-07/core-many-calls-context-repository-3158130-64.patch"
+                "Issue #3375860: Dynamic permissions issue on profile installation": "https://www.drupal.org/files/issues/2024-06-21/drupal-3375860-d103-11.patch"
             },
             "drupal/entity_reference_revisions": {
                 "Issue #2799479: Views doesn't recognize relationship to host": "patches/entity_reference_2799479-158-custom.patch.txt"
             },
             "drupal/field_group": {
-                "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2022-10-28/3114825-20.patch"
+                "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2024-08-14/field_group-document-translate-field-group-labels-and-descriptions-3114825-24.patch"
             },
             "drupal/paragraphs": {
                 "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
