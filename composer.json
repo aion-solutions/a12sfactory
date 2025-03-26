@@ -38,7 +38,7 @@
         "drupal/config_ignore": "~3.0-beta2",
         "drupal/config_perms": "~2.0",
         "drupal/content_lock": "~2.0",
-        "drupal/core": "^10.4.1",
+        "drupal/core": "^10.4.5",
         "drupal/crop": "~2.0",
         "drupal/diff": "~1.0",
         "drupal/draggableviews": "~1.2 || ^2.1.3",
@@ -227,9 +227,8 @@
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
                 "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
                 "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://www.drupal.org/files/issues/2024-09-19/3328425-50-drupal-core-10.3.5-ckeditor5-ballon.patch",
-                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2024-11-11/drupal-core-10.3.7-2730351-135.patch",
-                "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch",
-                "Issue #3375860: Dynamic permissions issue on profile installation": "https://www.drupal.org/files/issues/2024-06-21/drupal-3375860-d103-11.patch"
+                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2025-02-23/drupal-10.4.2-2739351-143.patch",
+                "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch"
             },
             "drupal/entity_reference_revisions": {
                 "Issue #2799479: Views doesn't recognize relationship to host": "patches/entity_reference_2799479-158-custom.patch.txt"
