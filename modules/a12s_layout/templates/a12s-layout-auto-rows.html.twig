@@ -1,0 +1,11 @@
+{{ attach_library('a12s_layout/layouts_auto_rows') }}
+
+{% if content %}
+  <div{{ attributes.addClass('layout-auto-rows') }}>
+    {% if content.main %}
+      <div{{ region_attributes.main.addClass('layout-auto-rows-main') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

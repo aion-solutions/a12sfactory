@@ -1,0 +1,13 @@
+a12s_layout_auto_rows:
+  label: 'Automatic rows layout'
+  category: 'Dynamic'
+  template: templates/a12s-layout-auto-rows
+  library: a12s_layout/layouts_auto_rows
+  default_region: main
+  icon_map:
+    - [ content_one, content_two, content_three ]
+    - [ content_four, content_five, content_six ]
+    - [ content_seven, content_eight, content_nine ]
+  regions:
+    main:
+      label: Main content

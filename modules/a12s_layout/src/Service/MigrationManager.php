@@ -4,11 +4,14 @@ namespace Drupal\a12s_layout\Service;
 
 use Drupal\Component\Utility\NestedArray;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Messenger\MessengerTrait;
 use Drupal\layout_paragraphs\LayoutParagraphsLayout;
 use Drupal\paragraphs\Entity\Paragraph;
 use Drupal\paragraphs\ParagraphInterface;
 
 class MigrationManager {
+
+  use MessengerTrait;
 
   /**
    * The machine name of the paragraph layout field.
@@ -66,14 +69,10 @@ class MigrationManager {
             }
           }
           elseif ($count > 1 && $count <= 3) {
-            $this->manageLayoutParagraph(
-              $entity,
-              $paragraph,
-            );
+            $this->manageLayoutParagraph($entity, $paragraph);
           }
           else {
-            // Cannot migrate this.
-            \Drupal::logger('a12s_layout')->warning("Found $count child in the entity {$entity->getEntityTypeId()} {$entity->id()}");
+            $this->manageLayoutParagraph($entity, $paragraph, 'a12s_layout_auto_rows');
           }
 
           break;
@@ -127,11 +126,12 @@ class MigrationManager {
 
   /**
    * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   * @param string|null $layoutId
    *
    * @return \Drupal\paragraphs\ParagraphInterface
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function createLayoutParagraph(ParagraphInterface $paragraph): ParagraphInterface {
+  protected function createLayoutParagraph(ParagraphInterface $paragraph, ?string $layoutId = NULL): ParagraphInterface {
     $behaviorSettings = $paragraph->getAllBehaviorSettings();
 
     $columnWidths = '100';
@@ -140,12 +140,14 @@ class MigrationManager {
     }
 
     // Determine the layout id...
-    $layoutId = match ($paragraph->bundle()) {
-      'columns' => $paragraph->get('column_content')->count() === 2 ? 'layout_twocol_section' : 'layout_threecol_section',
-      'columns_two_uneven', 'hp_duo' => 'layout_twocol_section',
-      'columns_three_uneven' => 'layout_threecol_section',
-      default => 'layout_onecol',
-    };
+    if (!$layoutId) {
+      $layoutId = match ($paragraph->bundle()) {
+        'columns' => $paragraph->get('column_content')->count() === 2 ? 'layout_twocol_section' : 'layout_threecol_section',
+        'columns_two_uneven', 'hp_duo' => 'layout_twocol_section',
+        'columns_three_uneven' => 'layout_threecol_section',
+        default => 'layout_onecol',
+      };
+    }
 
     // ... and the column widths.
     $columnWidths = match ($paragraph->bundle()) {
@@ -157,13 +159,11 @@ class MigrationManager {
     };
 
     $layoutParagraph = Paragraph::create(['type' => 'layout']);
+    $newBehaviors = ['layout' => $layoutId];
 
-    $newBehaviors = [
-      'layout' => $layoutId,
-      'config' => [
-        'column_widths' => $columnWidths,
-      ],
-    ];
+    if ($layoutId !== 'a12s_layout_auto_rows') {
+      $newBehaviors['config']['column_widths'] = $columnWidths;
+    }
 
     // Copy behaviors.
     if ($layoutParagraph->getParagraphType()->hasEnabledBehaviorPlugin('layout_paragraphs')) {
@@ -180,13 +180,14 @@ class MigrationManager {
   /**
    * @param \Drupal\Core\Entity\EntityInterface $entity
    * @param \Drupal\paragraphs\ParagraphInterface $paragraph
+   * @param string|null $layoutId
    * @param string $targetField
    *
    * @throws \Drupal\Core\Entity\EntityStorageException
    */
-  protected function manageLayoutParagraph(EntityInterface $entity, ParagraphInterface $paragraph, string $targetField = self::PARAGRAPH_LAYOUT_FIELD) {
+  protected function manageLayoutParagraph(EntityInterface $entity, ParagraphInterface $paragraph, ?string $layoutId = NULL, string $targetField = self::PARAGRAPH_LAYOUT_FIELD) {
     // Create a new layout paragraph.
-    $layoutParagraph = $this->createLayoutParagraph($paragraph);
+    $layoutParagraph = $this->createLayoutParagraph($paragraph, $layoutId);
     $layoutParagraph->setParentEntity($entity, self::PARAGRAPH_LAYOUT_FIELD);
 
     // Initialize the layout.
@@ -212,7 +213,13 @@ class MigrationManager {
     $behaviors = $paragraph->getAllBehaviorSettings();
     if (!empty($behaviors['a12sfactory_paragraph_display'])) {
       unset($behaviors['a12sfactory_paragraph_display']['a12s_behaviors']);
-      foreach ([$behaviors['a12sfactory_paragraph_display'], $behaviors['a12sfactory_paragraph_grid']] as $behaviorGroup) {
+      $behaviorGroups = [$behaviors['a12sfactory_paragraph_display']];
+
+      if (!empty($behaviors['a12sfactory_paragraph_grid'])) {
+        $behaviorGroups[] = $behaviors['a12sfactory_paragraph_grid'];
+      }
+
+      foreach ($behaviorGroups as $behaviorGroup) {
         foreach ($behaviorGroup as $_bGroup => $_behaviors) {
           foreach ($_behaviors as $bName => $bValues) {
             $bGroup = $_bGroup;
@@ -374,62 +381,69 @@ class MigrationManager {
   protected function addParagraphToLayout(EntityInterface $entity, ParagraphInterface $layoutParagraph, LayoutParagraphsLayout $layout, ParagraphInterface $sourceParagraph): void {
     $i = 0;
 
-    // @todo change this... And load regions of the matching layout.
-    $regions = $sourceParagraph->bundle() === 'columns_single' ? ['content'] : self::PARAGRAPH_LAYOUT_REGIONS;
+    try {
+      $layoutId = $layoutParagraph->getBehaviorSetting('layout_paragraphs', 'layout');
+      /** @var \Drupal\Core\Layout\LayoutInterface $layoutPlugin */
+      $layoutPlugin = \Drupal::service('plugin.manager.core.layout')->createInstance($layoutId);
+      $regions = array_keys($layoutPlugin->getPluginDefinition()->getRegions() ?? []);
 
-    if (isset(self::PARAGRAPH_COLUMN_TYPES[$sourceParagraph->bundle()])) {
-      $fieldNames = self::PARAGRAPH_COLUMN_TYPES[$sourceParagraph->bundle()];
-      if (!is_array($fieldNames)) {
-        $fieldNames = [$fieldNames];
-      }
+      if (isset(self::PARAGRAPH_COLUMN_TYPES[$sourceParagraph->bundle()])) {
+        $fieldNames = self::PARAGRAPH_COLUMN_TYPES[$sourceParagraph->bundle()];
+        if (!is_array($fieldNames)) {
+          $fieldNames = [$fieldNames];
+        }
 
-      foreach ($fieldNames as $fieldName) {
-        foreach ($sourceParagraph->get($fieldName) as $childField) {
-          /** @var ParagraphInterface $child */
-          $child = $childField->entity;
-          if (is_null($child)) {
-            continue;
-          }
+        foreach ($fieldNames as $fieldName) {
+          foreach ($sourceParagraph->get($fieldName) as $childField) {
+            /** @var ParagraphInterface $child */
+            $child = $childField->entity;
+            if (is_null($child)) {
+              continue;
+            }
 
-          if (in_array($child->bundle(), array_keys(self::PARAGRAPH_COLUMN_TYPES))) {
-            if ($child->bundle() === 'columns_single') {
-              // Remove the useless parent container.
-              foreach ($child->get(self::PARAGRAPH_COLUMN_TYPES[$child->bundle()]) as $subChildField) {
-                $subChild = $subChildField->entity;
-                if (!is_null($subChild)) {
-                  $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $subChild);
-                  $this->migrateBehaviorsToParent($layoutParagraph, $subChild, $regions[$i]);
+            if (in_array($child->bundle(), array_keys(self::PARAGRAPH_COLUMN_TYPES))) {
+              if ($child->bundle() === 'columns_single') {
+                // Remove the useless parent container.
+                foreach ($child->get(self::PARAGRAPH_COLUMN_TYPES[$child->bundle()]) as $subChildField) {
+                  $subChild = $subChildField->entity;
+                  if (!is_null($subChild)) {
+                    $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $subChild);
+                    $this->migrateBehaviorsToParent($layoutParagraph, $subChild, $regions[$i]);
+                  }
                 }
+              }
+              else {
+                // Create the new layout paragraph and add it to the current layout.
+                $childLayoutParagraph = $this->createLayoutParagraph($child);
+                $childLayoutParagraph->setParentEntity($entity, self::PARAGRAPH_LAYOUT_FIELD);
+
+                $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $childLayoutParagraph);
+                $this->migrateBehaviorsToParent($layoutParagraph, $childLayoutParagraph, $regions[$i]);
+
+                $this->addParagraphToLayout($entity, $childLayoutParagraph, $layout, $child);
               }
             }
             else {
-              // Create the new layout paragraph and add it to the current layout.
-              $childLayoutParagraph = $this->createLayoutParagraph($child);
-              $childLayoutParagraph->setParentEntity($entity, self::PARAGRAPH_LAYOUT_FIELD);
-
-              $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $childLayoutParagraph);
-              $this->migrateBehaviorsToParent($layoutParagraph, $childLayoutParagraph, $regions[$i]);
-
-              $this->addParagraphToLayout($entity, $childLayoutParagraph, $layout, $child);
+              $child = $this->convertContentParagraph($child);
+              $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $child);
+              $this->migrateBehaviorsToParent($layoutParagraph, $child, $regions[$i]);
             }
-          }
-          else {
-            $child = $this->convertContentParagraph($child);
-            $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $child);
-            $this->migrateBehaviorsToParent($layoutParagraph, $child, $regions[$i]);
-          }
 
-          // "Stack" paragraphs on "columns_single".
-          if ($sourceParagraph->bundle() !== 'columns_single') {
-            $i++;
+            // "Stack" paragraphs on "columns_single", or if we already are on the last region.
+            if ($sourceParagraph->bundle() !== 'columns_single' && count($regions) > ($i + 1)) {
+              $i++;
+            }
           }
         }
       }
+      else {
+        $sourceParagraph = $this->convertContentParagraph($sourceParagraph);
+        $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $sourceParagraph);
+        $this->migrateBehaviorsToParent($layoutParagraph, $sourceParagraph, $regions[$i]);
+      }
     }
-    else {
-      $sourceParagraph = $this->convertContentParagraph($sourceParagraph);
-      $layout->insertIntoRegion($layoutParagraph->uuid(), $regions[$i], $sourceParagraph);
-      $this->migrateBehaviorsToParent($layoutParagraph, $sourceParagraph, $regions[$i]);
+    catch (\Exception $e) {
+      $this->messenger()->addError($e->getMessage());
     }
   }
 

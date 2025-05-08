@@ -1,0 +1,15 @@
+.layout-auto-rows-main {
+  display: grid;
+  gap: 1rem;
+
+  @media (min-width: 1024px) {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  img, iframe {
+    height: auto;
+    max-width: 100%;
+    width: auto;
+  }
+}

@@ -15,3 +15,9 @@ spacing-container:
   css:
     theme:
       css/spacing-container.css: { }
+
+layouts_auto_rows:
+  version: VERSION
+  css:
+    layout:
+      css/layouts/auto-rows.css: { }
