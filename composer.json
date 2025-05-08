@@ -145,6 +145,39 @@
                 "web/modules/contrib/webform/composer.libraries.json"
             ]
         },
+        "installer-types": [
+            "drupal-recipe",
+            "npm-asset",
+            "bower-asset"
+        ],
+        "installer-paths": {
+            "drush/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/easing/": [
+                "npm-asset/jquery.easing"
+            ],
+            "web/libraries/{$name}": [
+                "type:bower-asset",
+                "type:npm-asset",
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "docroot/recipes/contrib/{$name}": [
+                "type:drupal-recipe"
+            ]
+        },
         "drupal-scaffold": {
             "file-mapping": {
                 "[web-root]/.ht.router.php": false,
