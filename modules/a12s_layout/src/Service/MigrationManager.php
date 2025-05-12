@@ -62,10 +62,17 @@ class MigrationManager {
                 continue;
               }
 
-              $entity->{$targetField}[] = [
-                'target_id' => $child->id(),
-                'target_revision_id' => $child->getRevisionId(),
-              ];
+              // If the paragraph is of type "column*", we need to convert it.
+              if (in_array($child->bundle(), array_keys(self::PARAGRAPH_COLUMN_TYPES))) {
+                $this->migrateParagraph($entity, $child, $targetField);
+              }
+              else {
+                $child->setParentEntity($entity, $targetField);
+                $entity->{$targetField}[] = [
+                  'target_id' => $child->id(),
+                  'target_revision_id' => $child->getRevisionId(),
+                ];
+              }
             }
           }
           elseif ($count > 1 && $count <= 3) {
@@ -99,6 +106,11 @@ class MigrationManager {
     else {
       // Nothing to do, we'll reuse the current paragraph.
       $paragraph = $this->convertContentParagraph($paragraph);
+
+      // Special case for paragraph entities: we need to override the
+      // parent entity, otherwise we may have troubles when the market
+      // entity is removed, as the paragraph will be considered as orphan.
+      $paragraph->setParentEntity($entity, $targetField);
 
       if ($paragraph->getParagraphType()->hasEnabledBehaviorPlugin('a12s_layout_display_options')) {
         // Move behaviors for a paragraph outside a layout.
