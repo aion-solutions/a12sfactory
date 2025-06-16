@@ -89,7 +89,7 @@
         "drupal/smart_trim": "~2.0",
         "drupal/spamspan": "^3.0",
         "drupal/swiper_formatter": "^2.0.1-beta4",
-        "drupal/symfony_mailer": "^1.2",
+        "drupal/symfony_mailer": "^1.6",
         "drupal/symfony_mailer_reroute": "^1.2@beta",
         "drupal/taxonomy_access_fix": "^3.1 || ^4.0",
         "drupal/token": "^1.7",
@@ -272,9 +272,6 @@
             "drupal/paragraphs": {
                 "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
                 "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
-            },
-            "drupal/symfony_mailer": {
-                "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "https://git.drupalcode.org/project/symfony_mailer/-/commit/58a66f9bb53e7e2f6efe5a28db98cff7cb01f21d.patch"
             },
             "drupal/token": {
                 "Issue #3115486: Provide array of primitive property values on multivalue field": "https://www.drupal.org/files/issues/2022-12-27/token-array-3115486-27.patch"
