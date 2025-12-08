@@ -21,13 +21,13 @@
         }
     },
     "require": {
+        "php": ">=8",
         "composer/installers": "^1.7",
         "cweagans/composer-patches": "^1.6",
         "drupal/a12s": "^1.0.0-beta8",
         "drupal/access_unpublished": "~1.0-beta1",
         "drupal/ace_editor": "^2.0",
         "drupal/admin_toolbar": "~2.0 || ^3.0",
-        "drupal/advagg": "^6.0",
         "drupal/antibot": "^2.0.3",
         "drupal/better_exposed_filters": "^6.0 || ^7.0",
         "drupal/blazy": "^3.0",
@@ -37,8 +37,7 @@
         "drupal/components": "~3.0",
         "drupal/config_ignore": "~3.0-beta2",
         "drupal/config_perms": "~2.0",
-        "drupal/content_lock": "~2.0",
-        "drupal/core": "^10.5.6",
+        "drupal/core": "^11.2.9",
         "drupal/crop": "~2.0",
         "drupal/diff": "~1.0",
         "drupal/draggableviews": "~1.2 || ^2.1.3",
@@ -58,9 +57,9 @@
         "drupal/honeypot": "~1.30 || ^2.0",
         "drupal/imagemagick": "^4.0",
         "drupal/inline_entity_form": "^3.0@RC",
+        "drupal/layout_paragraphs": "^3.0@alpha",
         "drupal/libraries": "^4.0",
         "drupal/linkit": "^7.0",
-        "drupal/layout_paragraphs": "^3.0@alpha",
         "drupal/login_destination": "~1.0 || ^2.0",
         "drupal/masquerade": "~2.0-beta2",
         "drupal/maxlength": "^3.1",
@@ -71,8 +70,8 @@
         "drupal/node_edit_protection": "~1.0-alpha1",
         "drupal/oembed_providers": "^2.0",
         "drupal/override_node_options": "~2.7",
-        "drupal/paragraphs": "~1.11",
         "drupal/paragraph_view_mode": "^3.1",
+        "drupal/paragraphs": "~1.11",
         "drupal/password_policy": "^4.0.1",
         "drupal/pathauto": "^1.8",
         "drupal/pathologic": "~2.0.0-alpha1",
@@ -89,8 +88,7 @@
         "drupal/smart_trim": "~2.0",
         "drupal/spamspan": "^3.0",
         "drupal/swiper_formatter": "^2.0.1-beta4",
-        "drupal/symfony_mailer": "1.5",
-        "drupal/symfony_mailer_reroute": "^1.2@beta",
+        "drupal/symfony_mailer": "^2.0",
         "drupal/taxonomy_access_fix": "^3.1 || ^4.0",
         "drupal/token": "^1.7",
         "drupal/twig_tweak": "^3.2",
@@ -108,7 +106,6 @@
         "npm-asset/imagesloaded": "^4.1",
         "npm-asset/jquery.easing": "^1.4",
         "oomphinc/composer-installers-extender": "^1.0 | ^2.0",
-        "php": ">=8",
         "webflo/drupal-finder": "^1.0.0",
         "wikimedia/composer-merge-plugin": "^1.4 || ^2.0.1"
     },
@@ -125,11 +122,14 @@
         "allow-plugins": {
             "composer/installers": true,
             "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
             "drupal/console-extend-plugin": true,
-            "oomphinc/composer-installers-extender": true,
             "drupal/core-composer-scaffold": true,
-            "wikimedia/composer-merge-plugin": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "oomphinc/composer-installers-extender": true,
+            "php-http/discovery": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true,
+            "wikimedia/composer-merge-plugin": true
         }
     },
     "autoload": {
@@ -247,18 +247,17 @@
         "patches": {
             "drupal/core": {
                 "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/2020-09-11/2893892-19.patch",
-                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://www.drupal.org/files/issues/2024-06-21/2888320-92.patch",
+                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://git.drupalcode.org/project/drupal/-/merge_requests/12147.patch",
                 "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
                 "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
                 "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
-                "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch",
-                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2024-06-26/2689459_d10.3.0.patch",
-                "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2020-12-04/2546212-168.patch",
+                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2025-11-10/2689459_11.2.6.patch",
+                "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2025-12-08/drupal-entity-view-form-mode-formatter-widget-settings-have-no-translation-ui-2546212-334-12.2.5.patch",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
                 "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
-                "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://www.drupal.org/files/issues/2024-09-19/3328425-50-drupal-core-10.3.5-ckeditor5-ballon.patch",
-                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2025-02-23/drupal-10.4.2-2739351-143.patch",
+                "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://git.drupalcode.org/project/drupal/-/merge_requests/8896.diff",
+                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2025-08-13/drupal-11.2.3-2730351-147.patch",
                 "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch"
             },
             "drupal/entity_reference_revisions": {
@@ -270,9 +269,6 @@
             "drupal/paragraphs": {
                 "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
                 "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
-            },
-            "drupal/symfony_mailer": {
-                "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "https://git.drupalcode.org/project/symfony_mailer/-/commit/58a66f9bb53e7e2f6efe5a28db98cff7cb01f21d.patch"
             },
             "drupal/token": {
                 "Issue #3115486: Provide array of primitive property values on multivalue field": "https://www.drupal.org/files/issues/2022-12-27/token-array-3115486-27.patch"
