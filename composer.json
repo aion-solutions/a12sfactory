@@ -103,10 +103,10 @@
         "drupal/webform": "^5.15 || ^6.3.0-beta5",
         "drupal/webp": "^1.0-rc2",
         "drush/drush": "^13.3.0",
+        "npm-asset/ace-builds": "^1.43",
         "npm-asset/blazy": "^1.8",
         "npm-asset/dropzone": "^5.7",
         "npm-asset/imagesloaded": "^4.1",
-        "npm-asset/jquery.easing": "^1.4",
         "oomphinc/composer-installers-extender": "^1.0 | ^2.0",
         "php": ">=8",
         "webflo/drupal-finder": "^1.0.0",
@@ -155,8 +155,8 @@
             "web/core": [
                 "type:drupal-core"
             ],
-            "web/libraries/easing/": [
-                "npm-asset/jquery.easing"
+            "web/libraries/ace/": [
+                "npm-asset/ace-builds"
             ],
             "web/libraries/{$name}": [
                 "type:bower-asset",
