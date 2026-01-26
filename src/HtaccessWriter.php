@@ -1,4 +1,3 @@
-
 <?php
 
 namespace Drupal\a12sfactory;
@@ -14,14 +13,27 @@ class HtaccessWriter extends CoreHtaccessWriter {
    * {@inheritdoc}
    */
   public function ensure(): void {
-    // Check if the server supports .htaccess files.
-    // Apache uses 'apache' or 'apache2handler' as SAPI
-    $server_software = $_SERVER['SERVER_SOFTWARE'] ?? '';
-
-    // Perform .htaccess generation if running on Apache.
-    if (stripos($server_software, 'apache') !== FALSE) {
+    if ($this->supportHtAccessFile()) {
       parent::ensure();
     }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function defaultProtectedDirs(): array {
+    return $this->supportHtAccessFile() ? parent::defaultProtectedDirs() : [];
+  }
+
+  /**
+   * Checks if the server supports .htaccess files.
+   *
+   * @return bool
+   */
+  protected function supportHtAccessFile(): bool {
+    $server_software = $_SERVER['SERVER_SOFTWARE'] ?? '';
+    // Perform .htaccess generation if running on Apache.
+    return stripos($server_software, 'apache') !== FALSE;
   }
 
 }
