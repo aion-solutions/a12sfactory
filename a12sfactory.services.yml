@@ -8,3 +8,7 @@ services:
     arguments: [ '@entity_field.manager' ]
     tags:
       - { name: event_subscriber }
+  # Override the default file.htaccess_writer service
+  file.htaccess_writer:
+    class: Drupal\a12sfactory\HtaccessWriter
+    arguments: ['@logger.channel.security', '@stream_wrapper_manager']
