@@ -277,6 +277,11 @@
             "drupal/username_enumeration_prevention": {
                 "Issue #2871931: hook_requirements error on install phase": "https://www.drupal.org/files/issues/username_enumeration_prevention-check_phase_runtime-2871931-5.patch"
             }
+        },
+        "patches-ignore": {
+            "drupal/symfony_mailer": {
+                "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "^2.0"
+            }
         }
     }
 }
