@@ -21,8 +21,8 @@
         }
     },
     "require": {
-        "composer/installers": "^1.7",
-        "cweagans/composer-patches": "^1.6",
+        "composer/installers": "^2.0",
+        "cweagans/composer-patches": "^2.0",
         "drupal/a12s": "^1.0.0-beta8",
         "drupal/access_unpublished": "~1.0-beta1",
         "drupal/ace_editor": "^2.0.2",
@@ -38,9 +38,9 @@
         "drupal/config_ignore": "~3.0-beta2",
         "drupal/config_perms": "~2.0",
         "drupal/content_lock": "~2.0",
-        "drupal/core": "^10.6.2",
+        "drupal/core": "^10.6.9",
         "drupal/crop": "~2.0",
-        "drupal/diff": "~1.0",
+        "drupal/diff": "^2.0",
         "drupal/draggableviews": "~1.2 || ^2.1.3",
         "drupal/dropzonejs": "~2.8",
         "drupal/email_registration": "^2.0",
@@ -94,7 +94,7 @@
         "drupal/token": "^1.17",
         "drupal/twig_tweak": "^3.2",
         "drupal/userprotect": "~1.0",
-        "drupal/views_bulk_edit": "~2.2",
+        "drupal/views_bulk_edit": "^3.0",
         "drupal/views_bulk_operations": "^4.2",
         "drupal/views_field_formatter": "^4.0",
         "drupal/views_infinite_scroll": "~2.0",
@@ -247,8 +247,7 @@
             "drupal/core": {
                 "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/2020-09-11/2893892-19.patch",
                 "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://www.drupal.org/files/issues/2024-06-21/2888320-92.patch",
-                "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
-                "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
+                "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2023-11-06/more-link-disappears-1819538-82_0.patch",
                 "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
                 "Issue #2883302: Allow themes to alter widget forms": "https://www.drupal.org/files/issues/2021-06-24/core-allow_themes_to_alter_widget_forms-d9.3-2883302-15.patch",
@@ -267,11 +266,7 @@
                 "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2024-08-14/field_group-document-translate-field-group-labels-and-descriptions-3114825-24.patch"
             },
             "drupal/paragraphs": {
-                "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
                 "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
-            },
-            "drupal/symfony_mailer": {
-                "Issue #3284140: Email adjuster to attach/embed by scanning the email body": "https://git.drupalcode.org/project/symfony_mailer/-/commit/58a66f9bb53e7e2f6efe5a28db98cff7cb01f21d.patch"
             },
             "drupal/username_enumeration_prevention": {
                 "Issue #2871931: hook_requirements error on install phase": "https://www.drupal.org/files/issues/username_enumeration_prevention-check_phase_runtime-2871931-5.patch"
