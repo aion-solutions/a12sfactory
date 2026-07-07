@@ -1,10 +1,13 @@
 services:
-  a12sfactory.route_subscriber:
-    class: Drupal\a12sfactory\Routing\RouteSubscriber
+  a12sfactory.recipe_events_subscriber:
+    class: 'Drupal\a12sfactory\EventSubscriber\RecipeEventsSubscriber'
+    arguments:
+      - '@state'
+      - '@config.factory'
+      - '@module_installer'
+      - '@module_handler'
+      - '@extension.list.module'
+      - '@theme_handler'
+      - '@language_manager'
     tags:
-      - { name: event_subscriber }
-  a12sfactory.paragraphs_translation_synchronization:
-    class: Drupal\a12sfactory\Paragraphs\TranslationSynchronization
-    arguments: [ '@entity_field.manager' ]
-    tags:
-      - { name: event_subscriber }
+      - { name: 'event_subscriber' }

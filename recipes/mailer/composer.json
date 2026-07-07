@@ -1,0 +1,16 @@
+{
+    "name": "a12sfactory/mailer",
+    "description": "Recipe for Mailer Configuration",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/symfony_mailer": "^1.6",
+        "drupal/reroute_email": "^2.3"
+    },
+    "extra": {
+        "recipes": [
+            {
+                "install": true
+            }
+        ]
+    }
+}

@@ -2,8 +2,3 @@ install-page:
   css:
     component:
       css/component/install-page.css: {}
-
-slick-clear:
-  css:
-    component:
-      css/component/slick/skin.clear.css: {}

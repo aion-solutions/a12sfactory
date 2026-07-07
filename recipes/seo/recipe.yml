@@ -1,0 +1,30 @@
+name: 'SEO Recipe'
+description: 'SEO Configuration with Metatag'
+type: 'drupal-recipe'
+install:
+  - menu_breadcrumb
+  - metatag
+  - extlink
+config:
+  import:
+    metatag:
+      - metatag.metatag_defaults.global
+      - metatag.metatag_defaults.front
+      - metatag.metatag_defaults.node
+      - metatag.metatag_defaults.taxonomy_term
+      - metatag.metatag_defaults.user
+  strict: false
+  actions:
+    user.role.editor:
+      ensure_exists:
+        id: editor
+      grantPermissions:
+        - "administer meta tags"
+        - "edit meta tags"
+    user.role.site_manager:
+      ensure_exists:
+        id: site_manager
+      grantPermissions:
+        - "administer meta tags"
+        - "edit meta tags"
+        - "administer metatag configuration"

@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - mailer_policy
+id: _
+configuration:
+  mailer_inline_css: {  }
+  mailer_inline_images: {  }
+  email_theme:
+    theme: claro
+  mailer_url_to_absolute: {  }
+  mailer_wrap_and_convert:
+    plain: 0

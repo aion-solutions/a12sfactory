@@ -1,0 +1,20 @@
+name: "Mailer Recipe"
+description: "Mailer configuration"
+type: "drupal-recipe"
+install:
+  - symfony_mailer:mailer_policy
+  - symfony_mailer:mailer_transport
+  - symfony_mailer:symfony_mailer
+  - reroute_email:reroute_email
+config:
+  import:
+    mailer_policy: '*'
+    mailer_transport: '*'
+    reroute_email: '*'
+  actions:
+    user.role.site_manager:
+      ensure_exists:
+        id: site_manager
+      grantPermissions:
+        - "administer mailer"
+        - "administer reroute email"

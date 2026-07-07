@@ -1,9 +1,5 @@
-/modules/*
-!/modules/a12s_layout
-!/modules/a12sfactory_seo
-!/modules/media_thumbnail_formatters
-
 /composer.lock
+/modules/*
 
 /docker-compose.yml
 /.env.example

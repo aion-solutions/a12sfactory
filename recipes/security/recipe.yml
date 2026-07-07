@@ -1,0 +1,23 @@
+name: "Security Recipe"
+description: "Security configuration with honeypot"
+type: "drupal-recipe"
+install:
+  - antibot
+  - honeypot
+  - spamspan
+  - userprotect
+config:
+  import:
+    antibot:
+      - antibot.settings
+    honeypot:
+      - honeypot.settings
+  strict: false
+  actions:
+    user.role.site_manager:
+      ensure_exists:
+        id: site_manager
+        label: 'Site Manager'
+      grantPermissions:
+        - "administer honeypot"
+        - "Administer antibot configuration"

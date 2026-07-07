@@ -1,6 +1,0 @@
-langcode: en
-status: true
-name: 'Email HTML'
-format: email_html
-weight: 0
-filters: {}

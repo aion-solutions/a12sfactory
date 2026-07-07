@@ -1,0 +1,67 @@
+name: 'User Recipe'
+description: 'Configure user features.'
+type: 'recipe'
+install:
+  - realname
+config:
+  import:
+    realname:
+      - realname.settings
+    user:
+      - core.entity_view_display.user.user.default
+      - core.entity_form_display.user.user.default
+      - user.role.editor
+      - user.role.site_manager
+  strict: false
+  # @todo integrate optionally with field_group module.
+  actions:
+    core.entity_view_display.user.user.default:
+      setComponents:
+        -
+          name: field_firstname
+          options:
+            type: string
+            weight: 4
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+        -
+          name: field_lastname
+          options:
+            type: string
+            weight: 3
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+    core.entity_form_display.user.user.default:
+      setComponents:
+        - name: field_firstname
+          options:
+            type: string_textfield
+            weight: -1
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+        - name: field_lastname
+          options:
+            type: string_textfield
+            weight: -2
+            region: content
+            settings:
+              size: 60
+              placeholder: ''
+            third_party_settings: { }
+    user.role.editor:
+      grantPermissions:
+        - 'access user profiles'
+        - 'edit own user account'
+    user.role.site_manager:
+      grantPermissions:
+        - 'access user profiles'
+        - 'edit own user account'

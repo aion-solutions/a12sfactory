@@ -1,0 +1,19 @@
+name: "Admin toolbar"
+description: "Admin toolbart"
+type: "drupal-recipe"
+install:
+  - admin_toolbar
+  - admin_toolbar_tools
+# @todo add dependency on the "user" recipe.
+config:
+  actions:
+    user.role.editor:
+      ensure_exists:
+        id: editor
+      grantPermissions:
+        - "access toolbar"
+    user.role.site_manager:
+      ensure_exists:
+        id: site_manager
+      grantPermissions:
+        - "access toolbar"

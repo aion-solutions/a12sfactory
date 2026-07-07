@@ -1,3 +1,0 @@
-langcode: en
-default_transport: smtp
-override: {  }

@@ -1,0 +1,40 @@
+name: "i18n Recipe"
+description: "i18n Configuration"
+type: "drupal-recipe"
+install:
+  - locale
+  - language
+  - content_translation
+  - config_translation
+input:
+  recipe_i18n_install_optional_configuration:
+    data_type: boolean
+    description: 'Whether to enable the i18n optional configuration.'
+    prompt:
+      # @see \Symfony\Component\Console\Style\SymfonyStyle methods and arguments
+      # to define the desired prompt. E.g. with the choice() method, we need to
+      # define the question and the choices.
+      # <code>
+      #   method: choice
+      #   arguments:
+      #     question: 'My question'
+      #     choices:
+      #       test_1: Test 1
+      #       test_2: Test 2
+      # </code>
+      method: confirm
+      arguments:
+        question: 'Would you like to enable the i18n optional configuration? (true/false)'
+    default:
+      source: value
+      value: true
+  languages:
+    data_type: string
+    description: 'List of extra languages to install.'
+    prompt:
+      method: ask
+      arguments:
+        question: 'Specify the languages to install, separated by coma? (e.g. en, ar, ja, pt-br, zh-hans)'
+    default:
+      source: value
+      value: ''

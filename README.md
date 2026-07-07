@@ -1,20 +1,23 @@
-CONTENTS OF THIS FILE
----------------------
+# Contents of this file
+-----------------------
 
- * Distribution
- * Requirements
- * Background styles
-
-
-DISTRIBUTION
-------------
-
-The A12S Factory distribution provides advanced features for content management. It solves some
-common issues with a huge use of Paragraphs.
+ * Description
+ * Recipes
 
 
-REQUIREMENTS
-------------
+## Description
+--------------
 
-The distribution relies heavily on Bootstrap 4, to handle the grid feature through paragraph behaviors. This may evolve
-if there are some interests in other frameworks, with people able to collaborate on such issue.
+The A12S Factory profile provides advanced features for content management. It
+solves some common issues with a huge use of Paragraphs.
+
+
+## Recipes
+----------
+
+Several recipes are provided within this profile. To install one of them, run:
+
+```shell
+cd web
+drush recipe profiles/contrib/a12sfactory/recipes/<recipe-name>
+```

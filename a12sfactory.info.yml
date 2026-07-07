@@ -1,8 +1,7 @@
 name: A12s Factory
 type: profile
 description: 'This distribution provides advanced features and automation for managing Websites.'
-core_version_requirement: '^9 || ^10'
-php: 8.0
+core_version_requirement: '^11.3'
 distribution:
   name: A12S Factory
 
@@ -25,8 +24,6 @@ dependencies:
 
 install:
   # Core modules
-  - drupal:admin_toolbar
-  - drupal:admin_toolbar_tools
   - drupal:block_content
 #  - drupal:contextual # @todo make this optional, but install it by default when installing the profile (manually or by CLI). Add some default permissions if enabled.
   - drupal:dblog # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
@@ -47,71 +44,55 @@ install:
   - drupal:views_ui
 
   # Contrib modules
-  - ace_editor:ace_editor # @todo make this optional, but install it by default when installing the profile (manually or by CLI). Make the related filter format optional.
-  - advagg:advagg # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - advagg:advagg_css_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - advagg:advagg_js_minify # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - antibot:antibot
-  - blazy:blazy
-  - block_field:block_field
-  - crop:crop
-  # @todo add menu_link_attributes with optional configuration?
-  - draggableviews:draggableviews
-  - dropzonejs:dropzonejs
-  - dropzonejs:dropzonejs_eb_widget
-  - email_registration:email_registration # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - embed:embed
-  - entity:entity
-  - entity_browser:entity_browser
-  - entity_browser:entity_browser_entity_form
-  - entity_browser_enhanced:entity_browser_enhanced
-  - entity_embed:entity_embed
-  - entity_reference_revisions:entity_reference_revisions
-  - extlink:extlink
-  - field_group:field_group
-  - file_mdm:file_mdm
-  - file_mdm:file_mdm_exif
-  - focal_point:focal_point
-  - honeypot:honeypot
-  - imagemagick:imagemagick # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - inline_entity_form:inline_entity_form
-  - linkit:linkit
-  - maxlength:maxlength
-  - menu_breadcrumb:menu_breadcrumb
-  - metatag:metatag # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - oembed_providers:oembed_providers
-  - override_node_options:override_node_options
-  - paragraphs:paragraphs
-  - paragraph_view_mode:paragraph_view_mode
-  - password_policy:password_policy # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - password_policy:password_policy_length # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - password_policy:password_policy_username # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
-  - pathauto:pathauto
-  - pathologic:pathologic
-  - rabbit_hole:rabbit_hole
-  - realname:realname
-  - redirect:redirect
-  - roleassign:roleassign
-  - smart_trim:smart_trim
-  - spamspan:spamspan
-  - symfony_mailer:symfony_mailer
-  - taxonomy_access_fix:taxonomy_access_fix # @todo make this optional, but install it by default when installing the profile (manually or by CLI)
+#  - ace_editor:ace_editor
+#  - blazy:blazy
+#  - block_field:block_field
+#  - crop:crop
+# @todo add menu_link_attributes with optional configuration?
+#  - draggableviews:draggableviews
+#  - dropzonejs:dropzonejs
+#  - dropzonejs:dropzonejs_eb_widget
+#  - email_registration:email_registration
+#  - embed:embed
+#  - entity:entity
+#  - entity_browser:entity_browser
+#  - entity_browser:entity_browser_entity_form
+#  - entity_browser_enhanced:entity_browser_enhanced
+#  - entity_embed:entity_embed
+#  - entity_reference_revisions:entity_reference_revisions
+#  - field_group:field_group
+#  - file_mdm:file_mdm
+#  - file_mdm:file_mdm_exif
+#  - focal_point:focal_point
+#  - imagemagick:imagemagick
+#  - inline_entity_form:inline_entity_form
+#  - linkit:linkit
+#  - maxlength:maxlength
+#  - oembed_providers:oembed_providers
+#  - override_node_options:override_node_options
+#  - paragraphs:paragraphs
+#  - paragraph_view_mode:paragraph_view_mode
+#  - pathauto:pathauto
+#  - pathologic:pathologic
+#  - rabbit_hole:rabbit_hole
+#  - redirect:redirect
+#  - roleassign:roleassign
+#  - smart_trim:smart_trim
+#  - taxonomy_access_fix:taxonomy_access_fix
   - token:token
-  - twig_tweak:twig_tweak
-  - userprotect:userprotect
-  - views_field_formatter:views_field_formatter
-  - views_infinite_scroll:views_infinite_scroll
-  - webform:webform
-  - webform:webform_ui
-  - webp:webp
-  - viewsreference:viewsreference
+#  - twig_tweak:twig_tweak
+#  - views_field_formatter:views_field_formatter
+#  - views_infinite_scroll:views_infinite_scroll
+#  - webform:webform
+#  - webform:webform_ui
+#  - webp:webp
+#  - viewsreference:viewsreference
 
   # Custom modules
   - a12s:a12s_core
-  - a12s:a12s_layout
+#  - a12s:a12s_layout
   - a12s:a12s_theme_builder
-  - a12sfactory:media_thumbnail_formatters # @todo remove this in a future release
 
 themes:
-  - olivero
   - claro
+  - olivero

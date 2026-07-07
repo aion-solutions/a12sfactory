@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: text
+label: Text
+revision: true
+description: 'This block type provides a title and a body for security recipe.'
+third_party_settings: {  }

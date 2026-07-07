@@ -1,6 +1,0 @@
-name: Development
-description: Enables various development features (email rerouting, ...)
-dependencies:
-  - symfony_mailer_reroute
-forms:
-  - \Drupal\a12sfactory\features\development\Form\ConfigureRerouteEmail

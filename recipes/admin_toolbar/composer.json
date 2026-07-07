@@ -1,0 +1,15 @@
+{
+    "name": "a12sfactory/admin_toolbar",
+    "description": "Recipe for Admin toolbar",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/admin_toolbar": "^3.6"
+    },
+    "extra": {
+        "recipes": [
+            {
+                "install": true
+            }
+        ]
+    }
+}

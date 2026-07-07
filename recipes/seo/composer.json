@@ -1,0 +1,18 @@
+{
+    "name": "a12sfactory/seo",
+    "description": "Recipe for SEO Configuration",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/menu_breadcrumb": "^2.0",
+        "drupal/metatag": "^2.0",
+        "drupal/extlink": "^2.0"
+    },
+    "extra": {
+        "recipes": [
+            {
+                "install": true
+            }
+        ]
+    }
+
+}

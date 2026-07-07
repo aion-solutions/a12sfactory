@@ -1,0 +1,7 @@
+a12sfactory.settings:
+  path: '/admin/config/system/a12sfactory'
+  defaults:
+    _form: '\Drupal\a12sfactory\Form\SettingsForm'
+    _title: 'Settings'
+  requirements:
+    _permission: 'administer site configuration'

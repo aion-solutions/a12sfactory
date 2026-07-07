@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: site_manager
+label: 'Site manager'
+is_admin: false
+permissions:
+  - 'access user profiles'

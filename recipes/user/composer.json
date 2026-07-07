@@ -1,0 +1,13 @@
+{
+    "name": "a12sfactory/user",
+    "description": "Recipe for User Configuration",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/realname": "^2.0"
+    },
+    "extra": {
+        "drupal-recipe": {
+            "type": "recipe"
+        }
+    }
+}

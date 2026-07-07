@@ -21,260 +21,36 @@
         }
     },
     "require": {
-        "php": ">=8",
-        "composer/installers": "^1.7",
-        "cweagans/composer-patches": "^1.6",
-        "drupal/a12s": "^1.0.0-beta8",
-        "drupal/access_unpublished": "~1.0-beta1",
-        "drupal/ace_editor": "^2.0",
-        "drupal/admin_toolbar": "~2.0 || ^3.0",
-        "drupal/antibot": "^2.0.3",
-        "drupal/better_exposed_filters": "^6.0 || ^7.0",
-        "drupal/blazy": "^3.0",
-        "drupal/block_field": "^1.0@RC",
-        "drupal/captcha": "^2.0",
-        "drupal/ckeditor_media_embed": "^2.0",
-        "drupal/components": "~3.0",
-        "drupal/config_ignore": "~3.0-beta2",
-        "drupal/config_perms": "~2.0",
-        "drupal/core": "^11.2.9",
-        "drupal/crop": "~2.0",
-        "drupal/diff": "~1.0",
-        "drupal/draggableviews": "~1.2 || ^2.1.3",
-        "drupal/dropzonejs": "~2.8",
-        "drupal/email_registration": "^2.0",
-        "drupal/embed": "^1.9",
-        "drupal/entity": "~1.0-rc3",
-        "drupal/entity_browser": "^2.9",
-        "drupal/entity_browser_enhanced": "~2.0",
-        "drupal/entity_embed": "~1.0",
-        "drupal/entity_reference_revisions": "~1.9",
-        "drupal/eu_cookie_compliance": "^1.20",
-        "drupal/extlink": "^2.0",
-        "drupal/facets": "^2.0 || ^3.0",
-        "drupal/field_group": "^4.0",
-        "drupal/focal_point": "^2.1.0",
-        "drupal/honeypot": "~1.30 || ^2.0",
-        "drupal/imagemagick": "^4.0",
-        "drupal/inline_entity_form": "^3.0@RC",
-        "drupal/layout_paragraphs": "^3.0@alpha",
-        "drupal/libraries": "^4.0",
-        "drupal/linkit": "^7.0",
-        "drupal/login_destination": "~1.0 || ^2.0",
-        "drupal/masquerade": "~2.0-beta2",
-        "drupal/maxlength": "^3.1",
-        "drupal/menu_breadcrumb": "^2.0",
-        "drupal/menu_item_extras": "^3.0",
-        "drupal/menu_link_attributes": "~1.0",
-        "drupal/metatag": "^2.0",
-        "drupal/node_edit_protection": "~1.0-alpha1",
-        "drupal/oembed_providers": "^2.0",
-        "drupal/override_node_options": "~2.7",
-        "drupal/paragraph_view_mode": "^3.1",
-        "drupal/paragraphs": "~1.11",
-        "drupal/password_policy": "^4.0.1",
-        "drupal/pathauto": "^1.8",
-        "drupal/pathologic": "~2.0.0-alpha1",
-        "drupal/rabbit_hole": "^2.0",
-        "drupal/realname": "^2.0.0-beta2",
-        "drupal/recaptcha": "^3.2",
-        "drupal/redirect": "~1.5",
-        "drupal/robotstxt": "~1.2",
-        "drupal/roleassign": "^2.0",
-        "drupal/schema_metatag": "^3.0",
-        "drupal/search_api": "^1.31",
-        "drupal/select_or_other": "^4.0",
-        "drupal/simple_sitemap": "^4.1.4",
-        "drupal/smart_trim": "~2.0",
-        "drupal/spamspan": "^3.0",
-        "drupal/swiper_formatter": "^2.0.1-beta4",
-        "drupal/symfony_mailer": "^2.0",
-        "drupal/taxonomy_access_fix": "^3.1 || ^4.0",
-        "drupal/token": "^1.7",
-        "drupal/twig_tweak": "^3.2",
-        "drupal/userprotect": "~1.0",
-        "drupal/views_bulk_edit": "~2.2",
-        "drupal/views_bulk_operations": "^4.2",
-        "drupal/views_field_formatter": "^4.0",
-        "drupal/views_infinite_scroll": "~2.0",
-        "drupal/viewsreference": "^2.0-beta7",
-        "drupal/webform": "^5.15 || ^6.3.0-beta5",
-        "drupal/webp": "^1.0-rc2",
-        "drush/drush": "^13.3.0",
-        "npm-asset/blazy": "^1.8",
-        "npm-asset/dropzone": "^5.7",
-        "npm-asset/imagesloaded": "^4.1",
-        "npm-asset/jquery.easing": "^1.4",
-        "oomphinc/composer-installers-extender": "^1.0 | ^2.0",
-        "webflo/drupal-finder": "^1.0.0",
-        "wikimedia/composer-merge-plugin": "^1.4 || ^2.0.1"
+        "cweagans/composer-patches": "^1.7",
+        "drupal/a12s": "2.0.x@dev",
+        "drupal/core": "^11.3.3",
+        "drupal/core-composer-scaffold": "^11.3.3",
+        "drupal/token": "^1.17",
+        "drush/drush": "^13.7",
+        "php": ">=8.3"
     },
-    "require-dev": {
-        "drupal/core-dev": "*",
-        "drupal/core-composer-scaffold": "*"
+    "conflict": {
+        "drupal/drupal": "*"
     },
-    "conflict": {},
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "config": {
-        "component-dir": "/tmp",
-        "sort-packages": true,
-        "allow-plugins": {
-            "composer/installers": true,
-            "cweagans/composer-patches": true,
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "drupal/console-extend-plugin": true,
-            "drupal/core-composer-scaffold": true,
-            "oomphinc/composer-installers-extender": true,
-            "php-http/discovery": true,
-            "phpstan/extension-installer": true,
-            "tbachert/spi": true,
-            "wikimedia/composer-merge-plugin": true
-        }
-    },
-    "autoload": {
-        "psr-4": {
-            "Drupal\\a12sfactory\\features\\": "config/features/"
-        }
-    },
     "extra": {
-        "merge-plugin": {
-            "include": [
-                "web/modules/contrib/webform/composer.libraries.json"
-            ]
-        },
-        "installer-types": [
-            "drupal-recipe",
-            "npm-asset",
-            "bower-asset"
-        ],
-        "installer-paths": {
-            "drush/contrib/{$name}": [
-                "type:drupal-drush"
-            ],
-            "web/core": [
-                "type:drupal-core"
-            ],
-            "web/libraries/easing/": [
-                "npm-asset/jquery.easing"
-            ],
-            "web/libraries/{$name}": [
-                "type:bower-asset",
-                "type:npm-asset",
-                "type:drupal-library"
-            ],
-            "web/modules/contrib/{$name}": [
-                "type:drupal-module"
-            ],
-            "web/profiles/contrib/{$name}": [
-                "type:drupal-profile"
-            ],
-            "web/themes/contrib/{$name}": [
-                "type:drupal-theme"
-            ],
-            "docroot/recipes/contrib/{$name}": [
-                "type:drupal-recipe"
-            ]
-        },
-        "drupal-scaffold": {
-            "file-mapping": {
-                "[web-root]/.ht.router.php": false,
-                "[web-root]/.htaccess": false,
-                "[web-root]/example.gitignore": false,
-                "[web-root]/INSTALL.txt": false,
-                "[web-root]/README.txt": false,
-                "[web-root]/update.php": false,
-                "[web-root]/web.config": false,
-                "[web-root]/sites/README.txt": false,
-                "[web-root]/modules/README.txt": false,
-                "[web-root]/profiles/README.txt": false,
-                "[web-root]/themes/README.txt": false,
-                "[web-root]/sites/development.services.yml": {
-                    "path": "assets/scaffold/files/development.services.yml",
-                    "overwrite": false
-                },
-                "[web-root]/sites/example.sites.php": false,
-                "[web-root]/sites/sites.php": {
-                    "path": "assets/scaffold/files/example.sites.php",
-                    "overwrite": false
-                },
-                "[web-root]/sites/default/settings.development.php": false,
-                "[web-root]/sites/example.settings.local.php": false,
-                "[web-root]/sites/default/settings.local.php": {
-                    "path": "assets/scaffold/files/example.settings.local.php",
-                    "overwrite": false
-                },
-                "[web-root]/sites/default/settings.php": {
-                    "path": "assets/scaffold/files/default.settings.php",
-                    "overwrite": false
-                },
-                "[web-root]/sites/default/default.services.yml": false,
-                "[web-root]/sites/default/services.yml": {
-                    "path": "assets/scaffold/files/default.services.yml",
-                    "overwrite": false
-                },
-                "[web-root]/README.md": false,
-                "[project-root]/.gitignore": {
-                    "path": "assets/scaffold/files/default.gitignore",
-                    "overwrite": false
-                },
-                "[project-root]/.dockerignore": {
-                    "path": "assets/scaffold/files/default.dockerignore",
-                    "overwrite": false
-                },
-                "[project-root]/drush/drush.yml": {
-                    "path": "assets/scaffold/files/drush.yml",
-                    "overwrite": false
-                },
-                "[project-root]/docker-compose.yml": {
-                    "path": "assets/scaffold/files/docker-compose.yml",
-                    "overwrite": false
-                },
-                "[project-root]/.env.example": {
-                    "path": "assets/scaffold/files/.env.example",
-                    "overwrite": false
-                },
-                "[project-root]/local/nginx.conf": {
-                    "path": "assets/scaffold/files/nginx.conf",
-                    "overwrite": false
-                },
-                "[project-root]/local/uploads.ini": {
-                    "path": "assets/scaffold/files/uploads.ini",
-                    "overwrite": false
-                }
-            }
-        },
         "patches": {
             "drupal/core": {
-                "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/2020-09-11/2893892-19.patch",
-                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://git.drupalcode.org/project/drupal/-/merge_requests/12147.patch",
+                "Issue #2893892: Fixed Warning Invalid argument supplied for foreach() in Drupal": "https://www.drupal.org/files/issues/2022-06-28/2893892-27.patch",
+                "Issue #2888320: Add support for Token and plural in Views Global result summary plugin": "https://git.drupalcode.org/project/drupal/-/merge_requests/12147.diff",
                 "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
                 "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
-                "Issue #2998194: Undefined index: #summary_attributes": "https://www.drupal.org/files/issues/2018-12-17/core-undefined-index-summary_attributes-2998194-9.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
-                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://www.drupal.org/files/issues/2025-11-10/2689459_11.2.6.patch",
-                "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://www.drupal.org/files/issues/2025-12-08/drupal-entity-view-form-mode-formatter-widget-settings-have-no-translation-ui-2546212-334-12.2.5.patch",
+                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://git.drupalcode.org/project/drupal/-/merge_requests/13732.diff",
+                "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://git.drupalcode.org/project/drupal/-/merge_requests/4294.diff",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
                 "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
                 "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://git.drupalcode.org/project/drupal/-/merge_requests/8896.diff",
-                "Issue #2730351: CSRF check always fails for users without a session": "https://www.drupal.org/files/issues/2025-08-13/drupal-11.2.3-2730351-147.patch",
-                "Issue #3226791: Fix Validation error saving untranslatable Media reference field": "https://www.drupal.org/files/issues/2023-02-27/3226791-39-test-only.patch"
-            },
-            "drupal/entity_reference_revisions": {
-                "Issue #2799479: Views doesn't recognize relationship to host": "patches/entity_reference_2799479-158-custom.patch.txt"
-            },
-            "drupal/field_group": {
-                "Issue #3114825: Document how to translate field group labels and descriptions": "https://www.drupal.org/files/issues/2024-08-14/field_group-document-translate-field-group-labels-and-descriptions-3114825-24.patch"
-            },
-            "drupal/paragraphs": {
-                "Issue #2868155: Add new hooks to allow easier editing of paragraph forms": "https://www.drupal.org/files/issues/2868155-16.patch",
-                "Issue #2924774: Let Editors add/delete/clone paragraphs When [Editing a translation]": "https://www.drupal.org/files/issues/2018-06-03/2924774-29.patch"
+                "Issue #2730351: CSRF check always fails for users without a session": "patches/core-CSRF-check-always-fails-for-users-without-session-2730351-11.3.3.diff"
             },
             "drupal/token": {
-                "Issue #3115486: Provide array of primitive property values on multivalue field": "https://www.drupal.org/files/issues/2022-12-27/token-array-3115486-27.patch"
-            },
-            "drupal/username_enumeration_prevention": {
-                "Issue #2871931: hook_requirements error on install phase": "https://www.drupal.org/files/issues/username_enumeration_prevention-check_phase_runtime-2871931-5.patch"
+                "Issue #3115486: Provide array of primitive property values on multivalue field": "https://git.drupalcode.org/project/token/-/merge_requests/114/diffs.diff"
             }
         }
     }

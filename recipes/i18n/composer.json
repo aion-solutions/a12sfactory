@@ -1,0 +1,10 @@
+{
+    "name": "a12sfactory/i18n",
+    "description": "Recipe i18n",
+    "type": "drupal-recipe",
+    "extra": {
+        "drupal-recipe": {
+            "type": "recipe"
+        }
+    }
+}

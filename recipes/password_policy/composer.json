@@ -1,0 +1,15 @@
+{
+    "name": "a12sfactory/password_policy",
+    "description": "Recipe for Password Configuration",
+    "type": "drupal-recipe",
+    "require": {
+        "drupal/password_policy": "^4.0.1"
+    },
+    "extra": {
+        "recipes": [
+            {
+                "install": true
+            }
+        ]
+    }
+}

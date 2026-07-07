@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: editor
+label: Editor
+is_admin: false
+permissions:
+  - 'access user profiles'

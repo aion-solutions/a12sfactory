@@ -1,0 +1,7 @@
+a12sfactory.settings:
+  type: config_object
+  label: 'A12s Factory settings'
+  mapping:
+    recipe_i18n_install_optional_configuration:
+      type: boolean
+      label: 'Install optional configuration for i18n recipe'
