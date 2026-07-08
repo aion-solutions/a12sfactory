@@ -1,0 +1,398 @@
+diff --git a/core/modules/jsonapi/tests/src/Functional/NodeTest.php b/core/modules/jsonapi/tests/src/Functional/NodeTest.php
+index 50b56e1de3c..7989561e36a 100644
+--- a/core/modules/jsonapi/tests/src/Functional/NodeTest.php
++++ b/core/modules/jsonapi/tests/src/Functional/NodeTest.php
+@@ -8,6 +8,7 @@
+ use Drupal\Component\Utility\NestedArray;
+ use Drupal\Core\Cache\Cache;
+ use Drupal\Core\Cache\CacheableMetadata;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\Url;
+ use Drupal\jsonapi\JsonApiSpec;
+ use Drupal\jsonapi\Normalizer\HttpExceptionNormalizer;
+@@ -179,7 +180,7 @@ protected function getExpectedDocument(): array {
+           'path' => [
+             'alias' => '/llama',
+             'pid' => 1,
+-            'langcode' => 'en',
++            'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+           ],
+           'promote' => FALSE,
+           'revision_timestamp' => '1973-11-29T21:33:09+00:00',
+diff --git a/core/modules/jsonapi/tests/src/Functional/TermTest.php b/core/modules/jsonapi/tests/src/Functional/TermTest.php
+index 4371ba7dc7f..ecf97f53a3a 100644
+--- a/core/modules/jsonapi/tests/src/Functional/TermTest.php
++++ b/core/modules/jsonapi/tests/src/Functional/TermTest.php
+@@ -8,6 +8,7 @@
+ use Drupal\Component\Utility\NestedArray;
+ use Drupal\Core\Cache\Cache;
+ use Drupal\Core\Entity\EntityInterface;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\Url;
+ use Drupal\jsonapi\JsonApiSpec;
+ use Drupal\taxonomy\Entity\Term;
+@@ -280,7 +281,7 @@ protected function getExpectedDocument(): array {
+           'path' => [
+             'alias' => '/llama',
+             'pid' => 1,
+-            'langcode' => 'en',
++            'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+           ],
+           'weight' => 0,
+           'drupal_internal__tid' => 1,
+diff --git a/core/modules/node/tests/src/Functional/Rest/NodeResourceTestBase.php b/core/modules/node/tests/src/Functional/Rest/NodeResourceTestBase.php
+index 1ab6a217803..07529ff45d1 100644
+--- a/core/modules/node/tests/src/Functional/Rest/NodeResourceTestBase.php
++++ b/core/modules/node/tests/src/Functional/Rest/NodeResourceTestBase.php
+@@ -4,6 +4,7 @@
+ 
+ namespace Drupal\Tests\node\Functional\Rest;
+ 
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\node\Entity\Node;
+ use Drupal\node\Entity\NodeType;
+ use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
+@@ -202,7 +203,7 @@ protected function getExpectedNormalizedEntity() {
+         [
+           'alias' => '/llama',
+           'pid' => 1,
+-          'langcode' => 'en',
++          'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+         ],
+       ],
+     ];
+diff --git a/core/modules/path/src/Hook/PathHooks.php b/core/modules/path/src/Hook/PathHooks.php
+index b62b425a2c7..25e47011882 100644
+--- a/core/modules/path/src/Hook/PathHooks.php
++++ b/core/modules/path/src/Hook/PathHooks.php
+@@ -131,7 +131,7 @@ public function entityBaseFieldInfo(EntityTypeInterface $entity_type): array {
+   #[Hook('entity_translation_create')]
+   public function entityTranslationCreate(ContentEntityInterface $translation): void {
+     foreach ($translation->getFieldDefinitions() as $field_name => $field_definition) {
+-      if ($field_definition->getType() === 'path' && $translation->get($field_name)->pid) {
++      if ($field_definition->getType() === 'path' && $field_definition->isTranslatable() && $translation->get($field_name)->pid) {
+         // If there are values and a path ID, update the langcode and unset the
+         // path ID to save this as a new alias.
+         $translation->get($field_name)->langcode = $translation->language()->getId();
+diff --git a/core/modules/path/src/Plugin/Field/FieldType/PathFieldItemList.php b/core/modules/path/src/Plugin/Field/FieldType/PathFieldItemList.php
+index cfcb3348e12..864e363e9a3 100644
+--- a/core/modules/path/src/Plugin/Field/FieldType/PathFieldItemList.php
++++ b/core/modules/path/src/Plugin/Field/FieldType/PathFieldItemList.php
+@@ -21,8 +21,6 @@ class PathFieldItemList extends FieldItemList {
+   protected function computeValue() {
+     // Default the langcode to the current language if this is a new entity or
+     // there is no alias for an existent entity.
+-    // @todo Set the langcode to not specified for untranslatable fields
+-    //   in https://www.drupal.org/node/2689459.
+     $value = ['langcode' => $this->getLangcode()];
+ 
+     $entity = $this->getEntity();
+@@ -36,6 +34,11 @@ protected function computeValue() {
+           'pid' => $path_alias['id'],
+           'langcode' => $path_alias['langcode'],
+         ];
++
++        // Set the langcode to not specified for untranslatable fields.
++        if (!$entity->isTranslatable() || !$this->getFieldDefinition()->isTranslatable()) {
++          $value['langcode'] = LanguageInterface::LANGCODE_NOT_SPECIFIED;
++        }
+       }
+     }
+ 
+@@ -59,9 +62,13 @@ public function delete() {
+     // Delete all aliases associated with this entity.
+     $entity = $this->getEntity();
+     $langcode_list = [$entity->language()->getId()];
+-
++    // If neither the path field nor entity being deleted is translatable,
++    // delete alias with LANGCODE_NOT_SPECIFIED.
++    if (!$entity->isTranslatable() || !$this->getFieldDefinition()->isTranslatable()) {
++      $langcode_list = [LanguageInterface::LANGCODE_NOT_SPECIFIED];
++    }
+     // The default translation may also have language-neutral aliases.
+-    if ($entity->isDefaultTranslation()) {
++    elseif ($entity->isDefaultTranslation()) {
+       $langcode_list[] = LanguageInterface::LANGCODE_NOT_SPECIFIED;
+     }
+ 
+diff --git a/core/modules/path/src/Plugin/Field/FieldType/PathItem.php b/core/modules/path/src/Plugin/Field/FieldType/PathItem.php
+index a4eec1d8978..ad8df7d4f60 100644
+--- a/core/modules/path/src/Plugin/Field/FieldType/PathItem.php
++++ b/core/modules/path/src/Plugin/Field/FieldType/PathItem.php
+@@ -7,6 +7,7 @@
+ use Drupal\Core\Field\FieldDefinitionInterface;
+ use Drupal\Core\Field\FieldItemBase;
+ use Drupal\Core\Field\FieldStorageDefinitionInterface;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Drupal\Core\TypedData\DataDefinition;
+ 
+@@ -81,6 +82,14 @@ public function postSave($update) {
+     // Otherwise, fall back to the field/entity langcode.
+     $alias_langcode = $langcode ?: $this->getLangcode();
+ 
++    $moduleHandler = \Drupal::service('module_handler');
++    if ($moduleHandler->moduleExists('content_translation') && !$moduleHandler->moduleExists('workspaces')) {
++      // If either entity or the path field is non-translatable, use 'und'.
++      if (!$entity->isTranslatable() || !$this->getFieldDefinition()->isTranslatable()) {
++        $alias_langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
++      }
++    }
++
+     // If we have an alias, we need to create or update a path alias entity.
+     if ($alias) {
+       $properties = [
+diff --git a/core/modules/path/src/Plugin/Field/FieldWidget/PathWidget.php b/core/modules/path/src/Plugin/Field/FieldWidget/PathWidget.php
+index ca03d71c582..57c25dc45f9 100644
+--- a/core/modules/path/src/Plugin/Field/FieldWidget/PathWidget.php
++++ b/core/modules/path/src/Plugin/Field/FieldWidget/PathWidget.php
+@@ -6,6 +6,7 @@
+ use Drupal\Core\Field\FieldItemListInterface;
+ use Drupal\Core\Field\WidgetBase;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\StringTranslation\TranslatableMarkup;
+ use Symfony\Component\Validator\ConstraintViolationInterface;
+ 
+@@ -25,6 +26,11 @@ class PathWidget extends WidgetBase {
+   public function formElement(FieldItemListInterface $items, $delta, array $element, array &$form, FormStateInterface $form_state) {
+     $entity = $items->getEntity();
+ 
++    $langcode = $items[$delta]->langcode;
++    if (!$entity->get('path')->getFieldDefinition()->isTranslatable()) {
++      $langcode = LanguageInterface::LANGCODE_NOT_SPECIFIED;
++    }
++
+     $element += [
+       '#element_validate' => [[static::class, 'validateFormElement']],
+     ];
+@@ -38,7 +44,7 @@ public function formElement(FieldItemListInterface $items, $delta, array $elemen
+     ];
+     $element['pid'] = [
+       '#type' => 'value',
+-      '#value' => $items[$delta]->pid,
++      '#value' => $langcode === LanguageInterface::LANGCODE_NOT_SPECIFIED || $items->getLangcode() === $langcode ? $items[$delta]->pid : NULL,
+     ];
+     $element['source'] = [
+       '#type' => 'value',
+@@ -49,7 +55,7 @@ public function formElement(FieldItemListInterface $items, $delta, array $elemen
+       // For new aliases, let the save logic fall back to the entity language
+       // unless a form alter or other code explicitly provides an alias
+       // langcode. Existing aliases keep their stored langcode.
+-      '#value' => $items[$delta]->pid ? $items[$delta]->langcode : NULL,
++      '#value' => $items[$delta]->pid ? $langcode : NULL,
+     ];
+ 
+     // If the advanced settings tabs-set is available (normally rendered in the
+diff --git a/core/modules/path/tests/src/Functional/PathAliasTest.php b/core/modules/path/tests/src/Functional/PathAliasTest.php
+index 317f8d7ec18..3b781e4efde 100644
+--- a/core/modules/path/tests/src/Functional/PathAliasTest.php
++++ b/core/modules/path/tests/src/Functional/PathAliasTest.php
+@@ -5,6 +5,7 @@
+ namespace Drupal\Tests\path\Functional;
+ 
+ use Drupal\Core\Database\Database;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\Core\Url;
+ use Drupal\Tests\WaitTerminateTestTrait;
+ use PHPUnit\Framework\Attributes\Group;
+@@ -336,7 +337,7 @@ public function testNodeAlias(): void {
+ 
+     // Delete the node and check that the path alias is also deleted.
+     $node5->delete();
+-    $path_alias = \Drupal::service('path_alias.repository')->lookUpBySystemPath('/node/' . $node5->id(), $node5->language()->getId());
++    $path_alias = \Drupal::service('path_alias.repository')->lookUpBySystemPath('/node/' . $node5->id(), LanguageInterface::LANGCODE_NOT_SPECIFIED);
+     $this->assertNull($path_alias, 'Alias was successfully deleted when the referenced node was deleted.');
+ 
+     // Create sixth test node.
+diff --git a/core/modules/path/tests/src/Functional/PathLanguageTest.php b/core/modules/path/tests/src/Functional/PathLanguageTest.php
+index 080449bafe7..dd7c234b444 100644
+--- a/core/modules/path/tests/src/Functional/PathLanguageTest.php
++++ b/core/modules/path/tests/src/Functional/PathLanguageTest.php
+@@ -5,6 +5,8 @@
+ namespace Drupal\Tests\path\Functional;
+ 
+ use Drupal\Core\Language\LanguageInterface;
++use Drupal\Core\StringTranslation\StringTranslationTrait;
++use Drupal\Core\Url;
+ use Drupal\language\Plugin\LanguageNegotiation\LanguageNegotiationUrl;
+ use Drupal\Tests\content_translation\Traits\ContentTranslationTestTrait;
+ use Drupal\user\Entity\User;
+@@ -20,6 +22,7 @@
+ class PathLanguageTest extends PathTestBase {
+ 
+   use ContentTranslationTestTrait;
++  use StringTranslationTrait;
+ 
+   /**
+    * {@inheritdoc}
+@@ -91,15 +94,15 @@ public function testAliasTranslation(): void {
+     // Edit the node to set language and path.
+     $edit = [];
+     $edit['path[0][alias]'] = '/' . $english_alias;
+-    $this->drupalGet('node/' . $english_node->id() . '/edit');
++    $this->drupalGet($english_node->toUrl('edit-form'));
+     $this->submitForm($edit, 'Save');
+ 
+     // Confirm that the alias works.
+     $this->drupalGet($english_alias);
+-    $this->assertSession()->pageTextContains($english_node->body->value);
++    $this->assertSession()->pageTextContains($english_node->get('body')->value);
+ 
+     // Translate the node into French.
+-    $this->drupalGet('node/' . $english_node->id() . '/translations');
++    $this->drupalGet(Url::fromRoute('entity.node.content_translation_overview', ['node' => $english_node->id()]));
+     $this->clickLink('Add');
+ 
+     $edit = [];
+@@ -115,7 +118,6 @@ public function testAliasTranslation(): void {
+     // Languages are cached on many levels, and we need to clear those caches.
+     $this->container->get('language_manager')->reset();
+     $this->rebuildContainer();
+-    $languages = $this->container->get('language_manager')->getLanguages();
+ 
+     // Ensure the node was created.
+     $english_node = $node_storage->load($english_node->id());
+@@ -124,7 +126,7 @@ public function testAliasTranslation(): void {
+ 
+     // Confirm that the alias works.
+     $this->drupalGet('fr' . $edit['path[0][alias]']);
+-    $this->assertSession()->pageTextContains($english_node_french_translation->body->value);
++    $this->assertSession()->pageTextContains($english_node_french_translation->get('body')->value);
+ 
+     // Confirm that the alias is returned for the URL. Languages are cached on
+     // many levels, and we need to clear those caches.
+@@ -153,18 +155,18 @@ public function testAliasTranslation(): void {
+     // path alias for French matching the english alias. So the alias manager
+     // needs to use the URL language to check whether the alias is valid.
+     $this->drupalGet($english_alias);
+-    $this->assertSession()->pageTextContains($english_node_french_translation->body->value);
++    $this->assertSession()->pageTextContains($english_node_french_translation->get('body')->value);
+ 
+     // Check that the French alias works.
+     $this->drupalGet("fr/$french_alias");
+-    $this->assertSession()->pageTextContains($english_node_french_translation->body->value);
++    $this->assertSession()->pageTextContains($english_node_french_translation->get('body')->value);
+ 
+     // Disable URL language negotiation.
+     $this->container->get('language_negotiator')->saveConfiguration(LanguageInterface::TYPE_URL, [LanguageNegotiationUrl::METHOD_ID => FALSE]);
+ 
+     // Check that the English alias still works.
+     $this->drupalGet($english_alias);
+-    $this->assertSession()->pageTextContains($english_node_french_translation->body->value);
++    $this->assertSession()->pageTextContains($english_node_french_translation->get('body')->value);
+ 
+     // Check that the French alias is not available. We check the unprefixed
+     // alias because we disabled URL language negotiation above. In this
+@@ -216,4 +218,66 @@ public function testAliasTranslation(): void {
+     $this->assertPathAliasNotExists('/' . $und_alias, LanguageInterface::LANGCODE_NOT_SPECIFIED, NULL, 'Language-neutral alias is removed when the default translation is deleted.');
+   }
+ 
++  /**
++   * Tests alias generation when the field is marked as non-translatable.
++   */
++  public function testNonTranslatableAlias(): void {
++    // Disable translation for path field.
++    // Enable translation for page node.
++    $edit = [
++      'entity_types[node]' => 1,
++      'settings[node][page][translatable]' => 1,
++      'settings[node][page][fields][path]' => 0,
++      'settings[node][page][fields][body]' => 1,
++      'settings[node][page][settings][language][language_alterable]' => 1,
++    ];
++    $this->drupalGet('admin/config/regional/content-language');
++    $this->submitForm($edit, 'Save configuration');
++    \Drupal::entityTypeManager()->clearCachedDefinitions();
++
++    // Create node in default language.
++    $node_storage = $this->container->get('entity_type.manager')->getStorage('node');
++    $english_node = $this->drupalCreateNode(['type' => 'page', 'langcode' => 'en']);
++    $english_alias = $this->randomMachineName();
++
++    // Edit the node to set language and path.
++    $edit = [];
++    $edit['path[0][alias]'] = '/' . $english_alias;
++    $this->drupalGet($english_node->toUrl('edit-form'));
++    $this->submitForm($edit, 'Save');
++
++    // Confirm that the alias works.
++    $this->drupalGet($english_alias);
++    $this->assertSession()->pageTextContains($english_node->get('body')->value);
++
++    // Translate the node into French.
++    $this->drupalGet(Url::fromRoute('entity.node.content_translation_overview', ['node' => $english_node->id()]));
++
++    $this->clickLink($this->t('Add'));
++
++    $edit = [];
++    $edit['title[0][value]'] = $this->randomMachineName();
++    $edit['body[0][value]'] = $this->randomMachineName();
++    $french_alias = $this->randomMachineName();
++    $edit['path[0][alias]'] = '/' . $french_alias;
++    $this->submitForm($edit, 'Save (this translation)');
++
++    // Clear the path lookup cache.
++    $this->container->get('path_alias.manager')->cacheClear();
++
++    // Languages are cached on many levels, and we need to clear those caches.
++    $this->container->get('language_manager')->reset();
++    $this->rebuildContainer();
++
++    // Ensure the node was created.
++    $node_storage->resetCache([$english_node->id()]);
++    $english_node = $node_storage->load($english_node->id());
++    $english_node_french_translation = $english_node->getTranslation('fr');
++    $this->assertTrue($english_node->hasTranslation('fr'), 'Node found in database.');
++
++    // Confirm that the alias works.
++    $this->drupalGet('fr' . $edit['path[0][alias]']);
++    $this->assertSession()->pageTextContains($english_node_french_translation->get('body')->value);
++  }
++
+ }
+diff --git a/core/modules/path/tests/src/Kernel/PathItemTest.php b/core/modules/path/tests/src/Kernel/PathItemTest.php
+index a46169fcf7c..f2ecec1dec0 100644
+--- a/core/modules/path/tests/src/Kernel/PathItemTest.php
++++ b/core/modules/path/tests/src/Kernel/PathItemTest.php
+@@ -29,6 +29,7 @@ class PathItemTest extends KernelTestBase {
+     'node',
+     'user',
+     'language',
++    'content_translation',
+   ];
+ 
+   /**
+@@ -106,6 +107,11 @@ public function testPathItem(): void {
+     $values = $loaded_node->get('path')->getValue();
+     $this->assertEquals('/foo', $values[0]['alias']);
+ 
++    // Ensure that the bundle is translatable, using the same technique
++    // as enableTranslation() in Drupal\Tests\content_translation\Functional
++    \Drupal::service('content_translation.manager')->setEnabled('node', 'foo', TRUE);
++    \Drupal::service('router.builder')->rebuild();
++
+     $node_storage->resetCache();
+     $loaded_node = $node_storage->load($node->id());
+     $this->assertEquals('/foo', $loaded_node->path->alias);
+diff --git a/core/modules/taxonomy/tests/src/Functional/Rest/TermResourceTestBase.php b/core/modules/taxonomy/tests/src/Functional/Rest/TermResourceTestBase.php
+index 76e846359f9..1e442da2622 100644
+--- a/core/modules/taxonomy/tests/src/Functional/Rest/TermResourceTestBase.php
++++ b/core/modules/taxonomy/tests/src/Functional/Rest/TermResourceTestBase.php
+@@ -5,6 +5,7 @@
+ namespace Drupal\Tests\taxonomy\Functional\Rest;
+ 
+ use Drupal\Core\Cache\Cache;
++use Drupal\Core\Language\LanguageInterface;
+ use Drupal\taxonomy\Entity\Term;
+ use Drupal\taxonomy\Entity\Vocabulary;
+ use Drupal\Tests\rest\Functional\EntityResource\EntityResourceTestBase;
+@@ -220,7 +221,7 @@ protected function getExpectedNormalizedEntity() {
+         [
+           'alias' => '/llama',
+           'pid' => 1,
+-          'langcode' => 'en',
++          'langcode' => LanguageInterface::LANGCODE_NOT_SPECIFIED,
+         ],
+       ],
+       'status' => [

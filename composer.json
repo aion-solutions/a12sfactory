@@ -42,7 +42,7 @@
                 "Issue #1819538: More link disappears when time-based views cache is enabled": "https://www.drupal.org/files/issues/2021-03-10/1819538-65.patch",
                 "Issue #2789125: Error when a process plugin gives a multiple value for a subproperty destination": "https://www.drupal.org/files/issues/2789125-19.patch",
                 "Issue #2986041: Triggering RefreshView on a view is making multiple ajax calls": "https://www.drupal.org/files/issues/2023-10-11/2986041-29.patch",
-                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "https://git.drupalcode.org/project/drupal/-/merge_requests/13732.diff",
+                "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "./patches/core-untranslable-url-alias-2689459.patch.txt",
                 "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://git.drupalcode.org/project/drupal/-/merge_requests/4294.diff",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
                 "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
