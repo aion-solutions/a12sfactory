@@ -23,7 +23,7 @@
     "require": {
         "cweagans/composer-patches": "^1.7",
         "drupal/a12s": "2.0.x@dev",
-        "drupal/core": "^11.3.3",
+        "drupal/core": "^11.3.16",
         "drupal/core-composer-scaffold": "^11.3.3",
         "drupal/token": "^1.17",
         "drush/drush": "^13.7",
