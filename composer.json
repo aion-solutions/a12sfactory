@@ -23,7 +23,7 @@
     "require": {
         "cweagans/composer-patches": "^1.7",
         "drupal/a12s": "2.0.x@dev",
-        "drupal/core": "^11.3.16",
+        "drupal/core": "^11.4.5",
         "drupal/core-composer-scaffold": "^11.3.3",
         "drupal/token": "^1.17",
         "drush/drush": "^13.7",
@@ -45,7 +45,7 @@
                 "Issue #2689459: If you don't want to translate your URL alias, the original URL alias won't work with your translations": "./patches/core-untranslable-url-alias-2689459.patch.txt",
                 "Issue #2546212: Entity view/form mode formatter/widget settings have no translation UI": "https://git.drupalcode.org/project/drupal/-/merge_requests/4294.diff",
                 "Issue #3051453: Call to a member function setSyncing() on null when installing a module": "https://www.drupal.org/files/issues/2020-08-18/protect_against_invalid_ids_in_import_delete-3051453-10.patch",
-                "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2019-12-03/2643466-31.patch",
+                "Issue #2643466: Use TrustedRedirectResponse Error on Multilingual Setup": "https://www.drupal.org/files/issues/2024-07-19/2643466-60.patch",
                 "Issue #3328425: Unable to link text in rich text field using CKEditor 5 when adding a new Media entity via a Media field on a node.": "https://git.drupalcode.org/project/drupal/-/merge_requests/8896.diff",
                 "Issue #2730351: CSRF check always fails for users without a session": "patches/core-CSRF-check-always-fails-for-users-without-session-2730351-11.4.1.diff"
             },
