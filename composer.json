@@ -24,7 +24,7 @@
         "cweagans/composer-patches": "^1.7",
         "drupal/a12s": "2.0.x@dev",
         "drupal/core": "^11.4.8",
-        "drupal/core-composer-scaffold": "^11.3.3",
+        "drupal/core-composer-scaffold": "^11.4.13",
         "drupal/token": "^1.17",
         "drush/drush": "^13.7",
         "php": ">=8.3"
